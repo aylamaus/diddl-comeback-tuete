@@ -291,6 +291,43 @@
     });
   }
 
+
+  /* ---------- FAQ aus data.js (faq.html) ----------
+     Das HTML enthält dieselben Einträge als Fallback ohne JS. Mit JS wird
+     die Liste aus DIDDL.faq neu aufgebaut, damit data.js führend bleibt. */
+
+  function faqInit() {
+    var wurzel = document.querySelector("[data-faq]");
+    if (!wurzel || !Array.isArray(D.faq) || !D.faq.length) { return; }
+    wurzel.innerHTML = "";
+    D.faq.forEach(function (eintrag, i) {
+      var id = "faq-" + (i + 1);
+      var wrap = document.createElement("div");
+      wrap.className = "akkordeon__eintrag";
+      var h2 = document.createElement("h2");
+      var knopf = document.createElement("button");
+      knopf.type = "button";
+      knopf.className = "akkordeon__knopf";
+      knopf.setAttribute("aria-controls", id);
+      knopf.setAttribute("aria-expanded", "false");
+      knopf.textContent = eintrag.frage;
+      knopf.insertAdjacentHTML("beforeend", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg>');
+      h2.appendChild(knopf);
+      var inhalt = document.createElement("div");
+      inhalt.className = "akkordeon__inhalt";
+      inhalt.id = id;
+      var absaetze = Array.isArray(eintrag.antwort) ? eintrag.antwort : [eintrag.antwort];
+      absaetze.forEach(function (t) {
+        var p = document.createElement("p");
+        p.textContent = t;
+        inhalt.appendChild(p);
+      });
+      wrap.appendChild(h2);
+      wrap.appendChild(inhalt);
+      wurzel.appendChild(wrap);
+    });
+  }
+
   /* ---------- Newsletter (nur Frontend, kein Backend) ---------- */
 
   function newsletterInit() {
@@ -362,6 +399,7 @@
     headerInit();
     badgeAktualisieren();
     karussellInit();
+    faqInit();
     akkordeonInit();
     newsletterInit();
     consentInit();

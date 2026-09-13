@@ -1102,6 +1102,10 @@ button {
 .akkordeon__eintrag {
   border-bottom: 2px solid var(--pastel-flieder);
 }
+.akkordeon h2 {
+  margin: 0;
+  font: inherit;
+}
 .akkordeon__knopf {
   width: 100%;
   display: flex;
