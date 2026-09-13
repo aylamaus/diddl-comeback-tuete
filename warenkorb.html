@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Warenkorb und Kasse – Diddl Comeback-Tüte</title>
+  <meta name="description" content="Dein Warenkorb: Menge prüfen, Lieferadresse und Zahlungsart wählen, Bestellung prüfen. Prototyp ohne echte Bestellung.">
+  <meta name="robots" content="noindex, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:site_name" content="Diddl Comeback-Tüte">
+  <meta property="og:title" content="Warenkorb und Kasse – Diddl Comeback-Tüte">
+  <meta property="og:description" content="Dein Warenkorb: Menge prüfen, Lieferadresse und Zahlungsart wählen, Bestellung prüfen. Prototyp ohne echte Bestellung.">
+  <meta property="og:image" content="assets/img/hero-banner.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#hauptinhalt">Zum Inhalt springen</a>
+<header class="kopf">
+  <div class="container kopf__innen">
+    <a class="kopf__logo" href="index.html">
+      <img src="assets/img/logo-diddl-is-back.png" alt="Diddl is back! – zur Startseite" width="1000" height="572">
+    </a>
+    <nav class="nav" id="hauptnavigation" aria-label="Hauptnavigation">
+      <ul class="nav__liste">
+        <li><a class="nav__link" href="index.html#ueber-diddl">Über Diddl</a></li>
+        <li><a class="nav__link" href="produkt.html">Diddl Comeback-Tüte</a></li>
+        <li><a class="nav__link" href="index.html#geheim">Geheim</a></li>
+      </ul>
+    </nav>
+    <div class="kopf__rechts">
+      <a class="korb-button" href="warenkorb.html" aria-label="Warenkorb">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M3 10h18l-1.6 8.2a2 2 0 0 1-2 1.8H6.6a2 2 0 0 1-2-1.8L3 10z"/>
+          <path d="M8 10l3-6M16 10l-3-6M9 14v3M15 14v3M12 14v3"/>
+        </svg>
+        <span class="korb-button__text">Warenkorb</span>
+        <span class="korb-badge" data-korb-badge hidden>0</span>
+      </a>
+      <button class="burger" type="button" data-burger aria-expanded="false" aria-controls="hauptnavigation" aria-label="Menü">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<main id="hauptinhalt" tabindex="-1">
+  <div class="container--schmal checkout">
+    <h1>Warenkorb und Kasse</h1>
+
+    <div class="hinweis-kasten" role="note">
+      <span class="hinweis-kasten__etikett">Prototyp</span>
+      <p>Dieser Shop ist ein Prototyp im Rahmen eines Studienprojekts der DHBW Mannheim. Es werden keine Bestellungen ausgelöst, keine Zahlungen abgewickelt und keine Daten übertragen. Du kannst den Ablauf trotzdem bis zur Bestätigungsseite durchspielen.</p>
+    </div>
+
+    <ol class="schritte" aria-label="Fortschritt im Bestellvorgang">
+      <li data-schritt-marke="1" aria-current="step">Warenkorb</li>
+      <li data-schritt-marke="2">Lieferung und Zahlung</li>
+      <li data-schritt-marke="3">Prüfen und bestellen</li>
+    </ol>
+
+    <noscript>
+      <div class="karte-flach karte-flach--rosa">
+        <p>Der Warenkorb wird in deinem Browser gespeichert und braucht dafür JavaScript. Ohne JavaScript kannst du dir die <a href="produkt.html">Comeback-Tüte</a> trotzdem ansehen.</p>
+      </div>
+    </noscript>
+
+    <!-- Schritt 1: Warenkorb -->
+    <section class="checkout__schritt" data-schritt="1" aria-labelledby="schritt1-titel">
+      <h2 id="schritt1-titel" tabindex="-1">Dein Warenkorb</h2>
+
+      <div data-warenkorb-leer class="warenkorb-leer" hidden>
+        <p>Dein Warenkorb ist noch leer. Die Comeback-Tüte wartet schon.</p>
+        <a class="btn" href="produkt.html">Zur Comeback-Tüte</a>
+      </div>
+
+      <div data-warenkorb-voll hidden>
+        <div data-warenkorb-liste aria-live="polite"></div>
+
+        <dl class="summen">
+          <div><dt>Zwischensumme</dt><dd data-summe-zwischen>0,00 €</dd></div>
+          <div><dt>Versandkosten</dt><dd data-summe-versand>4,95 €</dd></div>
+          <div class="summen__gesamt"><dt>Gesamtsumme</dt><dd data-summe-gesamt>0,00 €</dd></div>
+          <div class="summen__mwst"><dt class="visuell-versteckt">Steuerhinweis</dt><dd>inkl. 19 % MwSt.</dd></div>
+        </dl>
+
+        <div class="checkout__aktionen">
+          <a class="btn btn--sekundaer" href="produkt.html">Weiter einkaufen</a>
+          <button class="btn" type="button" data-weiter="2">Weiter zur Lieferung</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Schritt 2: Lieferung und Zahlung -->
+    <section class="checkout__schritt" data-schritt="2" aria-labelledby="schritt2-titel" hidden>
+      <h2 id="schritt2-titel" tabindex="-1">Lieferung und Zahlung</h2>
+      <p>Alle Felder sind Pflichtfelder. Die Angaben bleiben in deinem Browser und werden nicht übertragen.</p>
+
+      <form class="formular" data-checkout-form novalidate>
+        <fieldset>
+          <legend>Lieferadresse</legend>
+          <div class="formular__reihe">
+            <div class="feld">
+              <label for="vorname">Vorname</label>
+              <input type="text" id="vorname" name="vorname" autocomplete="given-name" required aria-describedby="vorname-fehler">
+              <span class="feld__fehler" id="vorname-fehler" data-fehler-fuer="vorname"></span>
+            </div>
+            <div class="feld">
+              <label for="nachname">Nachname</label>
+              <input type="text" id="nachname" name="nachname" autocomplete="family-name" required aria-describedby="nachname-fehler">
+              <span class="feld__fehler" id="nachname-fehler" data-fehler-fuer="nachname"></span>
+            </div>
+          </div>
+          <div class="feld">
+            <label for="email">E-Mail-Adresse</label>
+            <input type="email" id="email" name="email" autocomplete="email" required aria-describedby="email-fehler">
+            <span class="feld__fehler" id="email-fehler" data-fehler-fuer="email"></span>
+          </div>
+          <div class="feld">
+            <label for="strasse">Straße und Hausnummer</label>
+            <input type="text" id="strasse" name="strasse" autocomplete="street-address" required aria-describedby="strasse-fehler">
+            <span class="feld__fehler" id="strasse-fehler" data-fehler-fuer="strasse"></span>
+          </div>
+          <div class="formular__reihe formular__reihe--plz">
+            <div class="feld">
+              <label for="plz">PLZ</label>
+              <input type="text" id="plz" name="plz" autocomplete="postal-code" inputmode="numeric" required aria-describedby="plz-fehler">
+              <span class="feld__fehler" id="plz-fehler" data-fehler-fuer="plz"></span>
+            </div>
+            <div class="feld">
+              <label for="ort">Ort</label>
+              <input type="text" id="ort" name="ort" autocomplete="address-level2" required aria-describedby="ort-fehler">
+              <span class="feld__fehler" id="ort-fehler" data-fehler-fuer="ort"></span>
+            </div>
+          </div>
+          <div class="feld">
+            <label for="land">Land</label>
+            <select id="land" name="land" autocomplete="country-name" required aria-describedby="land-fehler">
+              <option value="Deutschland">Deutschland</option>
+              <option value="Österreich">Österreich</option>
+              <option value="Schweiz">Schweiz</option>
+            </select>
+            <span class="feld__fehler" id="land-fehler" data-fehler-fuer="land"></span>
+          </div>
+        </fieldset>
+
+        <fieldset aria-describedby="zahlung-fehler">
+          <legend>Zahlungsart</legend>
+          <ul class="radio-liste">
+            <li><label><input type="radio" name="zahlung" value="Rechnung" required> <span>Rechnung</span></label></li>
+            <li><label><input type="radio" name="zahlung" value="PayPal"> <span>PayPal</span></label></li>
+            <li><label><input type="radio" name="zahlung" value="Kreditkarte"> <span>Kreditkarte</span></label></li>
+          </ul>
+          <span class="feld__fehler" id="zahlung-fehler" data-fehler-fuer="zahlung"></span>
+        </fieldset>
+
+        <div class="checkout__aktionen">
+          <button class="btn btn--sekundaer" type="button" data-zurueck="1">Zurück zum Warenkorb</button>
+          <button class="btn" type="submit">Weiter zur Prüfung</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Schritt 3: Prüfen und bestellen -->
+    <section class="checkout__schritt" data-schritt="3" aria-labelledby="schritt3-titel" hidden>
+      <h2 id="schritt3-titel" tabindex="-1">Prüfen und bestellen</h2>
+
+      <div class="zusammenfassung" data-zusammenfassung></div>
+
+      <form class="bestellen" data-bestellen-form novalidate>
+        <div class="feld">
+          <div class="checkbox-zeile">
+            <input type="checkbox" id="kenntnis" name="kenntnis" required aria-describedby="kenntnis-fehler">
+            <label for="kenntnis">Ich habe die <a href="widerruf.html">Widerrufsbelehrung und AGB</a> sowie die <a href="datenschutz.html">Datenschutzerklärung</a> zur Kenntnis genommen.</label>
+          </div>
+          <span class="feld__fehler" id="kenntnis-fehler" data-fehler-fuer="kenntnis"></span>
+        </div>
+        <p class="klein">Mit Klick auf „Zahlungspflichtig bestellen“ würdest du in einem echten Shop eine Bestellung mit Zahlungspflicht abgeben (§ 312j Abs. 3 BGB). Hier wird nichts ausgelöst.</p>
+        <div class="checkout__aktionen">
+          <button class="btn btn--sekundaer" type="button" data-zurueck="2">Zurück zur Lieferung</button>
+          <button class="btn" type="submit">Zahlungspflichtig bestellen</button>
+        </div>
+      </form>
+    </section>
+  </div>
+</main>
+<footer class="fuss">
+  <div class="container">
+    <div class="fuss__raster">
+      <div class="fuss__logo">
+        <img src="assets/img/logo-diddl-is-back-hell.png" alt="Diddl is back!" width="1000" height="572" loading="lazy">
+        <h2>Folge Diddl</h2>
+        <ul class="social">
+          <li><a href="https://www.instagram.com/diddl_original" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            Instagram</a></li>
+          <li><a href="https://www.facebook.com/DieDiddlmaus" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.4c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.2v2.3H7.4V14h2.8v8h3.3z"/></svg>
+            Facebook</a></li>
+          <li><a href="https://www.tiktok.com/@diddl_original" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M16.5 3c.3 2.3 1.7 3.9 4 4.1v3.1c-1.5 0-2.9-.5-4-1.3v6.3c0 3.3-2.7 5.8-6 5.8S4.5 18.5 4.5 15.2s2.7-5.8 6-5.8c.3 0 .7 0 1 .1v3.2c-.3-.1-.6-.2-1-.2-1.5 0-2.8 1.2-2.8 2.7s1.3 2.7 2.8 2.7 2.8-1.2 2.8-2.7V3h3.2z"/></svg>
+            TikTok</a></li>
+          <li><a href="https://www.youtube.com/channel/UCt2q9qyNrg0_lAfLlLSKwDA" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 8.5C3 6.6 4.6 5 6.5 5h11C19.4 5 21 6.6 21 8.5v7c0 1.9-1.6 3.5-3.5 3.5h-11C4.6 19 3 17.4 3 15.5v-7z"/><path d="M10 9l5 3-5 3V9z" fill="currentColor"/></svg>
+            YouTube</a></li>
+        </ul>
+      </div>
+      <nav aria-label="Fußnavigation">
+        <h2>Mehr entdecken</h2>
+        <ul class="fuss__liste">
+          <li><a href="index.html#ueber-diddl">Über Diddl</a></li>
+          <li><a href="produkt.html">Diddl Comeback-Tüte</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="datenschutz.html">Datenschutz</a></li>
+          <li><a href="widerruf.html">Widerruf und AGB</a></li>
+        </ul>
+      </nav>
+      <div class="newsletter">
+        <h2>Mausiger Diddl Newsletter</h2>
+        <p>Melde dich beim Diddl Newsletter an, um keine Neuigkeiten zu verpassen!</p>
+        <form data-newsletter novalidate>
+          <div class="newsletter__feld">
+            <label for="newsletter-email">Deine E-Mail-Adresse</label>
+            <input type="email" id="newsletter-email" name="email" autocomplete="email" required placeholder="du@beispiel.de">
+          </div>
+          <div class="checkbox-zeile">
+            <input type="checkbox" id="newsletter-einwilligung" name="einwilligung" required>
+            <label for="newsletter-einwilligung">Ich möchte den Newsletter erhalten und habe die <a href="datenschutz.html#newsletter">Datenschutzerklärung</a> gelesen. Die Einwilligung kann ich jederzeit widerrufen.</label>
+          </div>
+          <button class="btn btn--hell" type="submit">Anmelden</button>
+          <div class="newsletter__erfolg" data-newsletter-erfolg tabindex="-1" hidden>
+            <p><strong>Fast geschafft.</strong> In einem echten Betrieb bekämst du jetzt eine E-Mail mit einem Bestätigungslink (Double-Opt-In). Dieser Prototyp versendet nichts und speichert deine Adresse nicht.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="fuss__hinweis">
+      <p>Dieser Shop ist ein Prototyp im Rahmen eines Studienprojekts der DHBW Mannheim. Es werden keine Bestellungen ausgelöst, keine Zahlungen abgewickelt und keine Daten übertragen. Diese Seite steht in keiner Verbindung zur Marke Diddl oder zur Warimex-Gruppe. Alle Bildrechte liegen bei den jeweiligen Rechteinhabern.</p>
+      <p><a href="datenschutz.html#cookies" data-consent-oeffnen>Cookie-Einstellungen</a></p>
+    </div>
+  </div>
+</footer>
+<div class="consent" data-consent role="dialog" aria-labelledby="consent-titel" aria-describedby="consent-text" hidden>
+  <h2 id="consent-titel">Cookies und Speicherung</h2>
+  <p id="consent-text">Diese Seite setzt keine Tracking-Cookies. Der Warenkorb wird nur lokal in deinem Browser gespeichert. Deine Auswahl bereitet eine spätere Freigabe optionaler Dienste vor. Mehr in der <a href="datenschutz.html#cookies">Datenschutzerklärung</a>.</p>
+  <div class="consent__aktionen">
+    <button class="btn btn--klein" type="button" data-consent-wahl="alle">Alle akzeptieren</button>
+    <button class="btn btn--klein btn--sekundaer" type="button" data-consent-wahl="notwendig">Nur notwendige</button>
+  </div>
+</div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/warenkorb.js"></script>
+</body>
+</html>
