@@ -325,7 +325,8 @@ für Switch-Nutzer außer den Pfeil-Buttons (die vorhanden sind).
    Source: „Deploy from a branch“, Branch: `main`, Ordner: `/ (root)`.
    Speichern.
 4. Nach ein bis zwei Minuten ist die Seite unter
-   `https://<benutzername>.github.io/diddl-comeback-tuete/` erreichbar.
+   `https://<benutzername>.github.io/diddl-comeback-tuete/` erreichbar
+   (dieses Projekt: `https://aylamaus.github.io/diddl-comeback-tuete/`).
 5. Prüfen: Startseite laden, Browserkonsole öffnen (keine 404), eine Tüte in
    den Warenkorb legen, Seite neu laden (Warenkorb bleibt), Checkout bis zur
    Bestätigung durchspielen.
@@ -335,11 +336,11 @@ für Switch-Nutzer außer den Pfeil-Buttons (die vorhanden sind).
 geschrieben und ohne Umlaute, `.nojekyll` verhindert, dass GitHub den Ordner
 durch Jekyll schickt. Jede Änderung wird mit `git push` live.
 
-**Nach dem Deployment nachziehen:** Die `og:image`-Angaben in den
-`<head>`-Bereichen sind relativ. Social-Media-Crawler brauchen absolute
-URLs; nach dem ersten Deployment `assets/img/hero-banner.webp` durch
-`https://<benutzername>.github.io/diddl-comeback-tuete/assets/img/hero-banner.webp`
-ersetzen (Suchen und Ersetzen über alle HTML-Dateien).
+**Nach dem Deployment nachgezogen:** Die `og:image`-Angaben in den
+`<head>`-Bereichen zeigen als einzige Pfade absolut auf
+`https://aylamaus.github.io/diddl-comeback-tuete/assets/img/…`, weil
+Social-Media-Crawler keine relativen Bildpfade auflösen. Zieht das Repo um,
+müssen diese neun Zeilen angepasst werden (Suchen und Ersetzen).
 
 ---
 
@@ -353,7 +354,6 @@ ersetzen (Suchen und Ersetzen über alle HTML-Dateien).
 | **Schriftdateien** | Chewy 400, Quicksand 400/600/700 liegen als woff2 vor | Erledigt |
 | **Kein echtes Payment** | Checkout simuliert; keine Datenübertragung | Ausbauweg siehe Abschnitt 2 |
 | **Newsletter** | Nur Frontend-Erfolgsmeldung, kein Double-Opt-In-Versand | Dienst anbinden, sobald ein Backend/Formulardienst gewählt ist |
-| **`og:image` relativ** | Siehe Abschnitt 7 | Nach Deployment auf absolute URL setzen |
 | **404 bei verschachtelten Pfaden** | `404.html` nutzt relative Pfade; bei URLs mit Unterordner (`/repo/foo/bar`) laden Stylesheet und Bilder nicht | Für Projektseiten akzeptiert; alternativ `<base href>` nach Deployment setzen |
 | **Fallback-Texte** | Produktbeschreibung und FAQ stehen zusätzlich statisch im HTML | Bei Änderungen in `data.js` mitpflegen (Abschnitt 4) |
 | **Annahmen im Prototyp** | Versandkosten 4,95 €, Lieferzeit 2–4 Werktage, Länder DE/AT/CH, Artikelnummer `DEMO-2026-001` | Frei gesetzte Demo-Werte, keine Angaben der Marke; über `data.js` änderbar |
