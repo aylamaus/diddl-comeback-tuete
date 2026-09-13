@@ -321,10 +321,10 @@
     var gespeichert = lesen(SCHLUESSEL.consent);
     D.trackingErlaubt = gespeichert === "alle";
 
-    function zeigen() {
+    function zeigen(fokus) {
       banner.hidden = false;
       var erster = banner.querySelector("button");
-      if (erster) { erster.focus(); }
+      if (fokus && erster) { erster.focus(); }
     }
     function wahl(wert) {
       schreiben(SCHLUESSEL.consent, wert);
@@ -336,11 +336,11 @@
       btn.addEventListener("click", function () { wahl(btn.getAttribute("data-consent-wahl")); });
     });
     document.querySelectorAll("[data-consent-oeffnen]").forEach(function (btn) {
-      btn.addEventListener("click", function (e) { e.preventDefault(); zeigen(); });
+      btn.addEventListener("click", function (e) { e.preventDefault(); zeigen(true); });
     });
 
     if (gespeichert !== "alle" && gespeichert !== "notwendig") {
-      zeigen();
+      zeigen(false);
     }
   }
 
@@ -349,8 +349,10 @@
   function navMarkieren() {
     var datei = window.location.pathname.split("/").pop() || "index.html";
     document.querySelectorAll(".nav__link").forEach(function (a) {
-      var ziel = a.getAttribute("href").split("#")[0];
-      if (ziel && ziel === datei) { a.setAttribute("aria-current", "page"); }
+      var href = a.getAttribute("href");
+      // Anker-Links (index.html#…) nicht markieren, sonst wären auf der
+      // Startseite zwei Punkte gleichzeitig „aktuell“
+      if (href.indexOf("#") === -1 && href === datei) { a.setAttribute("aria-current", "page"); }
     });
   }
 
