@@ -33,18 +33,18 @@ DIDDL.produkte = {
   "comeback-tuete": {
     id: "comeback-tuete",
     name: "Diddl Comeback-Tüte",
-    kurz: "Eine Tüte voller Diddl – limitiert, überraschend und garantiert mit Block, Schreibwaren und Kuscheltier.",
+    kurz: "Eine Tüte voller Diddl – limitiert, überraschend und garantiert mit Block, Schreibwaren, Accessoire und Kuscheltier.",
     preisCent: 1999,           // 19,99 Euro, inkl. 19 % MwSt.
     mwstProzent: 19,
     warenwertMindestensCent: 1999, // geschätzter Mindest-Warenwert des Inhalts
     mengeMax: 5,               // maximale Stückzahl pro Bestellung
     bild: "assets/img/tuete-1.webp", // Bild im Warenkorb
     beschreibung: [
-      "Die Diddl Comeback-Tüte ist unsere Überraschungstüte zum Comeback in Deutschland, Österreich und der Schweiz. Drinnen steckt eine Auswahl aus der aktuellen Kollektion, zusammengestellt wie damals am Kiosk: Du weißt vorher nicht, welche Motive dich erwarten.",
-      "Sicher ist: Ein Diddl-Block, ein Schreibwaren-Utensil und ein Kuscheltier sind immer dabei. Der geschätzte Warenwert liegt mindestens beim Kaufpreis. Die Tüte erscheint in limitierter Auflage und wird nicht nachproduziert."
+      "Die Diddl Comeback-Tüte ist unsere Überraschungstüte zum Diddl-Comeback. Drinnen steckt eine Auswahl aus der aktuellen Kollektion, zusammengestellt wie damals am Kiosk: Du weißt vorher nicht, welche Motive dich erwarten.",
+      "Sicher ist: Ein Diddl-Block, ein Schreibwaren-Utensil, ein Accessoire und ein Kuscheltier sind immer dabei. Der geschätzte Warenwert liegt mindestens beim Kaufpreis. Die Tüte erscheint in limitierter Auflage und wird nicht nachproduziert."
     ],
     details: [
-      { label: "Inhalt", wert: "Mindestens 3 Artikel: Block, Schreibwaren, Kuscheltier" },
+      { label: "Inhalt", wert: "Mindestens 4 Artikel: Block, Schreibwaren, Accessoire, Kuscheltier" },
       { label: "Auflage", wert: "Limitiert, keine Nachproduktion" },
       { label: "Verpackung", wert: "Bedruckte Papiertüte, verschlossen" },
       { label: "Versand", wert: "Deutschland, Österreich, Schweiz" },
@@ -53,6 +53,7 @@ DIDDL.produkte = {
     garantiertEnthalten: [
       "1x Diddl-Block",
       "1x Schreibwaren-Utensil",
+      "1x Diddl-Accessoire",
       "1x Diddl-Kuscheltier"
     ],
     galerie: [
@@ -70,7 +71,7 @@ DIDDL.produkte = {
    --------------------------------------------------------------------- */
 DIDDL.versand = {
   kostenCent: 495,             // 4,95 Euro pro Bestellung
-  lieferzeitText: "2 bis 4 Werktage nach Zahlungseingang",
+  lieferzeitText: "3 bis 5 Werktage nach Zahlungseingang",
   laender: ["Deutschland", "Österreich", "Schweiz"],
   zahlungsarten: [
     { id: "rechnung", label: "Rechnung" },
@@ -93,6 +94,32 @@ DIDDL.kampagne = {
 };
 
 /* ---------------------------------------------------------------------
+   BEWERTUNGEN – BEISPIELANSICHT
+   Achtung: Das sind keine echten Kundenbewertungen, sondern Beispiele,
+   die zeigen, wie die Section aussehen würde. Sie werden auf der Seite
+   als „Beispiel“ gekennzeichnet. Vor einem echten Betrieb müssen sie
+   durch echte, nachprüfbare Bewertungen ersetzt oder entfernt werden.
+   sterne: Zahl von 1 bis 5.
+   --------------------------------------------------------------------- */
+DIDDL.bewertungen = [
+  {
+    vorname: "Lena",
+    sterne: 5,
+    text: "Ich hab die Tüte mit meiner kleinen Schwester zusammen aufgemacht. Sie kannte Diddl gar nicht, jetzt liegt der Block auf ihrem Schreibtisch."
+  },
+  {
+    vorname: "Jonas",
+    sterne: 5,
+    text: "Der Kuscheltier-Diddl sieht aus wie der von 2001 aus meinem Kinderzimmer. Schneller Versand, alles heil angekommen."
+  },
+  {
+    vorname: "Mira",
+    sterne: 4,
+    text: "Schöne Überraschung, das Duftpapier riecht wie damals. Ein Stern Abzug, weil ich mir zwei Tüten hätte bestellen sollen."
+  }
+];
+
+/* ---------------------------------------------------------------------
    FAQ
    Jeder Eintrag hat eine Frage und eine Antwort. Die Antwort darf
    mehrere Absätze enthalten, dann als Liste: antwort: ["Absatz 1", "Absatz 2"].
@@ -102,13 +129,13 @@ DIDDL.faq = [
   {
     frage: "Was ist in der Comeback-Tüte drin?",
     antwort: [
-      "Garantiert enthalten sind ein Diddl-Block, ein Schreibwaren-Utensil und ein Diddl-Kuscheltier. Welche Motive und welche weiteren Artikel dazukommen, verraten wir vor dem Kauf nicht – das ist der Überraschungscharakter der Tüte.",
+      "Garantiert enthalten sind ein Diddl-Block, ein Schreibwaren-Utensil, ein Diddl-Accessoire und ein Diddl-Kuscheltier. Welche Motive und welche weiteren Artikel dazukommen, verraten wir vor dem Kauf nicht – das ist der Überraschungscharakter der Tüte.",
       "Der geschätzte Warenwert des Inhalts liegt immer bei mindestens 19,99 Euro."
     ]
   },
   {
     frage: "Kann ich mir bestimmte Motive oder Charaktere wünschen?",
-    antwort: "Nein. Die Tüten werden vorab zusammengestellt, ein Anspruch auf bestimmte Motive oder Charaktere besteht nicht. Tauschen ist aber ausdrücklich erwünscht – so wie früher auf dem Schulhof."
+    antwort: "Nein. Die Tüten werden vorab zusammengestellt, ein Anspruch auf bestimmte Motive oder Charaktere besteht nicht. Das gilt für alle vier Kategorien – Block, Schreibwaren, Accessoire und Kuscheltier. Tauschen ist aber ausdrücklich erwünscht – so wie früher auf dem Schulhof."
   },
   {
     frage: "Wie viele Tüten kann ich bestellen?",
@@ -120,7 +147,7 @@ DIDDL.faq = [
   },
   {
     frage: "Was kostet der Versand und wie lange dauert er?",
-    antwort: "Der Versand kostet 4,95 Euro pro Bestellung nach Deutschland, Österreich und in die Schweiz. Die Lieferzeit beträgt in der Regel 2 bis 4 Werktage nach Zahlungseingang."
+    antwort: "Der Versand kostet 4,95 Euro pro Bestellung nach Deutschland, Österreich und in die Schweiz. Die Lieferzeit beträgt in der Regel 3 bis 5 Werktage nach Zahlungseingang."
   },
   {
     frage: "Kann ich die Tüte zurückgeben?",
@@ -133,7 +160,7 @@ DIDDL.faq = [
 ];
 
 /* ---------------------------------------------------------------------
-   QUIZ „Welcher Diddl bist du?“
+   QUIZ „Welcher Diddl-Charakter steckt in dir?“
 
    So funktioniert es:
    - Es gibt vier Ergebnisfiguren (DIDDL.quiz.figuren). Jede hat eine id.
@@ -144,79 +171,92 @@ DIDDL.faq = [
 
    Neue Frage hinzufügen: einfach einen weiteren Block in "fragen"
    anhängen. Der Fortschritt („Frage 2 von 5“) passt sich automatisch an.
+   Jede Figur hat ein Bild (bild) aus assets/img/, das im Ergebnis
+   als runder Sticker erscheint.
    --------------------------------------------------------------------- */
 DIDDL.quiz = {
+  titelZeile: "Diddl Charakter Quiz",
+  frageTitel: "Welcher Diddl-Charakter steckt in dir?",
+  einleitung: "5 Fragen, 4 Freunde aus dem Käsekuchenland. Finde heraus, ob du Diddl, Diddlina, Pimboli oder Wollywell bist!",
+  kopfbild: { src: "assets/img/quiz-kopf.jpg", alt: "Wollywell, Diddl, Diddlina und Pimboli springen fröhlich vor rosafarbenem Hintergrund.", breite: 1200, hoehe: 700 },
+
   figuren: {
     diddl: {
       id: "diddl",
       name: "Diddl",
       untertitel: "Die Springmaus mit den großen Füßen",
-      beschreibung: "Du kommst aus dem Käsekuchenland, zumindest im Herzen. Optimistisch, immer für eine Idee gut und mit Füßen, die dich überall hintragen. Wenn jemand eine Tauschrunde eröffnet, bist du die erste Stimme im Raum."
+      bild: "assets/img/figur-diddl.jpg",
+      beschreibung: "Neugierig, mutig und immer bereit für das nächste Abenteuer – so wie die Maus mit den großen Füßen selbst. Du probierst lieber aus, statt lange zu überlegen, und genau das macht dich unwiderstehlich liebenswert."
     },
     diddlina: {
       id: "diddlina",
       name: "Diddlina",
       untertitel: "Diddls Freundin, kreativ und herzlich",
-      beschreibung: "Bei dir hat jedes Blatt Papier einen Plan, und jeder Brief bekommt mindestens einen Sticker. Du sammelst nicht nur, du gestaltest. Und du merkst dir, wer welches Motiv noch sucht."
+      bild: "assets/img/figur-diddlina.jpg",
+      beschreibung: "Du liebst schöne Dinge, kleine Details und alles, was Herz hat. Mit deinem Gespür für Ästhetik und deiner herzlichen Art bringst du automatisch Farbe in den Alltag."
     },
     pimboli: {
       id: "pimboli",
       name: "Pimboli",
       untertitel: "Der Knuffelteddy aus dem Wohnkoffer",
-      beschreibung: "Du wohnst in einem Wohnkoffer in Diddls Käsehöhle – oder zumindest am liebsten unter einer Decke. Etwas schüchtern, sehr verspielt, mit einer Schwäche für Honig und Kuscheln. Überraschungen genießt du in Ruhe."
+      bild: "assets/img/figur-pimboli.jpg",
+      beschreibung: "Kuschelig, treu und immer für andere da – der Knuffelteddy unter deinen Freund:innen. Bei dir fühlt sich jeder sofort geborgen, denn Nähe und Verlässlichkeit sind für dich das Wichtigste."
     },
-    ackaturbo: {
-      id: "ackaturbo",
-      name: "Ackaturbo",
-      untertitel: "Der Feuerschwanz-Minirabe",
-      beschreibung: "Schnell, frech und neugierig: Du hast die Tüte schon aufgerissen, bevor jemand „Überraschung“ sagen konnte. Stillsitzen ist nicht dein Ding, aber wenn jemand etwas Neues entdeckt, bist du schon da."
+    wollywell: {
+      id: "wollywell",
+      name: "Wollywell",
+      untertitel: "Das verträumte Schaf aus dem Käsekuchenland",
+      bild: "assets/img/figur-wollywell.jpg",
+      beschreibung: "Verträumt, fantasievoll und ein bisschen wolkig unterwegs – du lebst am liebsten in deiner eigenen kleinen Welt. Deine Kreativität und Ruhe machen dich zu jemandem, bei dem andere gerne mal abschalten."
     }
   },
 
+  // Die Antworten sind pro Frage bewusst in unterschiedlicher Reihenfolge,
+  // damit nicht immer die erste Antwort zu Diddl führt.
   fragen: [
     {
-      frage: "Vor dir liegt ein leeres Blatt Diddl-Papier. Was passiert?",
+      frage: "Wie sieht dein perfekter Nachmittag aus?",
       antworten: [
-        { text: "Ich schreibe sofort einen Brief an jemanden, der einen verdient hat.", figur: "diddl" },
-        { text: "Ich male den Rand voll und klebe Sticker drauf, bevor ein Wort draufsteht.", figur: "diddlina" },
-        { text: "Ich lege es in meine Mappe. Zu schön zum Beschreiben.", figur: "pimboli" },
-        { text: "Ich falte einen Papierflieger. Da ist das Blatt wenigstens in Bewegung.", figur: "ackaturbo" }
+        { text: "Draußen unterwegs, irgendwas Neues entdecken.", figur: "diddl" },
+        { text: "Zimmer neu dekorieren oder mein Lieblingsoutfit zusammenstellen.", figur: "diddlina" },
+        { text: "Auf dem Sofa kuscheln, mit meinem Lieblingsmenschen oder Kuscheltier.", figur: "pimboli" },
+        { text: "Kopfhörer auf, in Gedanken verloren, vor mich hin träumen oder malen.", figur: "wollywell" }
       ]
     },
     {
-      frage: "Tauschrunde auf dem Schulhof. Wie gehst du vor?",
+      frage: "Du bekommst eine Diddl Comeback-Tüte – was machst du zuerst?",
       antworten: [
-        { text: "Ich mache eine große Ansage und bringe alle zusammen.", figur: "diddl" },
-        { text: "Ich habe eine Liste, wer was sucht, und vermittle.", figur: "diddlina" },
-        { text: "Ich schaue erst mal zu und tausche nur mit Leuten, die ich mag.", figur: "pimboli" },
-        { text: "Ich bin schon dreimal um den Hof gerannt und habe alles gesehen.", figur: "ackaturbo" }
+        { text: "Mir Zeit lassen und die Vorfreude genießen, bevor ich reinschaue.", figur: "wollywell" },
+        { text: "Sofort aufreißen, ich kann’s nicht erwarten!", figur: "diddl" },
+        { text: "Hoffen, dass das Kuscheltier drin ist – mein neuer Bettnachbar.", figur: "pimboli" },
+        { text: "Vorsichtig öffnen und mich über jedes hübsche Detail freuen.", figur: "diddlina" }
       ]
     },
     {
-      frage: "Dein Lieblingsplatz?",
+      frage: "Was hättest du in der Schule am liebsten gemacht?",
       antworten: [
-        { text: "Draußen, irgendwo mit Aussicht auf Käsekuchen.", figur: "diddl" },
-        { text: "Am Schreibtisch, mit allen Stiften in Reichweite.", figur: "diddlina" },
-        { text: "Unter einer Decke, am liebsten in einem Koffer.", figur: "pimboli" },
-        { text: "Überall, solange es nicht lange derselbe ist.", figur: "ackaturbo" }
+        { text: "Zeit mit Freunden, Gruppenarbeiten.", figur: "pimboli" },
+        { text: "Aus dem Fenster träumen oder Geschichten schreiben.", figur: "wollywell" },
+        { text: "Sport oder irgendwas Aktives draußen.", figur: "diddl" },
+        { text: "Kreatives Gestalten, Kunst, mein Mäppchen dekorieren.", figur: "diddlina" }
       ]
     },
     {
-      frage: "Jemand überreicht dir eine Überraschungstüte. Deine Reaktion?",
+      frage: "Wie tröstest du eine gute Freundin oder einen guten Freund?",
       antworten: [
-        { text: "Jubeln, dann alle einladen, beim Auspacken zuzuschauen.", figur: "diddl" },
-        { text: "Vorsichtig öffnen und den Inhalt sofort schön anordnen.", figur: "diddlina" },
-        { text: "Erst mal drücken. Die Tüte ist schon Geschenk genug.", figur: "pimboli" },
-        { text: "Aufgerissen, bevor der Satz zu Ende war.", figur: "ackaturbo" }
+        { text: "Eine kleine, süße Überraschung basteln oder schenken.", figur: "diddlina" },
+        { text: "Zuhören, ganz ruhig, ohne viele Worte.", figur: "wollywell" },
+        { text: "Ablenken – wir machen sofort etwas Cooles zusammen.", figur: "diddl" },
+        { text: "Ganz fest umarmen und einfach da sein.", figur: "pimboli" }
       ]
     },
     {
-      frage: "Und der Lieblingssnack?",
+      frage: "Dein Lebensmotto?",
       antworten: [
-        { text: "Käsekuchen. Gibt es eine andere Antwort?", figur: "diddl" },
-        { text: "Etwas Selbstgebackenes, mit Verzierung.", figur: "diddlina" },
-        { text: "Honig. Direkt aus dem Glas.", figur: "pimboli" },
-        { text: "Egal, Hauptsache schnell und unterwegs.", figur: "ackaturbo" }
+        { text: "„Kopf in den Wolken, Herz am richtigen Fleck.“", figur: "wollywell" },
+        { text: "„Zuhause ist, wo die Liebsten sind.“", figur: "pimboli" },
+        { text: "„Kleine Dinge, große Wirkung.“", figur: "diddlina" },
+        { text: "„Lieber ausprobieren als abwarten.“", figur: "diddl" }
       ]
     }
   ]
