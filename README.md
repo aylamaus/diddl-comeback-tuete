@@ -139,8 +139,9 @@ ohne Programmierkenntnisse in einem Texteditor bearbeitet werden.
 | Produkt | `name`, `kurz`, `beschreibung`, `details`, `preisCent`, `mengeMax`, `garantiertEnthalten`, `galerie` | Preis auf 24,99 € ändern: `preisCent: 2499` |
 | Versand | `kostenCent`, `lieferzeitText`, `laender`, `zahlungsarten` | |
 | Kampagne | `hashtag`, Social-Links | |
+| Bewertungen | `vorname`, `sterne`, `text` – als Beispiel gekennzeichnet | Vor echtem Betrieb durch echte Bewertungen ersetzen oder löschen |
 | FAQ | `frage`, `antwort` (Text oder Liste von Absätzen), Reihenfolge | Eintrag anhängen oder löschen |
-| Quiz | `fragen` (Frage, vier Antworten mit `figur`), `figuren` (Name, Untertitel, Beschreibung) | Sechste Frage anhängen – Fortschritt „Frage x von y“ passt sich automatisch an |
+| Quiz | `fragen` (Frage, vier Antworten mit `figur`), `figuren` (Name, Untertitel, Bild, Beschreibung) | Sechste Frage anhängen – Fortschritt „Frage x von y“ passt sich automatisch an |
 
 **Was nicht geändert werden darf**
 
@@ -154,8 +155,9 @@ ohne Programmierkenntnisse in einem Texteditor bearbeitet werden.
 **Zusammenspiel mit dem HTML**
 
 Damit die Seiten auch ohne JavaScript lesbar bleiben (Progressive
-Enhancement, SEO), stehen Produktbeschreibung, Produktdetails und FAQ zusätzlich
-als statisches HTML in `produkt.html` und `faq.html`. Mit JavaScript werden
+Enhancement, SEO), stehen Produktbeschreibung, Produktdetails, FAQ und
+Beispiel-Bewertungen zusätzlich als statisches HTML in `produkt.html`,
+`faq.html` und `index.html`. Mit JavaScript werden
 diese Bereiche aus `data.js` neu aufgebaut, `data.js` ist also führend.
 Redaktionshinweis: Wer Texte in `data.js` ändert, sollte die statischen
 Fallback-Texte in den beiden HTML-Dateien mitziehen. Header und Footer sind
@@ -232,10 +234,13 @@ Format: Beobachtung → Risiko → Entscheidung → Begründung.
 - **Risiko:** Ohne Banner wäre eine spätere Erweiterung um Analytics oder
   Social-Embeds nicht abgesichert; mit einem übertriebenen Banner würde
   Einwilligung suggeriert, wo keine nötig ist.
-- **Entscheidung:** Ein schlankes Banner mit gleichwertigen Optionen „Alle
-  akzeptieren“ und „Nur notwendige“, Link zur Datenschutzerklärung, Wahl im
-  `localStorage`, jederzeit über den Footer-Link „Cookie-Einstellungen“
-  änderbar. Es setzt nur die Variable `DIDDL.trackingErlaubt`.
+- **Entscheidung:** Ein schlankes Banner mit gleichwertigen Optionen „Nur
+  notwendige“ und „Alle akzeptieren“, Links zu Datenschutzerklärung und
+  Impressum, Wahl im `localStorage`, jederzeit über den Footer-Link
+  „Cookie-Einstellungen“ änderbar. Es setzt nur die Variable
+  `DIDDL.trackingErlaubt`. Nach Rückmeldung aus dem Rechts-Teilprojekt
+  (14.09.2026) sind beide Buttons identisch gestaltet (Outline, gleiche
+  Größe); „Alle akzeptieren“ ist nicht hervorgehoben.
 - **Begründung:** In dieser Ausbaustufe ist das Banner technisch nicht
   zwingend. Es existiert, weil (a) die Kampagne absehbar Reichweitenmessung
   braucht und der Mechanismus dann bereits steht, (b) das Banner transparent
@@ -255,31 +260,92 @@ Format: Beobachtung → Risiko → Entscheidung → Begründung.
   Social-Media-Verlinkung), alle Inhalte sind ohne JavaScript lesbar, und
   die Seite ist ohne Build-Schritt deploybar.
 
-### 5.7 Hero-Text neben statt über dem Bild
+### 5.7 Hero: Kampagnenfoto als Hintergrund, aber ohne Logo im Bild
 
-- **Beobachtung:** Das Kampagnenbanner enthält bereits Logo und Figuren.
-- **Risiko:** Text über dem Bild würde mit dem Logo kollidieren und den
-  Kontrast unkalkulierbar machen.
-- **Entscheidung:** Headline, Subline und Button stehen auf einer
-  Pastellfläche mit weichen Farbblobs; das Banner sitzt darunter in einem
-  weißen Sticker-Rahmen. Die Bildwahl (Desktop-Banner vs. Mobile-Gruppe)
-  läuft über `<picture>`.
-- **Begründung:** Lesbarkeit und Kontrast bleiben garantiert; das Original-
-  Artwork wird nicht überdeckt.
+- **Beobachtung:** Der erste Entwurf stellte Text und Banner untereinander,
+  weil das Banner bereits das „Diddl is back!“-Logo enthält. Das
+  Kundenfeedback vom 14.09.2026 wünschte das Foto als ganzes Hintergrundbild.
+- **Risiko:** Text über dem Bild kollidiert mit Logo und Figuren, der
+  Kontrast wäre unkalkulierbar.
+- **Entscheidung:** Das Banner wurde auf 1920 × 500 px beschnitten, sodass
+  das Logo wegfällt (`hero-banner-ohne-logo.jpg`); auf Mobile bleibt die
+  Figurengruppe ohne Logo. Das Foto liegt unten in der Section, der Text
+  darüber in einer halbtransparenten Sticker-Karte auf der rosa
+  Aquarellfläche. `<picture>` wählt weiterhin das passende Bild. Das
+  unbeschnittene Banner bleibt als `og:image` für Social-Media-Vorschauen.
+- **Begründung:** Lesbarkeit bleibt durch die Karte garantiert, das Artwork
+  wird nicht überdeckt, und der Hero wirkt als Vollbild wie gewünscht.
 
 ### 5.8 Bildformate und -größen
 
 - **Beobachtung:** Einige Quelldateien waren 3–4 MB groß (3840 px breit).
   Das Briefing sah für drei Bilder das webp- bzw. png-Format vor.
 - **Risiko:** Ladezeit auf Mobilfunk, Layout-Sprünge.
-- **Entscheidung:** Alle großen Bilder auf maximal 1600 px verkleinert; drei
-  Dateien wurden als JPEG statt webp/png abgelegt (`ueber-1-charaktere.jpg`,
-  `ueber-3-comeback.jpg`, `tuete-5.jpg`), weil auf dem Build-Rechner kein
-  webp-Encoder verfügbar war und PNG für Fotos ungeeignet ist. Jedes Bild hat
+- **Entscheidung:** Alle großen Bilder auf maximal 1600 px verkleinert;
+  mehrere Dateien wurden als JPEG statt webp/png abgelegt
+  (`ueber-1-charaktere.jpg`, `tuete-5.jpg`, `hero-banner-ohne-logo.jpg`),
+  weil auf dem Build-Rechner kein webp-Encoder verfügbar war und PNG für
+  Fotos ungeeignet ist. Jedes Bild hat
   `width`/`height`, `loading="lazy"` (außer Hero und erstes Galeriebild) und
   einen deutschen Alt-Text.
 - **Begründung:** Gesamtgewicht der Startseite bleibt unter 1 MB; das
   Format ist für die Nutzung irrelevant, die Dateinamen sind sprechend.
+
+### 5.9 Akzentblau außerhalb der Briefing-Palette
+
+- **Beobachtung:** Das Kundenfeedback vom 14.09.2026 wünschte blaue
+  Hover-Zustände in Navigation und Footer und nannte `#14b2ff`. Das Briefing
+  erlaubt nur die Tokens plus zwei abgeleitete Pastelltöne.
+- **Risiko:** Ein Blau ohne Regeln würde die Palette verwässern; `#14b2ff`
+  erreicht gegen Weiß nur 2,4:1 und ist damit als Textfarbe auf hellem
+  Grund unzulässig.
+- **Entscheidung:** Neuer Token `--akzent-blau: #14b2ff`, ausschließlich für
+  Hover- und Fokus-Zustände: als Hintergrund hinter dunklem Text in der
+  Navigation (7,1:1) und als Link-/Iconfarbe auf dem dunklen Footer (4,75:1).
+  Nie als Fließtext auf Hell, nie als Fläche mit heller Schrift.
+- **Begründung:** Kundenwunsch wird erfüllt, die Kontrastregeln bleiben
+  eingehalten, und die Erweiterung ist dokumentiert statt still eingeführt.
+
+### 5.10 Beispiel-Bewertungen
+
+- **Beobachtung:** Der Kunde wünschte eine Bewertungssektion mit drei
+  Beispielen. Das Briefing verbietet erfundene Bewertungen; rechtlich sind
+  fingierte Kundenbewertungen irreführende Werbung (§ 5b Abs. 3 UWG,
+  Anhang Nr. 23b/23c).
+- **Risiko:** Prüfende und Nutzer könnten die Texte für echt halten.
+- **Entscheidung:** Section „Das sagen Diddl-Fans“ mit drei Karten, jede
+  trägt das Etikett „Beispiel“, die Subline sagt ausdrücklich, dass die
+  Stimmen erfunden sind. Die Texte liegen in `data.js` unter
+  `DIDDL.bewertungen` mit einem Warnkommentar.
+- **Begründung:** Die Section zeigt das Layout, ohne zu täuschen. Vor einem
+  echten Betrieb sind die Einträge zu ersetzen oder zu löschen.
+
+### 5.11 Wellen an jedem Sectionwechsel und dezentes Einblenden
+
+- **Beobachtung:** Der erste Entwurf setzte bewusst nur zwei Wellen und
+  keine Scroll-Animationen (Briefing: kein „Fade-and-slide-up an jeder
+  Section“). Das Kundenfeedback wünschte mehr Wellen und ein sanftes
+  Einblenden als Extra.
+- **Risiko:** Monotonie durch identische Trenner; Bewegung, die ablenkt oder
+  Menschen mit Bewegungsempfindlichkeit stört.
+- **Entscheidung:** Wellen an jedem Wechsel der Startseite, drei
+  verschiedene Formen im Wechsel, Produkt- und Checkout-Seite bleiben ohne.
+  Einblenden nur über die Deckkraft (kein Verschieben), einmalig,
+  0,5 Sekunden, per `IntersectionObserver`; bei `prefers-reduced-motion`
+  und ohne JavaScript ist alles sofort sichtbar.
+- **Begründung:** Der Kundenwunsch wird erfüllt, ohne das Standardmuster
+  „slide-up“ zu übernehmen und ohne Barrierefreiheit zu opfern.
+
+### 5.12 Bild mit erkennbaren Personen nicht verwendet
+
+- **Beobachtung:** Unter den nachgelieferten Bildern war ein Ladenfoto mit
+  drei erkennbaren Personen (Pressefoto).
+- **Risiko:** Persönlichkeitsrechte der Abgebildeten, fehlende Lizenz.
+- **Entscheidung:** Nicht eingebaut; das Karussell nutzt stattdessen ein
+  Ladenfoto mit Produkten, auf dem keine Person erkennbar ist. Mit dem
+  Kunden abgestimmt.
+- **Begründung:** Für einen öffentlich erreichbaren Prototyp ist das Risiko
+  vermeidbar, der Nutzen des Bildes gering.
 
 ---
 
@@ -294,7 +360,7 @@ Format: Beobachtung → Risiko → Entscheidung → Begründung.
 | Alle Bilder mit `alt`, `width`, `height` | Skript | Bestanden |
 | Alle Formularfelder mit verknüpftem `<label>` | Skript | Bestanden |
 | Relative Pfade, keine toten Links, Anker vorhanden | Skript | Bestanden |
-| Textkontrast | Berechnung nach WCAG-Formel | Text 12,4:1 bis 16,6:1; Links ≥ 4,99:1; Button-Text auf Violett 5,71:1; Hover-Pink 3,42:1 nur mit ≥ 18 px/700 (siehe 5.2) |
+| Textkontrast | Berechnung nach WCAG-Formel | Text 12,4:1 bis 16,6:1; Links ≥ 4,99:1; Button-Text auf Violett 5,71:1; Hover-Pink 3,42:1 nur mit ≥ 18 px/700 (siehe 5.2); Akzentblau nur als Hover-Hintergrund mit dunklem Text (7,1:1) bzw. als Linkfarbe auf dunklem Footer (4,75:1) |
 | Sichtbarer Fokus | Manuell im Browser, Tab-Reihenfolge Skip-Link → Logo → Navigation → Warenkorb → Burger | Pinker Doppelring (Pink außen, Hell innen) auf allen Flächen sichtbar; kein `outline: none` |
 | Skip-Link | Erster Tab-Stopp auf jeder Seite | Springt zu `#hauptinhalt` |
 | Tastaturbedienung Burger-Menü | `aria-expanded`, `aria-controls`, Escape schließt und setzt Fokus zurück | Funktioniert |
@@ -302,7 +368,8 @@ Format: Beobachtung → Risiko → Entscheidung → Begründung.
 | Akkordeons | `<button aria-expanded>` steuert `hidden`; ohne JS alle offen | Funktioniert |
 | Quiz | Antworten als Buttons, Fortschritt „Frage x von y“ per `aria-live`, Ergebnis als fokussierte `aria-live`-Region | Funktioniert |
 | Checkout | Fehlermeldungen direkt am Feld, per `aria-describedby` verknüpft, `aria-invalid`, Fokus springt aufs erste Fehlerfeld; Schrittwechsel fokussiert die Überschrift | Funktioniert |
-| `prefers-reduced-motion` | CSS-Media-Query setzt alle Animationen und Übergänge auf 0 | Umgesetzt |
+| `prefers-reduced-motion` | CSS-Media-Query setzt alle Animationen und Übergänge auf 0, Einblenden beim Scrollen wird übersprungen | Umgesetzt |
+| Social-Icons ohne Textlabel | Jeder Link trägt ein `aria-label` („Diddl auf Instagram, öffnet in neuem Tab“) | Umgesetzt |
 | Ohne JavaScript | Firefox mit deaktiviertem JS, 375 px | Alle Inhalte lesbar, Navigation im Fluss, Slides untereinander, Akkordeons offen; Warenkorb, Quiz und Karussell-Steuerung entfallen erwartungsgemäß |
 | Responsiv | 360, 375, 768, 1280 px | Kein horizontales Scrollen, Navigation ab 768 px einzeilig |
 
@@ -348,15 +415,17 @@ müssen diese neun Zeilen angepasst werden (Suchen und Ersetzen).
 
 | Punkt | Status | Auswirkung |
 |---|---|---|
-| **Rechtstexte** (Impressum, Datenschutz, Widerruf/AGB) | Platzhalter in eckigen Klammern, sichtbarer Hinweiskasten auf jeder Seite | Vor einem echten Betrieb zwingend vom Rechts-Teilprojekt zu liefern |
+| **Rechtstexte** (Impressum, Datenschutz, Widerruf/AGB) | Vom Rechts-Teilprojekt geliefert und am 14.09.2026 eingepflegt; Anbieter ist das Projektteam c/o DHBW Mannheim | Erledigt; vor einem kommerziellen Betrieb erneut juristisch prüfen |
 | **Bildrechte** | Alle Bilder stammen aus dem Projektordner (Referenzmaterial); Rechteinhaber: Depesche / Thomas Goletz, dpa, Händler | Prototyp nur für Prüfungszwecke; keine Veröffentlichung ohne Lizenz |
-| **Charakterbilder für das Quiz** | Keine freigestellten Einzelbilder vorhanden; Ergebnis als farbige Sticker-Karte (Diddl = Rosa, Diddlina = Pink, Pimboli = Flieder, Ackaturbo = Violett) | Bilder können später in `quiz.js` (Funktion `ergebnisZeigen`) ergänzt werden |
+| **Charakterbilder für das Quiz** | Vier Bilder aus der 3D-Serie nachgeliefert (`figur-*.jpg`), im Ergebnis als runder Sticker; Farbflächen bleiben (Diddl = Rosa, Diddlina = Pink, Pimboli = Flieder, Wollywell = Violett) | Erledigt |
+| **Beispiel-Bewertungen** | Drei erfundene, als „Beispiel“ gekennzeichnete Stimmen (siehe 5.10) | Vor echtem Betrieb ersetzen oder entfernen |
 | **Schriftdateien** | Chewy 400, Quicksand 400/600/700 liegen als woff2 vor | Erledigt |
 | **Kein echtes Payment** | Checkout simuliert; keine Datenübertragung | Ausbauweg siehe Abschnitt 2 |
 | **Newsletter** | Nur Frontend-Erfolgsmeldung, kein Double-Opt-In-Versand | Dienst anbinden, sobald ein Backend/Formulardienst gewählt ist |
 | **404 bei verschachtelten Pfaden** | `404.html` nutzt relative Pfade; bei URLs mit Unterordner (`/repo/foo/bar`) laden Stylesheet und Bilder nicht | Für Projektseiten akzeptiert; alternativ `<base href>` nach Deployment setzen |
-| **Fallback-Texte** | Produktbeschreibung und FAQ stehen zusätzlich statisch im HTML | Bei Änderungen in `data.js` mitpflegen (Abschnitt 4) |
-| **Annahmen im Prototyp** | Versandkosten 4,95 €, Lieferzeit 2–4 Werktage, Länder DE/AT/CH, Artikelnummer `DEMO-2026-001` | Frei gesetzte Demo-Werte, keine Angaben der Marke; über `data.js` änderbar |
+| **Fallback-Texte** | Produktbeschreibung, FAQ und Bewertungen stehen zusätzlich statisch im HTML | Bei Änderungen in `data.js` mitpflegen (Abschnitt 4) |
+| **Annahmen im Prototyp** | Versandkosten 4,95 €, Lieferzeit 3–5 Werktage (wie AGB), Länder DE/AT/CH, Artikelnummer `DEMO-2026-001`, Beiname „Das verträumte Schaf aus dem Käsekuchenland“ für Wollywell | Frei gesetzte Demo-Werte, keine Angaben der Marke; über `data.js` änderbar |
+| **Zahlungslogos** | Als Text-Badges umgesetzt, keine Markenlogos | Bei Bedarf offizielle Logodateien der Anbieter einbinden |
 | **Screenreader-Test** | Nicht durchgeführt | Vor Livegang mit VoiceOver/NVDA prüfen |
 
 ---
@@ -373,20 +442,29 @@ nutzt sie ausschließlich zu Prüfungszwecken.
 | `logo-diddl-is-back.png` | `logo-diddl-2025.png` | Header | Striche auf `--text-dark` umgefärbt, Alphakanal beibehalten (die Quelle hatte entgegen dem Briefing bereits einen Alphakanal) |
 | `logo-diddl-is-back-hell.png` | `logo-diddl-2025.png` | Footer | Striche auf `--text-light`, weiße Füllflächen transparent |
 | `favicon.png` | `logo-diddl-2025.png` | Favicon | Ausschnitt Mausgesicht auf Pastell-Rosa, 128 px |
-| `hero-banner.webp` | `diddl-is-back-hero-banner-dektop-diddel-rosa-lafueliki.jpg.webp` | Hero Desktop | unverändert (1920 × 800) |
-| `hero-gruppe.webp` | `diddl-header-2.webp` | Hero Mobile | unverändert (730 × 391) |
-| `ueber-1-charaktere.jpg` | `04548352-bb25-49fd-a065-4bbb1a6a757e.jpg-3.webp` | Carousel Slide 1 | auf 1600 px verkleinert, JPEG |
-| `ueber-2-nostalgie.jpg` | `diddl-mau-20804.jpeg` | Carousel Slide 2 | auf 1600 px verkleinert |
-| `ueber-3-comeback.jpg` | `Bildschirmfoto 2026-09-13 um 14.06.51.png` | Carousel Slide 3 | auf 1600 px verkleinert, JPEG |
+| `hero-banner.webp` | `diddl-is-back-hero-banner-dektop-diddel-rosa-lafueliki.jpg.webp` | `og:image` für Social-Media-Vorschauen | unverändert (1920 × 800) |
+| `hero-banner-ohne-logo.jpg` | dieselbe Quelle | Hero Desktop | auf 1920 × 500 beschnitten, damit das Logo im Bild wegfällt |
+| `hero-gruppe.webp` | `diddl-header-2.webp` | Hero Mobile, Newsletter-Section | unverändert (730 × 391) |
+| `ueber-1-charaktere.jpg` | `04548352-bb25-49fd-a065-4bbb1a6a757e.jpg-3.webp` | Carousel Slide 2 | auf 1600 px verkleinert, JPEG |
+| `ueber-2-nostalgie.jpg` | `diddl-mau-20804.jpeg` | Carousel Slide 1 | auf 1600 px verkleinert |
+| `ueber-3-laden.jpg` | `neue Bilder 14September/kann auch für carousel über diddl section genutzt werden.jpeg` | Carousel Slide 3 | auf 1200 px verkleinert |
 | `tuete-1.webp` | `diddl-einkaufstuten.webp` | Produkt Hauptbild, Warenkorb | unverändert |
 | `tuete-2.webp` | `diddl-is-back-.webp` | Produktgalerie | unverändert |
 | `tuete-3.webp` | `dpa-com-60828636-2-jpg.webp` | Produktgalerie | unverändert (dpa-Bild) |
 | `tuete-4.jpg` | `a69c6f23-07f4-4cd7-8a36-a669299a2902_w640_r1_fpx45_fpy45.jpg` | Produktgalerie | unverändert |
 | `tuete-5.jpg` | `FpZcpaFQ7E2He3qO3mSkeNtUfEZsX1-metacHJvZHVrdGVfbW9iLnBuZw==--2.png` | Produktgalerie | JPEG statt PNG |
-| `inhalt-block.jpg` | `diddl-notizblock-100.jpg` | Was steckt drin | auf 1200 px verkleinert |
-| `inhalt-plueschtier.jpg` | `DEZTEL6XNZEGTF5BWMOADRQW2E.jpg` | Was steckt drin | auf 1600 px verkleinert |
-| `inhalt-schreibwaren.webp` | `Diddl.webp` | Was steckt drin | unverändert |
+| `inhalt-block.jpg` | `neue Bilder 14September/Das im Shop als 1x Block Darstellung.jpg` | Was steckt drin: Block | auf 1200 px Höhe verkleinert |
+| `tuete-4.jpg` | siehe oben | Was steckt drin: Schreibwaren | – |
+| `inhalt-accessoire.webp` | `Diddl.webp` (vorher `inhalt-schreibwaren.webp`) | Was steckt drin: Accessoire | unverändert |
+| `inhalt-kuscheltier.webp` | `neue Bilder 14September/das im shop für 1x kuscheltier verwenden.webp` | Was steckt drin: Kuscheltier | unverändert (2560 × 1080) |
+| `quiz-kopf.jpg` | `neue Bilder 14September/Header oder Hintergrundfoto beim Start des Quizzes.png.jpeg` | Kopfbild Quiz | unverändert (1200 × 700) |
+| `figur-diddl.jpg`, `figur-diddlina.jpg`, `figur-pimboli.jpg`, `figur-wollywell.jpg` | `neue Bilder 14September/diddl.jpg` usw. | Quiz-Ergebnis | unverändert (349 × 348) |
 | `inhalt-tasse.jpg` | `61it4vMiy2L.jpg` | Teaser Startseite | auf 1000 px verkleinert |
+
+Nicht verwendet: `diddl-comeback-dresden-108.jpg.avif` (Ladenfoto mit
+erkennbaren Personen, siehe 5.12). Weitere Quellenangaben laut
+Rechts-Teilprojekt: MDR (Julia Schönfeld, 21.07.2026), Der Spiegel
+(Nadine Schwickart, 19.08.2026), vedes.com.
 
 Schriften: [Chewy](https://fonts.google.com/specimen/Chewy) (SIL Open Font
 License) und [Quicksand](https://fonts.google.com/specimen/Quicksand)
@@ -406,11 +484,12 @@ Stand September 2026.
 |---|---|---|
 | `--text-dark` | `#39091c` | Fließtext, Headlines |
 | `--text-light` / `--bg-light` | `#fdfbfd` | Grundfläche, Schrift auf Dunkel |
-| `--bg-dark` | `#5d0872` | Footer, Ackaturbo-Sticker, Links auf Flieder |
+| `--bg-dark` | `#5d0872` | Footer, Wollywell-Sticker, Links auf Flieder |
 | `--btn` | `#9929cf` | Primär-Buttons, Links, Rahmen |
 | `--btn-hover` | `#ff2f7f` | Hover, Fokusring, Wellen-Unterstreichung, Diddlina-Sticker |
 | `--pastel-rosa` *(abgeleitet)* | `#ffe6f0` | `#ff2f7f` + 88 % Weiß – Hero, Sticker-Etiketten, Diddl-Sticker |
 | `--pastel-flieder` *(abgeleitet)* | `#ebd4f5` | `#9929cf` + 80 % Weiß – Teaser-Section, flache Karten, Pimboli-Sticker |
+| `--akzent-blau` *(Kundenwunsch 14.09.2026)* | `#14b2ff` | nur Hover/Fokus in Navigation und Footer, siehe 5.9 |
 
 Schatten sind aus dem Violett gemischt (`rgba(93, 8, 114, 0.14)`), nicht aus
 Grau, damit keine zusätzlichen Grautöne entstehen.
@@ -429,15 +508,19 @@ Grau, damit keine zusätzlichen Grautöne entstehen.
 
 - Mobile first, Container 1152 px, Textseiten 736 px.
 - Flächenrhythmus der Startseite: Pastell-Rosa (Hero) → Hell (Über Diddl) →
-  Flieder (Teaser) → Hell (Quiz) → Violett (Footer). Wellen-Trenner als
-  Inline-SVG nur an zwei Stellen, in zwei verschiedenen Formen.
+  Flieder (Teaser) → Hell (Bewertungen) → Rosa (Quiz) → Flieder
+  (Newsletter) → Violett (Footer). Wellen-Trenner als Inline-SVG an jedem
+  Wechsel, drei Formen im Wechsel (siehe 5.11).
+- Bildformen: Karussell-Bilder in Blütenform, Teaser-Bild als Blob – beides
+  über Inline-SVG-`clipPath` mit `objectBoundingBox`, ohne externe Assets.
 - Drei Kartentypen statt einer: *Sticker-Karte* (weiß, heller Halo, weicher
   Schatten, Radius 24), *flache Karte* (Pastell, kein Schatten, Radius 16),
   *Hinweiskasten* (violetter/pinker Rahmen mit Etikett).
 - Der Hero ist die eine laute Stelle. Ab der Produktseite wird es sachlich,
   der Checkout ist nüchtern.
-- Bewegung nur als Antwort auf Nutzeraktionen: Akkordeon, Toast,
-  Quiz-Ergebnis, Slide-Wechsel. `prefers-reduced-motion` schaltet alles ab.
+- Bewegung als Antwort auf Nutzeraktionen (Akkordeon, Toast, Quiz-Ergebnis,
+  Slide-Wechsel) plus ein dezentes Einblenden der Sections beim Scrollen
+  (nur Deckkraft). `prefers-reduced-motion` schaltet alles ab.
 
 ### Drei Leitprinzipien
 
@@ -452,9 +535,9 @@ Grau, damit keine zusätzlichen Grautöne entstehen.
 
 Identische Karten mit identischem Grau-Schatten, ALL-CAPS-Eyebrows,
 einzelne farbige Wörter in Headlines, nummerierte Marker ohne Reihenfolge,
-Pfeile im Buttontext, Fade-and-slide-up an jeder Section. Stattdessen: eine
-pinke Wellen-Unterstreichung unter Startseiten-`h2`, eine einzige Neigung
-(Teaser-Foto, –2°), eine Sticker-Collage in drei Größen für „Was steckt drin?“.
+Pfeile im Buttontext, Slide-up-Animationen. Stattdessen: organische
+Bildformen (Blüte, Blob), eine Collage aus vier Kacheln mit unterschiedlichen
+Ecken für „Was steckt drin?“, Wellen in drei Formen.
 
 ---
 
@@ -478,10 +561,10 @@ assets/
   css/style.css             gesamtes Styling, ein File, Tokens in :root
   js/data.js                zentrale Inhaltsdaten (Produkt, Versand, FAQ, Quiz, Kanäle)
   js/app.js                 Header, Warenkorb-Zustand, Toast, Karussell, Akkordeon,
-                            FAQ-Aufbau, Newsletter, Consent
+                            FAQ- und Bewertungs-Aufbau, Newsletter, Consent, Einblenden
   js/produkt.js             Galerie, Mengenwahl, In den Warenkorb
   js/warenkorb.js           Warenkorb, Checkout-Schritte, Validierung, Bestätigung
-  js/quiz.js                Diddl-Quiz
+  js/quiz.js                Diddl-Quiz (Ergebnis mit Charakterbild)
   img/                      Bilder (siehe Quellenverzeichnis)
   fonts/                    Chewy und Quicksand als woff2
 ```
