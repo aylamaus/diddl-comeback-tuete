@@ -18,6 +18,9 @@
   /* Zwei abgeleitete Pastelltöne (siehe README, Abschnitt Design) */
   --pastel-rosa: #ffe6f0;    /* #ff2f7f + 88 % Weiß */
   --pastel-flieder: #ebd4f5; /* #9929cf + 80 % Weiß */
+  /* Akzentblau aus dem Kundenfeedback vom 14.09.2026: nur für Hover-Zustände,
+     nie für Fließtext (2,4:1 gegen Weiß), mit dunklem Text 7,1:1 */
+  --akzent-blau: #14b2ff;
 
   /* Schatten werden aus dem Violett gemischt, nicht aus Grau */
   --schatten-weich: 0 12px 32px rgba(93, 8, 114, 0.14);
@@ -186,9 +189,11 @@ button {
 }
 .section__kopf h2 {
   display: inline-block;
-  text-decoration: underline wavy var(--btn-hover);
-  text-decoration-thickness: 3px;
-  text-underline-offset: 0.18em;
+}
+.section__kopf .vorzeile {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: var(--bg-dark);
 }
 .section__kopf p {
   font-size: var(--fs-label);
@@ -433,9 +438,12 @@ html:not(.js) .nav__liste {
   font-size: var(--fs-label);
   text-decoration: none;
 }
-.nav__link:hover,
 .nav__link[aria-current="page"] {
   background: var(--pastel-rosa);
+}
+.nav__link:hover,
+.nav__link:focus-visible {
+  background: var(--akzent-blau);
   color: var(--text-dark);
 }
 
@@ -507,38 +515,48 @@ html:not(.js) .nav__liste {
   .kopf__logo img { height: 3.5rem; }
 }
 
-/* ---------- 9. Hero ---------- */
+/* ---------- 9. Hero ----------
+   Das Kampagnenfoto liegt als Hintergrund unten in der Section (ohne das
+   im Original enthaltene Logo, siehe README). Der Text sitzt darüber in
+   einer halbtransparenten Sticker-Karte auf der rosa Aquarellfläche. */
 .hero {
   position: relative;
   background: var(--pastel-rosa);
   overflow: hidden;
-  padding-block: clamp(2.5rem, 7vw, 5rem) 0;
-}
-/* Weiche Farbblobs, angelehnt an die Aquarell-Banner der Marke */
-.hero::before,
-.hero::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(40px);
-  opacity: 0.55;
-  pointer-events: none;
+  padding-top: clamp(2rem, 6vw, 4rem);
+  /* Platz für das Bild: Mobile 730x391 (53,5 vw), Desktop 1920x500 (26 vw) */
+  padding-bottom: 50vw;
 }
 .hero::before {
-  width: 45vw;
-  height: 45vw;
-  left: -18vw;
-  top: -10vw;
-  background: var(--btn-hover);
-  opacity: 0.35;
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60vw 40vw at 0% 0%, rgba(255, 47, 127, 0.28), transparent 70%),
+    radial-gradient(50vw 40vw at 100% 20%, rgba(153, 41, 207, 0.22), transparent 70%);
+  pointer-events: none;
 }
-.hero::after {
-  width: 40vw;
-  height: 40vw;
-  right: -15vw;
-  bottom: 10vw;
-  background: var(--btn);
-  opacity: 0.25;
+.hero__hintergrund {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  line-height: 0;
+  pointer-events: none;
+}
+.hero__hintergrund img {
+  width: 100%;
+  height: auto;
+}
+/* weicher Übergang von der Fläche ins Foto */
+.hero__hintergrund::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1px;
+  height: 18%;
+  background: linear-gradient(var(--pastel-rosa), transparent);
 }
 .hero__innen {
   position: relative;
@@ -546,25 +564,24 @@ html:not(.js) .nav__liste {
   text-align: center;
 }
 .hero__text {
-  max-width: 40rem;
+  max-width: 46rem;
   margin-inline: auto;
+  padding: clamp(1.25rem, 4vw, 2.5rem) clamp(1rem, 4vw, 2.5rem);
+  border-radius: var(--radius-karte);
+  background: rgba(253, 251, 253, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: var(--schatten-flach);
 }
+.hero__text h1 { margin-bottom: 0.3em; }
 .hero__text p {
-  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  font-size: clamp(1.125rem, 2.5vw, 1.375rem);
   font-weight: 600;
   margin-inline: auto;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.5rem;
 }
-.hero__bild {
-  margin-top: clamp(2rem, 5vw, 3.5rem);
-  border-radius: var(--radius-karte) var(--radius-karte) 0 0;
-  overflow: hidden;
-  box-shadow: var(--sticker-rand), var(--schatten-weich);
-  background: var(--bg-light);
-}
-.hero__bild img {
-  width: 100%;
-  height: auto;
+@media (min-width: 48em) {
+  .hero { padding-bottom: 27vw; min-height: 34rem; }
 }
 
 /* ---------- 10. Carousel (Über Diddl) ---------- */
@@ -600,11 +617,18 @@ html:not(.js) .nav__liste {
   align-items: center;
 }
 .slide__bild {
-  border-radius: var(--radius-bild);
-  overflow: hidden;
-  box-shadow: var(--sticker-rand), var(--schatten-weich);
+  max-width: 26rem;
+  margin-inline: auto;
+  width: 100%;
 }
-.slide__bild img { width: 100%; }
+/* Blütenform über eine Inline-SVG-clipPath (siehe index.html, #clip-bluete) */
+.slide__bild img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  clip-path: url(#clip-bluete);
+}
+.slide__bild--blob img { clip-path: url(#clip-blob); }
 .slide__text h3 { margin-bottom: 0.4em; }
 .slide__text p:last-of-type { margin-bottom: 0; }
 .slide__text .btn { margin-top: 1.25rem; }
@@ -668,11 +692,14 @@ html:not(.js) .nav__liste {
 }
 .teaser__bild {
   justify-self: center;
-  max-width: 26rem;
-  border-radius: var(--radius-bild);
-  overflow: hidden;
-  box-shadow: var(--sticker-rand), var(--schatten-weich);
-  transform: rotate(-2deg); /* die einzige Neigung auf der Seite */
+  width: 100%;
+  max-width: 24rem;
+}
+.teaser__bild img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  clip-path: url(#clip-blob);
 }
 .teaser__text .btn { margin-top: 0.5rem; }
 @media (min-width: 48em) {
@@ -681,6 +708,14 @@ html:not(.js) .nav__liste {
 }
 
 /* ---------- 12. Quiz ---------- */
+.quiz__kopfbild {
+  max-width: 42rem;
+  margin: 0 auto 1.5rem;
+  border-radius: var(--radius-karte);
+  overflow: hidden;
+  box-shadow: var(--sticker-rand), var(--schatten-weich);
+}
+.quiz__kopfbild img { width: 100%; }
 .quiz {
   max-width: 42rem;
   margin-inline: auto;
@@ -751,6 +786,14 @@ html:not(.js) .nav__liste {
   font-size: var(--fs-h2);
   margin-bottom: 0.25em;
 }
+.figur-sticker__bild {
+  width: 10rem;
+  height: 10rem;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: var(--sticker-rand), var(--schatten-flach);
+}
 .figur-sticker p {
   margin-inline: auto;
   margin-bottom: 0;
@@ -758,7 +801,7 @@ html:not(.js) .nav__liste {
 .figur-sticker--diddl { background: var(--pastel-rosa); }
 .figur-sticker--diddlina { background: var(--btn-hover); color: var(--text-dark); }
 .figur-sticker--pimboli { background: var(--pastel-flieder); }
-.figur-sticker--ackaturbo { background: var(--bg-dark); color: var(--text-light); }
+.figur-sticker--wollywell { background: var(--bg-dark); color: var(--text-light); }
 .figur-sticker__untertitel {
   font-weight: 600;
   font-size: var(--fs-label);
@@ -784,10 +827,13 @@ html:not(.js) .nav__liste {
   padding-block: 3.5rem 2rem;
 }
 .fuss a { color: var(--text-light); }
-.fuss a:hover { color: var(--pastel-rosa); }
-.fuss__raster {
+.fuss a:hover,
+.fuss a:focus-visible { color: var(--akzent-blau); }
+.fuss__oben {
   display: grid;
   gap: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(253, 251, 253, 0.25);
 }
 .fuss__logo img {
   width: 11rem;
@@ -797,6 +843,40 @@ html:not(.js) .nav__liste {
 .fuss h2 {
   font-size: var(--fs-h3);
   margin-bottom: 0.6em;
+}
+.fuss h3 {
+  font-family: var(--font-text);
+  font-weight: 700;
+  font-size: var(--fs-label);
+  margin-bottom: 0.6em;
+}
+.social {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 0.5rem;
+}
+.social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: 2px solid rgba(253, 251, 253, 0.4);
+  text-decoration: none;
+}
+.social a:hover,
+.social a:focus-visible {
+  border-color: var(--akzent-blau);
+  color: var(--akzent-blau);
+}
+.social svg { width: 1.4rem; height: 1.4rem; }
+.fuss__unten {
+  display: grid;
+  gap: 2rem;
+  padding-top: 2.5rem;
 }
 .fuss__liste {
   list-style: none;
@@ -809,24 +889,37 @@ html:not(.js) .nav__liste {
   font-weight: 600;
 }
 .fuss__liste a:hover { text-decoration: underline; }
-.social {
+.fuss__liste button {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--text-light);
+  font-weight: 600;
+  font-size: var(--fs-basis);
+}
+.fuss__liste button:hover { color: var(--akzent-blau); text-decoration: underline; }
+.zahlung {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
 }
-.social a {
+.zahlung li {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  text-decoration: none;
-  font-weight: 600;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 8px;
+  background: var(--bg-light);
+  color: var(--bg-dark);
+  font-weight: 700;
+  font-size: var(--fs-klein);
+  margin: 0;
 }
-.social svg { width: 1.4rem; height: 1.4rem; flex: none; }
-.social a:hover { text-decoration: underline; }
+.zahlung svg { width: 1.1rem; height: 1.1rem; }
 
-.newsletter__feld { margin-bottom: 0.9rem; }
 .newsletter label,
 .formular label {
   display: block;
@@ -843,6 +936,7 @@ html:not(.js) .nav__liste {
   color: var(--text-dark);
   font: inherit;
 }
+.newsletter__feld { margin-bottom: 0.9rem; }
 .checkbox-zeile {
   display: flex;
   gap: 0.6rem;
@@ -870,29 +964,84 @@ html:not(.js) .nav__liste {
 }
 .newsletter__erfolg p { margin: 0; }
 .fuss__hinweis {
-  margin-top: 3rem;
+  margin-top: 2.5rem;
   padding-top: 1.5rem;
   border-top: 1px solid rgba(253, 251, 253, 0.25);
   font-size: var(--fs-klein);
 }
 .fuss__hinweis p { max-width: none; margin-bottom: 0.5rem; }
-.fuss__hinweis button {
-  background: none;
-  border: 0;
-  padding: 0;
-  color: var(--text-light);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  font-size: var(--fs-klein);
-}
-.fuss__hinweis button:hover { color: var(--pastel-rosa); }
 
 @media (min-width: 48em) {
-  .fuss__raster { grid-template-columns: 1fr 1fr; }
+  .fuss__oben { grid-template-columns: 1fr 1.3fr; gap: 3rem; }
+  .fuss__unten { grid-template-columns: repeat(4, 1fr); }
 }
-@media (min-width: 64em) {
-  .fuss__raster { grid-template-columns: 1.2fr 1fr 1.4fr; gap: 3.5rem; }
+
+/* Newsletter-Section auf der Startseite („Fanpost aus dem Käsekuchenland“) */
+.fanpost {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
 }
+.fanpost .newsletter input[type="email"] {
+  border-color: var(--btn);
+}
+.fanpost .newsletter__erfolg { background: var(--bg-light); }
+.fanpost__bild {
+  border-radius: var(--radius-karte);
+  overflow: hidden;
+  box-shadow: var(--sticker-rand), var(--schatten-weich);
+}
+.fanpost__bild img { width: 100%; }
+@media (min-width: 48em) {
+  .fanpost { grid-template-columns: 1.1fr 1fr; gap: 4rem; }
+}
+
+/* Bewertungen – Beispielansicht */
+.bewertungen {
+  display: grid;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: none;
+}
+.bewertung {
+  position: relative;
+  padding-top: 2rem;
+}
+.bewertung__etikett {
+  position: absolute;
+  top: -0.9rem;
+  left: 1.25rem;
+  padding: 0.15rem 0.85rem;
+  border-radius: var(--radius-pill);
+  background: var(--pastel-flieder);
+  color: var(--text-dark);
+  font-weight: 700;
+  font-size: var(--fs-klein);
+}
+.bewertung__sterne {
+  display: flex;
+  gap: 0.15rem;
+  color: var(--btn-hover);
+  margin-bottom: 0.75rem;
+}
+.bewertung__sterne svg { width: 1.25rem; height: 1.25rem; }
+.bewertung p { margin-bottom: 0.75rem; }
+.bewertung__name {
+  font-weight: 700;
+  margin: 0;
+}
+@media (min-width: 48em) {
+  .bewertungen { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Dezentes Einblenden beim Scrollen (Kundenwunsch): nur Deckkraft, einmalig */
+.js .einblenden {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.js .einblenden.ist-sichtbar { opacity: 1; }
 
 /* ---------- 14. Toast ---------- */
 .toast {
@@ -954,6 +1103,17 @@ html:not(.js) .nav__liste {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
+}
+/* Beide Optionen gleichwertig gestaltet – keine darf hervorgehoben sein */
+.consent__aktionen .btn {
+  flex: 1 1 12rem;
+  background: transparent;
+  color: var(--btn);
+}
+.consent__aktionen .btn:hover,
+.consent__aktionen .btn:focus-visible {
+  background: var(--btn-hover);
+  color: var(--btn-text);
 }
 
 /* ---------- 16. Produktseite ---------- */
@@ -1161,10 +1321,10 @@ html:not(.js) .nav__liste {
 .akkordeon__knopf svg { display: none; }
 .akkordeon.ist-aktiv .akkordeon__knopf svg { display: block; }
 
-/* "Was steckt drin?" – Sticker-Collage, bewusst keine drei gleichen Karten */
+/* "Was steckt drin?" – vier Kacheln, leicht versetzt statt starrem Raster */
 .collage {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 0.75rem;
   margin: 1rem 0;
   max-width: none;
@@ -1177,17 +1337,16 @@ html:not(.js) .nav__liste {
   border-radius: var(--radius-bild);
   overflow: hidden;
   box-shadow: var(--sticker-rand), var(--schatten-flach);
+  background: var(--pastel-rosa);
 }
-.collage li:nth-child(1) { grid-column: span 6; }
-.collage li:nth-child(2) { grid-column: span 3; }
-.collage li:nth-child(3) { grid-column: span 3; }
+.collage li:nth-child(2) { border-radius: var(--radius-karte) 12px; }
+.collage li:nth-child(3) { border-radius: 12px var(--radius-karte); }
 .collage img {
   width: 100%;
   height: 100%;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
-  aspect-ratio: 16 / 9;
 }
-.collage li:nth-child(n + 2) img { aspect-ratio: 1 / 1; }
 .collage figcaption {
   position: absolute;
   left: 0.6rem;
@@ -1198,12 +1357,6 @@ html:not(.js) .nav__liste {
   color: var(--text-dark);
   font-weight: 700;
   font-size: var(--fs-klein);
-}
-@media (min-width: 48em) {
-  .collage li:nth-child(1) { grid-column: span 3; grid-row: span 2; }
-  .collage li:nth-child(1) img { aspect-ratio: auto; }
-  .collage li:nth-child(2),
-  .collage li:nth-child(3) { grid-column: span 3; }
 }
 
 @media (min-width: 64em) {
@@ -1528,6 +1681,7 @@ html:not(.js) .nav__liste {
 /* ---------- 20. Reduzierte Bewegung ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .js .einblenden { opacity: 1; transition: none; }
   *,
   *::before,
   *::after {
@@ -1535,7 +1689,6 @@ html:not(.js) .nav__liste {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-  .teaser__bild { transform: none; }
 }
 
 /* ---------- 21. Druck ---------- */

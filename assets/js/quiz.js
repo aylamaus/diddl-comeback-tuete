@@ -1,5 +1,5 @@
 /* =====================================================================
-   quiz.js – „Welcher Diddl bist du?“ (Startseite, Section #geheim)
+   quiz.js – „Welcher Diddl-Charakter steckt in dir?“ (Startseite, Section #mein-diddl-typ)
    Fragen, Antworten, Zuordnung und Ergebnistexte kommen komplett aus
    data.js (DIDDL.quiz). Hier steht nur die Ablauflogik.
    ===================================================================== */
@@ -93,12 +93,16 @@
     var figur = gewinner();
     wurzel.innerHTML = "";
 
-    var karte = el("div", { class: "figur-sticker figur-sticker--" + figur.id }, [
+    var kinder = [];
+    if (figur.bild) {
+      kinder.push(el("img", { class: "figur-sticker__bild", src: figur.bild, alt: "", width: "349", height: "348" }));
+    }
+    var karte = el("div", { class: "figur-sticker figur-sticker--" + figur.id }, kinder.concat([
       el("p", { class: "figur-sticker__untertitel", text: "Du bist …" }),
       el("h3", { id: "quiz-ergebnis-titel", text: figur.name }),
       el("p", { class: "figur-sticker__untertitel", text: figur.untertitel }),
       el("p", { text: figur.beschreibung })
-    ]);
+    ]));
 
     var nochmal = el("button", { class: "btn btn--sekundaer", type: "button", text: "Nochmal spielen" });
     nochmal.addEventListener("click", function () { starten(); wurzel.querySelector(".quiz__frage").focus(); });
@@ -118,11 +122,11 @@
 
   function ergebnisTeilen(figur, hinweis) {
     var hashtag = (D.kampagne && D.kampagne.hashtag) || "#Diddl";
-    var url = window.location.href.split("#")[0] + "#geheim";
-    var text = "Ich bin " + figur.name + " – " + figur.untertitel + ". Welcher Diddl bist du? " + hashtag;
+    var url = window.location.href.split("#")[0] + "#mein-diddl-typ";
+    var text = "Ich bin " + figur.name + " – " + figur.untertitel + ". Welcher Diddl-Charakter steckt in dir? " + hashtag;
 
     if (navigator.share) {
-      navigator.share({ title: "Welcher Diddl bist du?", text: text, url: url }).catch(function () { /* abgebrochen */ });
+      navigator.share({ title: "Welcher Diddl-Charakter steckt in dir?", text: text, url: url }).catch(function () { /* abgebrochen */ });
       return;
     }
     var voll = text + " " + url;

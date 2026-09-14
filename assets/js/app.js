@@ -328,11 +328,68 @@
     });
   }
 
+  /* ---------- Bewertungen aus data.js (Beispielansicht) ----------
+     Wie beim FAQ: statisches HTML als Fallback, mit JS aus DIDDL.bewertungen. */
+
+  function bewertungenInit() {
+    var wurzel = document.querySelector("[data-bewertungen]");
+    if (!wurzel || !Array.isArray(D.bewertungen) || !D.bewertungen.length) { return; }
+    wurzel.innerHTML = "";
+    D.bewertungen.forEach(function (b) {
+      var li = document.createElement("li");
+      li.className = "bewertung sticker-karte";
+      var etikett = document.createElement("span");
+      etikett.className = "bewertung__etikett";
+      etikett.textContent = "Beispiel";
+      var sterne = document.createElement("div");
+      sterne.className = "bewertung__sterne";
+      var n = Math.max(1, Math.min(5, parseInt(b.sterne, 10) || 5));
+      sterne.setAttribute("role", "img");
+      sterne.setAttribute("aria-label", n + " von 5 Sternen");
+      for (var i = 0; i < 5; i++) {
+        sterne.insertAdjacentHTML("beforeend",
+          '<svg viewBox="0 0 24 24" fill="' + (i < n ? "currentColor" : "none") + '" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l2.4 5.2 5.6.7-4.1 3.9 1 5.6-4.9-2.7-4.9 2.7 1-5.6L4 8.9l5.6-.7z"/></svg>');
+      }
+      var text = document.createElement("p");
+      text.textContent = "„" + b.text + "“";
+      var name = document.createElement("p");
+      name.className = "bewertung__name";
+      name.textContent = b.vorname;
+      li.appendChild(etikett); li.appendChild(sterne); li.appendChild(text); li.appendChild(name);
+      wurzel.appendChild(li);
+    });
+  }
+
+  /* ---------- Dezentes Einblenden beim Scrollen ----------
+     Nur Deckkraft, einmalig; ohne IntersectionObserver oder bei
+     reduzierter Bewegung bleibt alles sofort sichtbar. */
+
+  function einblendenInit() {
+    var elemente = document.querySelectorAll(".einblenden");
+    if (!elemente.length) { return; }
+    var reduziert = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduziert || !("IntersectionObserver" in window)) {
+      elemente.forEach(function (el) { el.classList.add("ist-sichtbar"); });
+      return;
+    }
+    var beobachter = new IntersectionObserver(function (eintraege) {
+      eintraege.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add("ist-sichtbar");
+          beobachter.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -10% 0px", threshold: 0.05 });
+    elemente.forEach(function (el) { beobachter.observe(el); });
+  }
+
   /* ---------- Newsletter (nur Frontend, kein Backend) ---------- */
 
   function newsletterInit() {
-    var form = document.querySelector("[data-newsletter]");
-    if (!form) { return; }
+    document.querySelectorAll("[data-newsletter]").forEach(newsletterFormular);
+  }
+
+  function newsletterFormular(form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (!form.checkValidity()) {
@@ -400,7 +457,9 @@
     badgeAktualisieren();
     karussellInit();
     faqInit();
+    bewertungenInit();
     akkordeonInit();
+    einblendenInit();
     newsletterInit();
     consentInit();
     navMarkieren();
