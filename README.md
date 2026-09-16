@@ -830,15 +830,12 @@ Rückfrage, (4) kann sagen, ob das ein echter Shop ist.
 steckt, und teile das Ergebnis.“ Erfolg: Quiz gefunden über Navigation
 „Mein Diddl Typ“, Ergebnis geteilt oder kopiert.
 
-| Testperson | Persona | Kriterien erfüllt (1–4) | Zögern / Reibung beobachtet | Zitat / Nachfrage |
+| Testperson | Persona | Kriterien erfüllt (1–4) | Zögern / Reibung beobachtet | 
 |---|---|---|---|---|
-| 1 | A | [eintragen] | [eintragen] | [eintragen] |
-| 2 | A | [eintragen] | [eintragen] | [eintragen] |
-| 3 | A | [eintragen] | [eintragen] | [eintragen] |
-| 4 | B | [eintragen] | [eintragen] | [eintragen] |
-
-**Drei priorisierte Erkenntnisse:** [nach dem Test eintragen: Erkenntnis →
-geänderte Stelle → Commit]
+| 1 | A | Alle Kriterien erfüllt | / |
+| 2 | A | Alle Kriterien erfüllt | Hat anfangs Versandkosten überlesen, aber nach genauerem Hinschauen, alles erkannt |
+| 3 | A | Alle Kriterien erfüllt | / |
+| 4 | B | Zusatzaufgabe erfüllt | Person hat nur beim Fragebeantworten etwas länger überlegt |
 
 ### Reflexion: Was würden wir heute anders machen?
 
@@ -856,11 +853,7 @@ geänderte Stelle → Commit]
    Änderungen in wenigen Commits. Kleinere, thematische Commits hätten die
    Git-Historie als Dokumentation noch lesbarer gemacht (Vorlesung 20.08.:
    „Kleiner schneiden“).
-4. **Testpersonen früher einbeziehen.** Alle Prüfungen bis zum 16.09. waren
-   Experten- und Teamreviews. Ein Fünf-Minuten-Test mit einer Person aus der
-   Zielgruppe nach der ersten Fassung hätte die Reibung „Was ist drin?“
-   vermutlich noch stärker in den Hero gezogen.
-5. **Beispiel-Bewertungen bleiben ein Kompromiss.** Sie sind gekennzeichnet,
+4. **Beispiel-Bewertungen bleiben ein Kompromiss.** Sie sind gekennzeichnet,
    aber für einen echten Launch müssten sie durch echte, nachprüfbare
    Stimmen ersetzt werden; die Kennzeichnung ist eine Prototyp-Lösung, kein
    Vorbild.
