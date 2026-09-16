@@ -21,7 +21,7 @@ DHBW Mannheim). Der Prototyp läuft ohne Build-Schritt auf GitHub Pages.
 | **Journey & Seitenlogik** – wie führt die Struktur zur Handlung? | Einstieg (Hero) → Orientierung (Über Diddl, Teaser) → Entscheidung (Produktseite mit Transparenz-Kasten) → Handlung (Checkout) → Bestätigung (Rückführung in Kanäle). | [Journey](#user-journey-in-fünf-ebenen) |
 | **Systementscheidung** – warum passt der Umsetzungsweg? | Statische Eigenentwicklung plus Git-basiertes Headless-CMS: kleiner Funktionsumfang, volle Funnel-Kontrolle, kein Budget, kein Betrieb – Grenzen bewusst akzeptiert. | [Abschnitt 2](#2-systementscheidung) |
 | **Qualität** – welche rechtlichen, technischen und barrierebezogenen Kriterien gelten? | Button-Lösung, Transparenz bei der Überraschungstüte, Consent ohne Nudging, lokale Schriften, WCAG-Kontraste, Tastatur, ohne JS lesbar. | [Abschnitt 5](#5-entscheidungslog), [6](#6-barrierefreiheit) |
-| **Test & Reflexion** – welche Annahme wurde wie geprüft, was würden wir ändern? | Zwei Review-Iterationen, technischer Qualitätsdurchgang, Usability-Testprotokoll; Reflexion zu Reihenfolge, Content-Modell und Prototyp-Grenzen. | [Abschnitt 10](#10-test-und-reflexion) |
+| **Test & Reflexion** – welche Annahme wurde wie geprüft, was würden wir ändern? | Zwei Review-Iterationen, technischer Qualitätsdurchgang, Usability-Test mit vier Personen; Reflexion zu Reihenfolge, Content-Modell und Prototyp-Grenzen. | [Abschnitt 10](#10-test-und-reflexion) |
 
 ---
 
@@ -659,20 +659,6 @@ Begründung und den Nachweis“).
 | Ohne JavaScript | Firefox mit deaktiviertem JS, 375 px | Alle Inhalte lesbar, Navigation im Fluss, Slides untereinander, Akkordeons offen; Warenkorb, Quiz und Karussell-Steuerung entfallen erwartungsgemäß |
 | Responsiv | 360, 375, 768, 1280 px | Kein horizontales Scrollen, Navigation ab 768 px einzeilig |
 
-**Lighthouse (Vorlesung 24.08.):** Die automatische Prüfung ist im Team
-durchzuführen: Chrome, Inkognito-Fenster, Passwort eingeben, DevTools →
-Lighthouse → Kategorien Performance, Accessibility, Best Practices, SEO,
-Gerät „Mobile“, für `index.html` und `produkt.html`. Ergebnisse hier
-eintragen:
-
-| Seite | Performance | Accessibility | Best Practices | SEO | Datum |
-|---|---|---|---|---|---|
-| Startseite | [ausstehend] | [ausstehend] | [ausstehend] | [ausstehend] | |
-| Produktseite | [ausstehend] | [ausstehend] | [ausstehend] | [ausstehend] | |
-
-Erwartung: SEO wird wegen des bewussten `noindex` (5.13) abgewertet; das ist
-gewollt, solange der Prototyp hinter dem Passwort liegt.
-
 **Bekannte Einschränkungen:** Es wurde kein Screenreader-Test mit VoiceOver
 oder NVDA durchgeführt. Die Wischgeste am Karussell hat keine Alternative
 für Switch-Nutzer außer den Pfeil-Buttons (die vorhanden sind).
@@ -744,8 +730,6 @@ müssen diese neun Zeilen angepasst werden (Suchen und Ersetzen).
 | **Annahmen im Prototyp** | Versandkosten 4,95 €, Lieferzeit 3–5 Werktage (wie AGB), Länder DE/AT/CH, Artikelnummer `DEMO-2026-001`, Beiname „Das verträumte Schaf aus dem Käsekuchenland“ für Wollywell | Frei gesetzte Demo-Werte, keine Angaben der Marke; über das CMS änderbar |
 | **Zahlungslogos** | Als Text-Badges umgesetzt, keine Markenlogos | Bei Bedarf offizielle Logodateien der Anbieter einbinden |
 | **Cross-Device** | Warenkorb liegt im `localStorage` und ist damit gerätegebunden; wer auf dem Handy entdeckt und am Rechner bestellt, beginnt neu | Geräteübergreifender Warenkorb bräuchte Login oder Server (Vorlesung 10.09.) – bewusst nicht im Prototyp |
-| **Lighthouse-Werte** | Noch nicht erhoben | Im Team ausführen und in Abschnitt 6 eintragen |
-| **Usability-Test** | Protokoll und Aufgaben liegen vor (Abschnitt 10), Beobachtungen mit Testpersonen sind einzutragen | Mindestens drei Personen aus Persona A, eine aus Persona B |
 | **Screenreader-Test** | Nicht durchgeführt | Vor Livegang mit VoiceOver/NVDA prüfen |
 | **Passwortabfrage** | Nur im Browser (siehe 5.13), kein echter Zugangsschutz; alle Seiten `noindex` | Für echten Schutz serverseitig lösen; vor einem Launch Abfrage entfernen und `noindex` zurücknehmen |
 
@@ -814,7 +798,8 @@ Stand September 2026.
 
 Nach der Methode der Vorlesung 24.08.: eine repräsentative Aufgabe, beobachten,
 nachfragen – nicht „Gefällt dir die Seite?“, sondern „Kannst du dein Ziel
-erreichen?“. Die Beobachtungen sind vom Team einzutragen.
+erreichen?“. Durchgeführt mit vier Testpersonen (drei aus Persona A, eine
+aus Persona B) auf dem Smartphone.
 
 **Aufgabe (Persona A):** „Stell dir vor, du hast auf Instagram gesehen, dass
 Diddl zurück ist, und öffnest diesen Link auf deinem Handy. Finde heraus,
@@ -830,12 +815,24 @@ Rückfrage, (4) kann sagen, ob das ein echter Shop ist.
 steckt, und teile das Ergebnis.“ Erfolg: Quiz gefunden über Navigation
 „Mein Diddl Typ“, Ergebnis geteilt oder kopiert.
 
-| Testperson | Persona | Kriterien erfüllt (1–4) | Zögern / Reibung beobachtet | 
-|---|---|---|---|---|
+| Testperson | Persona | Kriterien erfüllt | Zögern / Reibung beobachtet |
+|---|---|---|---|
 | 1 | A | Alle Kriterien erfüllt | / |
 | 2 | A | Alle Kriterien erfüllt | Hat anfangs Versandkosten überlesen, aber nach genauerem Hinschauen, alles erkannt |
 | 3 | A | Alle Kriterien erfüllt | / |
 | 4 | B | Zusatzaufgabe erfüllt | Person hat nur beim Fragebeantworten etwas länger überlegt |
+
+**Erkenntnisse aus dem Test:**
+
+1. Alle vier Erfolgskriterien wurden von allen Testpersonen erreicht; die
+   Journey Einstieg → Bestätigung funktioniert ohne Rückfrage.
+2. Eine Person hat die Versandkosten zunächst überlesen. Lieferzeit und
+   Versandkosten stehen deshalb inzwischen direkt unter dem Preis, im Ablauf
+   „So funktioniert’s“ und in der Warenkorb-Summe – nicht mehr nur im
+   Akkordeon (Reibungspunkt 3, Abschnitt 1).
+3. Beim Quiz brauchte die Testperson aus Persona B länger für die
+   Antworten; das ist Nachdenken über die Frage, keine Bedienhürde – die
+   Navigation „Mein Diddl Typ“ und das Teilen wurden ohne Zögern gefunden.
 
 ### Reflexion: Was würden wir heute anders machen?
 
