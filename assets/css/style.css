@@ -307,7 +307,7 @@ button {
 }
 .karte-flach--rosa { background: var(--pastel-rosa); }
 /* Violett (#9929cf) erreicht auf Flieder nur 4,27:1, deshalb dort dunkles Violett */
-.karte-flach a,
+.karte-flach a:not(.btn),
 .karte-flach .artikel__entfernen,
 .section--flieder a:not(.btn) {
   color: var(--bg-dark);
@@ -438,13 +438,27 @@ html:not(.js) .nav__liste {
   font-size: var(--fs-label);
   text-decoration: none;
 }
-.nav__link[aria-current="page"] {
-  background: var(--pastel-rosa);
+/* Hover: blaue Linie zieht von links unter dem Menüpunkt auf */
+.nav__link {
+  position: relative;
 }
-.nav__link:hover,
-.nav__link:focus-visible {
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 0.35rem;
+  height: 3px;
+  border-radius: 2px;
   background: var(--akzent-blau);
-  color: var(--text-dark);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.2s ease;
+}
+.nav__link:hover::after,
+.nav__link:focus-visible::after,
+.nav__link[aria-current="page"]::after {
+  transform: scaleX(1);
 }
 
 .korb-button {
@@ -547,16 +561,9 @@ html:not(.js) .nav__liste {
 .hero__hintergrund img {
   width: 100%;
   height: auto;
-}
-/* weicher Übergang von der Fläche ins Foto */
-.hero__hintergrund::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: -1px;
-  height: 18%;
-  background: linear-gradient(var(--pastel-rosa), transparent);
+  /* Oberkante des Fotos löst sich weich in die Fläche auf */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 30%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 30%);
 }
 .hero__innen {
   position: relative;
@@ -566,12 +573,7 @@ html:not(.js) .nav__liste {
 .hero__text {
   max-width: 46rem;
   margin-inline: auto;
-  padding: clamp(1.25rem, 4vw, 2.5rem) clamp(1rem, 4vw, 2.5rem);
-  border-radius: var(--radius-karte);
-  background: rgba(253, 251, 253, 0.72);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  box-shadow: var(--schatten-flach);
+  padding-inline: 0.5rem;
 }
 .hero__text h1 { margin-bottom: 0.3em; }
 .hero__text p {
@@ -581,7 +583,7 @@ html:not(.js) .nav__liste {
   margin-bottom: 1.5rem;
 }
 @media (min-width: 48em) {
-  .hero { padding-bottom: 27vw; min-height: 34rem; }
+  .hero { padding-bottom: 25vw; min-height: 32rem; }
 }
 
 /* ---------- 10. Carousel (Über Diddl) ---------- */
@@ -799,7 +801,7 @@ html:not(.js) .nav__liste {
   margin-bottom: 0;
 }
 .figur-sticker--diddl { background: var(--pastel-rosa); }
-.figur-sticker--diddlina { background: var(--btn-hover); color: var(--text-dark); }
+.figur-sticker--diddlina { background: var(--pastel-rosa); }
 .figur-sticker--pimboli { background: var(--pastel-flieder); }
 .figur-sticker--wollywell { background: var(--bg-dark); color: var(--text-light); }
 .figur-sticker__untertitel {
@@ -836,9 +838,9 @@ html:not(.js) .nav__liste {
   border-bottom: 1px solid rgba(253, 251, 253, 0.25);
 }
 .fuss__logo img {
-  width: 11rem;
+  width: 15rem;
   height: auto;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 .fuss h2 {
   font-size: var(--fs-h3);
@@ -861,8 +863,8 @@ html:not(.js) .nav__liste {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 3.25rem;
+  height: 3.25rem;
   border-radius: 50%;
   border: 2px solid rgba(253, 251, 253, 0.4);
   text-decoration: none;
@@ -872,7 +874,7 @@ html:not(.js) .nav__liste {
   border-color: var(--akzent-blau);
   color: var(--akzent-blau);
 }
-.social svg { width: 1.4rem; height: 1.4rem; }
+.social svg { width: 1.6rem; height: 1.6rem; }
 .fuss__unten {
   display: grid;
   gap: 2rem;
@@ -926,9 +928,10 @@ html:not(.js) .nav__liste {
   font-weight: 600;
   margin-bottom: 0.3rem;
 }
+.fuss .newsletter { max-width: 24rem; }
 .newsletter input[type="email"] {
   width: 100%;
-  min-height: 3rem;
+  min-height: 2.75rem;
   padding: 0.6rem 1rem;
   border: 3px solid var(--bg-light);
   border-radius: var(--radius-pill);
@@ -972,7 +975,8 @@ html:not(.js) .nav__liste {
 .fuss__hinweis p { max-width: none; margin-bottom: 0.5rem; }
 
 @media (min-width: 48em) {
-  .fuss__oben { grid-template-columns: 1fr 1.3fr; gap: 3rem; }
+  .fuss__oben { grid-template-columns: 1.3fr 1fr; gap: 3rem; align-items: center; }
+  .fuss .newsletter { justify-self: end; width: 100%; }
   .fuss__unten { grid-template-columns: repeat(4, 1fr); }
 }
 
@@ -1239,6 +1243,19 @@ html:not(.js) .nav__liste {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+}
+.galerie__bild { position: relative; }
+.galerie__notiz {
+  position: absolute;
+  left: 0.75rem;
+  bottom: 0.75rem;
+  padding: 0.25rem 0.8rem;
+  border-radius: var(--radius-pill);
+  background: var(--bg-light);
+  color: var(--text-dark);
+  font-weight: 600;
+  font-size: var(--fs-klein);
+  max-width: calc(100% - 1.5rem);
 }
 .galerie__pfeile {
   display: none;

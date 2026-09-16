@@ -58,10 +58,9 @@ DIDDL.produkte = {
     ],
     galerie: [
       { src: "assets/img/tuete-1.webp", alt: "Zwei Hände halten rosafarbene Papiertüten mit dem Aufdruck „Diddl is back!“ in einem Einkaufszentrum.", breite: 1024, hoehe: 576 },
-      { src: "assets/img/tuete-2.webp", alt: "Diddl-Comeback-Motiv mit Schriftzug „Diddl is back!“.", breite: 1920, hoehe: 1080 },
-      { src: "assets/img/tuete-3.webp", alt: "Diddl-Produkte auf einem Verkaufstisch.", breite: 1200, hoehe: 800 },
-      { src: "assets/img/tuete-4.jpg", alt: "Nahaufnahme eines Diddl-Artikels aus der Comeback-Kollektion.", breite: 640, hoehe: 640 },
-      { src: "assets/img/tuete-5.jpg", alt: "Überblick über die Comeback-Kollektion: Rucksack, Kuscheltier, Notizbücher, Stifte, Tasse und Sticker mit Diddl-Motiven.", breite: 900, hoehe: 784 }
+      { src: "assets/img/tuete-2.webp", alt: "Diddl-Comeback-Motiv mit Schriftzug „Diddl is back!“.", breite: 1920, hoehe: 1080, notiz: "Mögliche Inhalte der Diddl Comeback-Tüte" },
+      { src: "assets/img/tuete-3.webp", alt: "Diddl-Produkte auf einem Verkaufstisch.", breite: 1200, hoehe: 800, notiz: "Mögliche Inhalte der Diddl Comeback-Tüte" },
+      { src: "assets/img/tuete-5.jpg", alt: "Überblick über die Comeback-Kollektion: Rucksack, Kuscheltier, Notizbücher, Stifte, Tasse und Sticker mit Diddl-Motiven.", breite: 900, hoehe: 784, notiz: "Mögliche Inhalte der Diddl Comeback-Tüte" }
     ]
   }
 };
@@ -85,7 +84,7 @@ DIDDL.versand = {
    Die Links zeigen auf die offiziellen Diddl-Kanäle.
    --------------------------------------------------------------------- */
 DIDDL.kampagne = {
-  hashtag: "#DiddlIstZurueck",
+  hashtag: "#DiddlisBack",
   // Quelle: Verlinkungen auf diddl.de (Stand September 2026)
   instagram: "https://www.instagram.com/diddl_original",
   tiktok: "https://www.tiktok.com/@diddl_original",

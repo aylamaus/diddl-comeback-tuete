@@ -270,11 +270,13 @@ Format: Beobachtung → Risiko → Entscheidung → Begründung.
 - **Entscheidung:** Das Banner wurde auf 1920 × 500 px beschnitten, sodass
   das Logo wegfällt (`hero-banner-ohne-logo.jpg`); auf Mobile bleibt die
   Figurengruppe ohne Logo. Das Foto liegt unten in der Section, der Text
-  darüber in einer halbtransparenten Sticker-Karte auf der rosa
-  Aquarellfläche. `<picture>` wählt weiterhin das passende Bild. Das
-  unbeschnittene Banner bleibt als `og:image` für Social-Media-Vorschauen.
-- **Begründung:** Lesbarkeit bleibt durch die Karte garantiert, das Artwork
-  wird nicht überdeckt, und der Hero wirkt als Vollbild wie gewünscht.
+  darüber direkt auf der rosa Aquarellfläche (die zunächst gebaute
+  Sticker-Karte wurde auf Kundenwunsch vom 16.09.2026 entfernt). Die
+  Foto-Oberkante wird per `mask-image` weich in die Fläche eingeblendet,
+  damit keine Kante entsteht. `<picture>` wählt weiterhin das passende Bild;
+  das unbeschnittene Banner bleibt als `og:image` für Social-Media-Vorschauen.
+- **Begründung:** Text und Figuren überlappen sich nicht, das Artwork wird
+  nicht überdeckt, und der Hero wirkt als Vollbild wie gewünscht.
 
 ### 5.8 Bildformate und -größen
 
@@ -300,9 +302,11 @@ Format: Beobachtung → Risiko → Entscheidung → Begründung.
   erreicht gegen Weiß nur 2,4:1 und ist damit als Textfarbe auf hellem
   Grund unzulässig.
 - **Entscheidung:** Neuer Token `--akzent-blau: #14b2ff`, ausschließlich für
-  Hover- und Fokus-Zustände: als Hintergrund hinter dunklem Text in der
-  Navigation (7,1:1) und als Link-/Iconfarbe auf dem dunklen Footer (4,75:1).
-  Nie als Fließtext auf Hell, nie als Fläche mit heller Schrift.
+  Hover- und Fokus-Zustände: in der Navigation als 3 px starke Linie, die
+  unter dem Menüpunkt aufzieht (seit 16.09.2026, vorher als Fläche), und als
+  Link-/Iconfarbe auf dem dunklen Footer (4,75:1). Nie als Fließtext auf
+  Hell, nie als Fläche mit heller Schrift. Der aktuelle Menüpunkt trägt die
+  Linie dauerhaft.
 - **Begründung:** Kundenwunsch wird erfüllt, die Kontrastregeln bleiben
   eingehalten, und die Erweiterung ist dokumentiert statt still eingeführt.
 
@@ -417,7 +421,7 @@ müssen diese neun Zeilen angepasst werden (Suchen und Ersetzen).
 |---|---|---|
 | **Rechtstexte** (Impressum, Datenschutz, Widerruf/AGB) | Vom Rechts-Teilprojekt geliefert und am 14.09.2026 eingepflegt; Anbieter ist das Projektteam c/o DHBW Mannheim | Erledigt; vor einem kommerziellen Betrieb erneut juristisch prüfen |
 | **Bildrechte** | Alle Bilder stammen aus dem Projektordner (Referenzmaterial); Rechteinhaber: Depesche / Thomas Goletz, dpa, Händler | Prototyp nur für Prüfungszwecke; keine Veröffentlichung ohne Lizenz |
-| **Charakterbilder für das Quiz** | Vier Bilder aus der 3D-Serie nachgeliefert (`figur-*.jpg`), im Ergebnis als runder Sticker; Farbflächen bleiben (Diddl = Rosa, Diddlina = Pink, Pimboli = Flieder, Wollywell = Violett) | Erledigt |
+| **Charakterbilder für das Quiz** | Vier Bilder aus der 3D-Serie nachgeliefert (`figur-*.jpg`), im Ergebnis als runder Sticker; Farbflächen (Diddl und Diddlina = Rosa, Pimboli = Flieder, Wollywell = Violett) | Erledigt |
 | **Beispiel-Bewertungen** | Drei erfundene, als „Beispiel“ gekennzeichnete Stimmen (siehe 5.10) | Vor echtem Betrieb ersetzen oder entfernen |
 | **Schriftdateien** | Chewy 400, Quicksand 400/600/700 liegen als woff2 vor | Erledigt |
 | **Kein echtes Payment** | Checkout simuliert; keine Datenübertragung | Ausbauweg siehe Abschnitt 2 |
@@ -445,24 +449,24 @@ nutzt sie ausschließlich zu Prüfungszwecken.
 | `hero-banner.webp` | `diddl-is-back-hero-banner-dektop-diddel-rosa-lafueliki.jpg.webp` | `og:image` für Social-Media-Vorschauen | unverändert (1920 × 800) |
 | `hero-banner-ohne-logo.jpg` | dieselbe Quelle | Hero Desktop | auf 1920 × 500 beschnitten, damit das Logo im Bild wegfällt |
 | `hero-gruppe.webp` | `diddl-header-2.webp` | Hero Mobile, Newsletter-Section | unverändert (730 × 391) |
+| `ueber-1-wiese.jpg` | `neue Bilder 16September/WhatsApp Image 2026-09-16 at 09.51.41.jpeg` (3D-Artwork, Diddl Studios) | Carousel Slide 1 | unverändert (900 × 1119) |
 | `ueber-1-charaktere.jpg` | `04548352-bb25-49fd-a065-4bbb1a6a757e.jpg-3.webp` | Carousel Slide 2 | auf 1600 px verkleinert, JPEG |
-| `ueber-2-nostalgie.jpg` | `diddl-mau-20804.jpeg` | Carousel Slide 1 | auf 1600 px verkleinert |
 | `ueber-3-laden.jpg` | `neue Bilder 14September/kann auch für carousel über diddl section genutzt werden.jpeg` | Carousel Slide 3 | auf 1200 px verkleinert |
-| `tuete-1.webp` | `diddl-einkaufstuten.webp` | Produkt Hauptbild, Warenkorb | unverändert |
+| `tuete-1.webp` | `diddl-einkaufstuten.webp` | Produkt Hauptbild, Warenkorb, Teaser Startseite | unverändert |
 | `tuete-2.webp` | `diddl-is-back-.webp` | Produktgalerie | unverändert |
 | `tuete-3.webp` | `dpa-com-60828636-2-jpg.webp` | Produktgalerie | unverändert (dpa-Bild) |
-| `tuete-4.jpg` | `a69c6f23-07f4-4cd7-8a36-a669299a2902_w640_r1_fpx45_fpy45.jpg` | Produktgalerie | unverändert |
+| `tuete-4.jpg` | `a69c6f23-07f4-4cd7-8a36-a669299a2902_w640_r1_fpx45_fpy45.jpg` | Collage Schreibwaren (aus der Galerie entfernt, 16.09.2026) | unverändert |
 | `tuete-5.jpg` | `FpZcpaFQ7E2He3qO3mSkeNtUfEZsX1-metacHJvZHVrdGVfbW9iLnBuZw==--2.png` | Produktgalerie | JPEG statt PNG |
 | `inhalt-block.jpg` | `neue Bilder 14September/Das im Shop als 1x Block Darstellung.jpg` | Was steckt drin: Block | auf 1200 px Höhe verkleinert |
 | `tuete-4.jpg` | siehe oben | Was steckt drin: Schreibwaren | – |
 | `inhalt-accessoire.webp` | `Diddl.webp` (vorher `inhalt-schreibwaren.webp`) | Was steckt drin: Accessoire | unverändert |
-| `inhalt-kuscheltier.webp` | `neue Bilder 14September/das im shop für 1x kuscheltier verwenden.webp` | Was steckt drin: Kuscheltier | unverändert (2560 × 1080) |
+| `inhalt-kuscheltier.jpg` | `neue Bilder 16September/WhatsApp Image 2026-09-16 at 09.52.42.jpeg` | Was steckt drin: Kuscheltier | auf 1200 px verkleinert |
 | `quiz-kopf.jpg` | `neue Bilder 14September/Header oder Hintergrundfoto beim Start des Quizzes.png.jpeg` | Kopfbild Quiz | unverändert (1200 × 700) |
 | `figur-diddl.jpg`, `figur-diddlina.jpg`, `figur-pimboli.jpg`, `figur-wollywell.jpg` | `neue Bilder 14September/diddl.jpg` usw. | Quiz-Ergebnis | unverändert (349 × 348) |
-| `inhalt-tasse.jpg` | `61it4vMiy2L.jpg` | Teaser Startseite | auf 1000 px verkleinert |
 
-Nicht verwendet: `diddl-comeback-dresden-108.jpg.avif` (Ladenfoto mit
-erkennbaren Personen, siehe 5.12). Weitere Quellenangaben laut
+Nicht (mehr) verwendet: `diddl-comeback-dresden-108.jpg.avif` (Ladenfoto mit
+erkennbaren Personen, siehe 5.12), `diddl-mau-20804.jpeg`, `61it4vMiy2L.jpg`
+(Tasse) und `DEZTEL6XNZEGTF5BWMOADRQW2E.jpg` – ersetzt durch nachgelieferte Bilder. Weitere Quellenangaben laut
 Rechts-Teilprojekt: MDR (Julia Schönfeld, 21.07.2026), Der Spiegel
 (Nadine Schwickart, 19.08.2026), vedes.com.
 
