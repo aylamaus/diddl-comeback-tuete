@@ -1,0 +1,21 @@
+{
+  "titel": "Das sagen Diddl-Fans",
+  "hinweis": "Beispielansicht: So könnte die Bewertungssektion aussehen. Die drei Stimmen sind erfunden, echte Bewertungen gibt es in diesem Prototyp nicht.",
+  "eintraege": [
+    {
+      "vorname": "Lena",
+      "sterne": 5,
+      "text": "Ich hab die Tüte mit meiner kleinen Schwester zusammen aufgemacht. Sie kannte Diddl gar nicht, jetzt liegt der Block auf ihrem Schreibtisch."
+    },
+    {
+      "vorname": "Jonas",
+      "sterne": 5,
+      "text": "Der Kuscheltier-Diddl sieht aus wie der von 2001 aus meinem Kinderzimmer. Schneller Versand, alles heil angekommen."
+    },
+    {
+      "vorname": "Mira",
+      "sterne": 4,
+      "text": "Schöne Überraschung, das Duftpapier riecht wie damals. Ein Stern Abzug, weil ich mir zwei Tüten hätte bestellen sollen."
+    }
+  ]
+}

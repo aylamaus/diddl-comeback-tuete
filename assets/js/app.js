@@ -1,8 +1,9 @@
 /* =====================================================================
    app.js – auf jeder Seite geladen
    Header (Burger-Menü, Warenkorb-Badge), Warenkorb-Zustand im
-   localStorage, Toast, Consent-Banner, Newsletter-Formular, Akkordeons.
-   Kein Framework, keine Abhängigkeiten. Alles hängt an window.DIDDL.
+   localStorage, Toast, Consent-Banner, Newsletter-Formular, Akkordeons,
+   Datenbindung der Startseite. Kein Framework, keine Abhängigkeiten.
+   Inhalte kommen aus daten.js (window.DIDDL), das die content/*.json lädt.
    ===================================================================== */
 (function () {
   "use strict";
@@ -278,7 +279,8 @@
       akk.classList.add("ist-aktiv");
       akk.querySelectorAll(".akkordeon__knopf").forEach(function (knopf, index) {
         var inhalt = document.getElementById(knopf.getAttribute("aria-controls"));
-        if (!inhalt) { return; }
+        if (!inhalt || knopf.hasAttribute("data-akk-init")) { return; }
+        knopf.setAttribute("data-akk-init", "");
         var offen = knopf.hasAttribute("data-offen") || (akk.hasAttribute("data-erster-offen") && index === 0);
         knopf.setAttribute("aria-expanded", offen ? "true" : "false");
         inhalt.hidden = !offen;
@@ -334,6 +336,10 @@
   function bewertungenInit() {
     var wurzel = document.querySelector("[data-bewertungen]");
     if (!wurzel || !Array.isArray(D.bewertungen) || !D.bewertungen.length) { return; }
+    if (D.bewertungenKopf) {
+      textSetzen("[data-bewertungen-titel]", D.bewertungenKopf.titel);
+      textSetzen("[data-bewertungen-hinweis]", D.bewertungenKopf.hinweis);
+    }
     wurzel.innerHTML = "";
     D.bewertungen.forEach(function (b) {
       var li = document.createElement("li");
@@ -381,6 +387,53 @@
       });
     }, { rootMargin: "0px 0px -10% 0px", threshold: 0.05 });
     elemente.forEach(function (el) { beobachter.observe(el); });
+  }
+
+  /* ---------- Datenbindung (Startseite, Quiz-Kopf) ----------
+     Elemente mit data-inhalt="pfad.zum.feld" bekommen den Text aus
+     DIDDL.startseite; data-inhalt-bild setzt src und alt; data-inhalt-link
+     setzt href. Mehrere Absätze (Leerzeile im Text) werden zu mehreren <p>. */
+
+  function textSetzen(selector, text) {
+    var el = document.querySelector(selector);
+    if (el && text) { el.textContent = text; }
+  }
+
+  function pfad(obj, weg) {
+    return String(weg).split(".").reduce(function (o, k) { return (o && o[k] !== undefined) ? o[k] : undefined; }, obj);
+  }
+
+  function inhalteBinden() {
+    var quelle = { startseite: D.startseite, quiz: D.quiz, kampagne: D.kampagne };
+    document.querySelectorAll("[data-inhalt]").forEach(function (el) {
+      var wert = pfad(quelle, el.getAttribute("data-inhalt"));
+      if (wert === undefined || wert === null) { return; }
+      var text = String(wert);
+      if (el.hasAttribute("data-inhalt-absaetze")) {
+        el.innerHTML = "";
+        text.split(/\n\s*\n/).forEach(function (t) {
+          if (!t.trim()) { return; }
+          var p = document.createElement("p");
+          p.textContent = t.trim();
+          el.appendChild(p);
+        });
+      } else {
+        el.textContent = text;
+      }
+    });
+    document.querySelectorAll("[data-inhalt-bild]").forEach(function (img) {
+      var src = pfad(quelle, img.getAttribute("data-inhalt-bild"));
+      var alt = pfad(quelle, img.getAttribute("data-inhalt-alt") || "");
+      if (src) { img.src = src; }
+      if (typeof alt === "string") { img.alt = alt; }
+    });
+    document.querySelectorAll("[data-inhalt-link]").forEach(function (a) {
+      var href = pfad(quelle, a.getAttribute("data-inhalt-link"));
+      var text = pfad(quelle, a.getAttribute("data-inhalt-linktext") || "");
+      if (href) { a.href = href; a.hidden = false; } else if (a.hasAttribute("data-inhalt-linktext")) { a.hidden = true; }
+      if (text) { a.textContent = text; }
+      if (href && /^https?:/.test(href)) { a.target = "_blank"; a.rel = "noopener"; } else { a.removeAttribute("target"); }
+    });
   }
 
   /* ---------- Newsletter (nur Frontend, kein Backend) ---------- */
@@ -452,18 +505,26 @@
 
   /* ---------- Start ---------- */
 
+  // Teil 1: alles, was keine Inhalte braucht
   document.addEventListener("DOMContentLoaded", function () {
     headerInit();
-    badgeAktualisieren();
     karussellInit();
-    faqInit();
-    bewertungenInit();
     akkordeonInit();
     einblendenInit();
     newsletterInit();
     consentInit();
     navMarkieren();
   });
+
+  // Teil 2: sobald content/*.json geladen ist (daten.js)
+  function datenInit() {
+    inhalteBinden();
+    badgeAktualisieren();
+    faqInit();
+    bewertungenInit();
+    akkordeonInit(); // neu aufgebaute FAQ-Einträge
+  }
+  if (D.wennBereit) { D.wennBereit(datenInit); }
 
   // Öffentliche Schnittstelle für die anderen Skripte
   D.app = {

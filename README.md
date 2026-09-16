@@ -18,7 +18,7 @@ DHBW Mannheim). Der Prototyp läuft ohne Build-Schritt auf GitHub Pages.
 1. [Projekt und Praxisfall](#1-projekt-und-praxisfall)
 2. [Systementscheidung](#2-systementscheidung)
 3. [Abgrenzung: Vibe Coding ist der Implementierungsansatz](#3-abgrenzung-vibe-coding-ist-der-implementierungsansatz)
-4. [Contentpflege über data.js](#4-contentpflege-über-datajs)
+4. [Contentpflege über das CMS](#4-contentpflege-über-das-cms)
 5. [Entscheidungslog](#5-entscheidungslog)
 6. [Barrierefreiheit](#6-barrierefreiheit)
 7. [Deployment auf GitHub Pages](#7-deployment-auf-github-pages)
@@ -64,7 +64,11 @@ Smartphone. Deshalb ist die Seite mobile first gebaut.
 ## 2. Systementscheidung
 
 **Entscheidung: individuelle Webanwendung als statische Eigenentwicklung**
-(reines HTML, CSS, JavaScript; Hosting auf GitHub Pages).
+(reines HTML, CSS, JavaScript; Hosting auf GitHub Pages), ergänzt um ein
+**Git-basiertes Headless-CMS** (Sveltia CMS) für die Inhaltspflege. Die
+Inhalte liegen als JSON-Dateien im Repository, das CMS ist eine reine
+Redaktionsoberfläche ohne eigene Datenbank und ohne Server – jede Änderung
+ist ein Git-Commit, den GitHub Pages automatisch ausliefert.
 
 ### Warum nicht WordPress, Website-Builder oder Shopsystem?
 
@@ -79,10 +83,13 @@ Smartphone. Deshalb ist die Seite mobile first gebaut.
 
 ### Grenzen der Entscheidung (ehrlich benannt)
 
-- **Keine redaktionelle Oberfläche.** Inhalte werden in `assets/js/data.js`
-  in einem Texteditor gepflegt, nicht in einem Backend.
-- **Keine Rollen- und Rechteverwaltung, keine Freigabeworkflows.** Wer
-  Schreibzugriff auf das Repository hat, kann alles ändern.
+- **Redaktionsoberfläche nur für Inhalte, nicht für Struktur.** Über das CMS
+  lassen sich Texte, Bilder, Preise, FAQ, Quiz und Bewertungen pflegen;
+  neue Seiten oder Abschnitte brauchen weiterhin HTML-Kenntnisse.
+- **Rechte nur über GitHub, kein Freigabeworkflow.** Wer als Collaborator
+  Schreibrecht im Repository hat, veröffentlicht direkt; Entwürfe und
+  Vier-Augen-Freigaben gibt es nicht (Sveltia CMS bietet keinen Editorial
+  Workflow; Decap CMS könnte das über Pull Requests nachrüsten).
 - **Kein echtes Zahlungssystem.** Der Checkout ist eine Simulation. Es gibt
   keine Bestellverwaltung, keinen Lagerbestand, keine Rechnungsstellung.
 - **Keine Mehrsprachigkeit, keine Suche, keine Personalisierung.**
@@ -98,9 +105,10 @@ Smartphone. Deshalb ist die Seite mobile first gebaut.
 2. **Mittelfristig (mehrere Produkte, echte Bestellungen):** Headless-Commerce
    oder ein gehostetes Shopsystem für Warenkorb, Zahlung, Bestellverwaltung,
    Steuer und Versand. Die Landingpage kann als Frontend davor bleiben.
-3. **Langfristig (Redaktion, Freigaben, viele Seiten):** Headless-CMS oder
-   klassisches CMS mit Rollen, Workflows und Medienverwaltung; die hier
-   definierte Content-Struktur (`data.js`) ist die Vorlage für die Datenmodelle.
+3. **Langfristig (Redaktion mit Freigaben, viele Seiten):** Wechsel auf ein
+   Headless-CMS mit Rollen und Workflows (z. B. Decap mit Editorial Workflow
+   oder ein gehostetes Headless-CMS); die hier definierten JSON-Strukturen in
+   `content/` sind die Vorlage für die Datenmodelle.
 
 ---
 
@@ -125,45 +133,59 @@ die Arbeitsschritte.
 
 ---
 
-## 4. Contentpflege über data.js
+## 4. Contentpflege über das CMS
 
-`assets/js/data.js` ist die einzige Stelle, an der Produktdaten, Preise,
-Versandkosten, FAQ-Einträge, Quizfragen und Social-Media-Links stehen. Die
-Datei ist ausführlich auf Deutsch kommentiert und kann von einer Redakteurin
-ohne Programmierkenntnisse in einem Texteditor bearbeitet werden.
+Die Inhalte liegen als sechs JSON-Dateien in `content/` und werden über
+**Sveltia CMS** gepflegt, ein Git-basiertes Headless-CMS: Die
+Redaktionsoberfläche läuft im Browser unter `admin/`, liest und schreibt die
+Dateien direkt im GitHub-Repository und erzeugt für jede Änderung einen
+Commit (`CMS: Produkt „produkt“ aktualisiert`). Es gibt keine Datenbank und
+keinen Server; GitHub Pages liefert die geänderten Dateien nach etwa einer
+Minute aus.
 
-**Was dort geändert werden darf**
-
-| Bereich | Feld | Beispiel |
+| Datei | Bereich im CMS | Inhalt |
 |---|---|---|
-| Produkt | `name`, `kurz`, `beschreibung`, `details`, `preisCent`, `mengeMax`, `garantiertEnthalten`, `galerie` | Preis auf 24,99 € ändern: `preisCent: 2499` |
-| Versand | `kostenCent`, `lieferzeitText`, `laender`, `zahlungsarten` | |
-| Kampagne | `hashtag`, Social-Links | |
-| Bewertungen | `vorname`, `sterne`, `text` – als Beispiel gekennzeichnet | Vor echtem Betrieb durch echte Bewertungen ersetzen oder löschen |
-| FAQ | `frage`, `antwort` (Text oder Liste von Absätzen), Reihenfolge | Eintrag anhängen oder löschen |
-| Quiz | `fragen` (Frage, vier Antworten mit `figur`), `figuren` (Name, Untertitel, Bild, Beschreibung) | Sechste Frage anhängen – Fortschritt „Frage x von y“ passt sich automatisch an |
+| `content/startseite.json` | Startseite | Hero, Über-Diddl-Slides (Text, Bild, Button), Teaser, Newsletter-Abschnitt |
+| `content/produkt.json` | Produkt | Name, Texte, Preis in Euro, Mindest-Warenwert, Maximalmenge, Details, garantierter Inhalt, Galerie mit Notizen |
+| `content/einstellungen.json` | Versand & Kanäle | Versandkosten, Lieferzeit, Länder, Zahlungsarten, Hashtag, Social-Links |
+| `content/faq.json` | FAQ | Fragen und Antworten (Leerzeile = Absatz) |
+| `content/quiz.json` | Quiz | Überschriften, Kopfbild, vier Figuren mit Bild, Fragen mit je vier Antworten und Zuordnung |
+| `content/bewertungen.json` | Bewertungen (Beispiel) | Überschrift, Hinweistext, Einträge |
 
-**Was nicht geändert werden darf**
+**So läuft eine Änderung**
 
-- Die `id`-Felder (`comeback-tuete`, `diddl`, `pimboli` …), sie werden vom
-  Code referenziert.
-- `DIDDL.speicherSchluessel` (Schlüssel im localStorage).
-- Die Struktur (Klammern, Kommas, Anführungszeichen). Ein fehlendes Komma
-  macht die Datei ungültig – dann bleibt der Warenkorb leer und das Quiz
-  erscheint nicht. Nach jeder Änderung die Seite im Browser prüfen.
+1. `https://aylamaus.github.io/diddl-comeback-tuete/admin/` öffnen und mit
+   GitHub anmelden (siehe Abschnitt 7, „Anmeldung im CMS“).
+2. Bereich wählen, Feld ändern, Bild hochladen (landet in `assets/img/`).
+3. „Speichern“ – das CMS committet auf `main`. Nach ein bis zwei Minuten ist
+   die Änderung live; ggf. Seite hart neu laden (Cmd + Shift + R).
 
-**Zusammenspiel mit dem HTML**
+**Was das CMS absichert:** Pflichtfelder, Zahlenfelder mit Grenzen (Sterne
+1–5, Menge 1–20), feste Anzahl bei Slides (3), Figuren (4) und Antworten
+(4), Auswahlfelder für die Figur-Zuordnung. Ein kaputtes JSON ist damit
+praktisch ausgeschlossen – anders als beim früheren Editieren einer
+JavaScript-Datei im Texteditor.
 
-Damit die Seiten auch ohne JavaScript lesbar bleiben (Progressive
-Enhancement, SEO), stehen Produktbeschreibung, Produktdetails, FAQ und
-Beispiel-Bewertungen zusätzlich als statisches HTML in `produkt.html`,
-`faq.html` und `index.html`. Mit JavaScript werden
-diese Bereiche aus `data.js` neu aufgebaut, `data.js` ist also führend.
-Redaktionshinweis: Wer Texte in `data.js` ändert, sollte die statischen
-Fallback-Texte in den beiden HTML-Dateien mitziehen. Header und Footer sind
-bewusst auf jeder Seite als identisches statisches HTML wiederholt (kein
-JavaScript-Injecting), damit Navigation und Rechtslinks ohne Skript
-funktionieren und Suchmaschinen sie direkt sehen.
+**Wer darf ändern:** Alle GitHub-Accounts, die als Collaborator
+Schreibrecht im Repository haben. Das ist die Rollen- und Rechteverwaltung
+dieses Systems; Rechte entziehen = Collaborator entfernen. Jede Änderung ist
+im Git-Log mit Autor und Zeitpunkt nachvollziehbar und rückgängig zu machen.
+
+**Technik dahinter:** `assets/js/daten.js` lädt die JSON-Dateien per
+`fetch`, rechnet Euro in Cent um, macht aus der Figurenliste eine Map und
+stellt alles als `window.DIDDL` bereit. Erst dann starten Warenkorb, Quiz,
+Galerie und die Textbindung der Startseite (Ereignis `diddl:bereit`).
+Elemente mit `data-inhalt="startseite.hero.headline"` bekommen ihren Text
+aus dem JSON, `data-inhalt-bild` und `data-inhalt-link` entsprechend Bild
+und Link.
+
+**Grenzen und Fallback:** Die HTML-Seiten enthalten die Texte zusätzlich
+statisch – als Fallback ohne JavaScript und für Suchmaschinen. Diese
+Fallback-Texte werden vom CMS **nicht** aktualisiert und können deshalb
+mit der Zeit vom Live-Inhalt abweichen; das ist eine bewusste Grenze der
+Build-freien Lösung (siehe 5.15). Die Rechtsseiten und die Struktur der
+Seiten bleiben absichtlich außerhalb des CMS, damit Pflichttexte nicht
+versehentlich verändert werden.
 
 ---
 
@@ -319,8 +341,8 @@ Format: Beobachtung → Risiko → Entscheidung → Begründung.
 - **Risiko:** Prüfende und Nutzer könnten die Texte für echt halten.
 - **Entscheidung:** Section „Das sagen Diddl-Fans“ mit drei Karten, jede
   trägt das Etikett „Beispiel“, die Subline sagt ausdrücklich, dass die
-  Stimmen erfunden sind. Die Texte liegen in `data.js` unter
-  `DIDDL.bewertungen` mit einem Warnkommentar.
+  Stimmen erfunden sind. Die Texte liegen in `content/bewertungen.json`;
+  der CMS-Bereich heißt ausdrücklich „Bewertungen (Beispiel)“.
 - **Begründung:** Die Section zeigt das Layout, ohne zu täuschen. Vor einem
   echten Betrieb sind die Einträge zu ersetzen oder zu löschen.
 
@@ -375,6 +397,44 @@ Format: Beobachtung → Risiko → Entscheidung → Begründung.
   geschützten Bereich wäre serverseitiger Schutz nötig (z. B. Cloudflare
   Pages mit Basic Auth), siehe Abschnitt 8.
 
+### 5.14 Git-basiertes Headless-CMS statt klassischem CMS
+
+- **Beobachtung:** Die Vorlesung betont, dass Mitarbeitende Inhalte ohne
+  Entwickler ändern können sollen. Der Prototyp ist eine statische Seite
+  ohne Server und ohne Budget.
+- **Risiko:** Ein klassisches CMS (WordPress u. a.) würde Datenbank,
+  Hosting, Updates und Sicherheitspflege mitbringen – genau das, was die
+  Systementscheidung vermeiden sollte.
+- **Entscheidung:** Sveltia CMS als Git-basiertes Headless-CMS: eine
+  statische Admin-Seite (`admin/`), die über die GitHub-API direkt die
+  JSON-Dateien im Repository bearbeitet. Kein Server, keine Datenbank, keine
+  Kosten; Rechte über GitHub-Collaborators; Historie über Git. Gewählt statt
+  Decap CMS wegen der moderneren, deutschsprachigen Oberfläche, der
+  schnelleren Bedienung und der Anmeldung per Zugriffstoken ohne
+  zusätzlichen Auth-Server; Decap bleibt die Option, falls ein
+  Freigabe-Workflow gebraucht wird. Das CMS-Skript wird nur auf der
+  Admin-Seite von einem CDN geladen – die öffentliche Seite bleibt ohne
+  externe Requests.
+- **Begründung:** Erfüllt die Anforderung „schnelle Änderungen durch
+  Mitarbeitende“ ohne die Systemkategorie zu wechseln: Die Seite bleibt eine
+  statische Eigenentwicklung, das CMS ist ein Werkzeug darüber.
+
+### 5.15 Inhalte als JSON, per fetch geladen
+
+- **Beobachtung:** Bisher lagen die Inhalte in `assets/js/data.js`; ein CMS
+  kann JavaScript nicht strukturiert bearbeiten.
+- **Risiko:** JSON kann ein statisches HTML nicht ohne Build-Schritt
+  „einbacken“; ohne JavaScript oder bei blockiertem `fetch` gäbe es keine
+  Inhalte.
+- **Entscheidung:** Inhalte in `content/*.json`, zur Laufzeit per `fetch`
+  geladen (`daten.js`). Die HTML-Seiten behalten die Texte als statischen
+  Fallback, der bei CMS-Änderungen nicht mitzieht; Preis, Transparenz-Kasten
+  und Rechtstexte stehen ohnehin statisch im HTML.
+- **Begründung:** Erhält den Verzicht auf einen Build-Schritt und bleibt
+  ohne JavaScript lesbar; die Abweichung des Fallbacks ist dokumentiert und
+  für den Prototyp akzeptabel. Ein späterer Build-Schritt (z. B. GitHub
+  Action, die JSON ins HTML rendert) würde die Lücke schließen.
+
 ---
 
 ## 6. Barrierefreiheit
@@ -427,6 +487,22 @@ für Switch-Nutzer außer den Pfeil-Buttons (die vorhanden sind).
    (keine 404), eine Tüte in den Warenkorb legen, Seite neu laden (Warenkorb bleibt), Checkout bis zur
    Bestätigung durchspielen.
 
+**Anmeldung im CMS (`admin/`)** – drei Wege, vom einfachsten zum
+komfortabelsten:
+
+1. **Mit Zugriffstoken:** Auf GitHub unter *Settings → Developer settings →
+   Personal access tokens → Fine-grained tokens* ein Token nur für dieses
+   Repository mit der Berechtigung *Contents: Read and write* erzeugen. Im
+   CMS „Mit Zugriffstoken anmelden“ wählen und das Token einfügen. Kein
+   weiterer Dienst nötig.
+2. **Mit lokalem Repository:** In Chrome oder Edge „Mit lokalem Repository
+   arbeiten“ wählen und den geklonten Ordner auswählen – Änderungen landen
+   lokal und werden mit `git push` veröffentlicht.
+3. **Mit GitHub-Login (OAuth):** Einmalig eine GitHub-OAuth-App anlegen und
+   den kostenlosen Auth-Worker `sveltia-cms-auth` auf Cloudflare deployen,
+   dessen URL als `base_url` in `admin/config.yml` eintragen. Danach genügt
+   „Mit GitHub anmelden“.
+
 **Warum kein Build-Schritt nötig ist:** Alle Pfade sind relativ
 (`assets/css/style.css`, nicht `/assets/…`), Dateinamen sind klein
 geschrieben und ohne Umlaute, `.nojekyll` verhindert, dass GitHub den Ordner
@@ -452,8 +528,9 @@ müssen diese neun Zeilen angepasst werden (Suchen und Ersetzen).
 | **Kein echtes Payment** | Checkout simuliert; keine Datenübertragung | Ausbauweg siehe Abschnitt 2 |
 | **Newsletter** | Nur Frontend-Erfolgsmeldung, kein Double-Opt-In-Versand | Dienst anbinden, sobald ein Backend/Formulardienst gewählt ist |
 | **404 bei verschachtelten Pfaden** | `404.html` nutzt relative Pfade; bei URLs mit Unterordner (`/repo/foo/bar`) laden Stylesheet und Bilder nicht | Für Projektseiten akzeptiert; alternativ `<base href>` nach Deployment setzen |
-| **Fallback-Texte** | Produktbeschreibung, FAQ und Bewertungen stehen zusätzlich statisch im HTML | Bei Änderungen in `data.js` mitpflegen (Abschnitt 4) |
-| **Annahmen im Prototyp** | Versandkosten 4,95 €, Lieferzeit 3–5 Werktage (wie AGB), Länder DE/AT/CH, Artikelnummer `DEMO-2026-001`, Beiname „Das verträumte Schaf aus dem Käsekuchenland“ für Wollywell | Frei gesetzte Demo-Werte, keine Angaben der Marke; über `data.js` änderbar |
+| **Fallback-Texte** | Startseite, Produkt, FAQ und Bewertungen stehen zusätzlich statisch im HTML | Werden vom CMS nicht aktualisiert (siehe 5.15); bei größeren Änderungen im HTML nachziehen |
+| **CMS-Login per OAuth** | `base_url` in `admin/config.yml` noch nicht gesetzt | Anmeldung per Zugriffstoken funktioniert sofort; OAuth-Worker optional (Abschnitt 7) |
+| **Annahmen im Prototyp** | Versandkosten 4,95 €, Lieferzeit 3–5 Werktage (wie AGB), Länder DE/AT/CH, Artikelnummer `DEMO-2026-001`, Beiname „Das verträumte Schaf aus dem Käsekuchenland“ für Wollywell | Frei gesetzte Demo-Werte, keine Angaben der Marke; über das CMS änderbar |
 | **Zahlungslogos** | Als Text-Badges umgesetzt, keine Markenlogos | Bei Bedarf offizielle Logodateien der Anbieter einbinden |
 | **Screenreader-Test** | Nicht durchgeführt | Vor Livegang mit VoiceOver/NVDA prüfen |
 | **Passwortabfrage** | Nur im Browser (siehe 5.13), kein echter Zugangsschutz; alle Seiten `noindex` | Für echten Schutz serverseitig lösen; vor einem Launch Abfrage entfernen und `noindex` zurücknehmen |
@@ -578,7 +655,7 @@ index.html                  Startseite: Hero, Über Diddl, Teaser, Quiz
 produkt.html                Produktdetailseite mit Galerie und Transparenz-Kasten
 warenkorb.html              Warenkorb und Checkout in drei Schritten
 bestellbestaetigung.html    Bestätigung mit Kanalverknüpfung
-faq.html                    Häufige Fragen (aus data.js)
+faq.html                    Häufige Fragen (aus content/faq.json)
 impressum.html              Platzhalter mit Pflichtgliederung
 datenschutz.html            Platzhalter mit Pflichtgliederung
 widerruf.html               Widerrufsbelehrung, Muster-Formular, AGB (Platzhalter)
@@ -589,15 +666,26 @@ README.md                   diese Dokumentation
 BRIEFING.md                 Arbeitsauftrag (Kopie von Prompts/PROMPT.md)
 assets/
   css/style.css             gesamtes Styling, ein File, Tokens in :root
-  js/data.js                zentrale Inhaltsdaten (Produkt, Versand, FAQ, Quiz, Kanäle)
+  js/daten.js               lädt content/*.json und stellt window.DIDDL bereit
   js/app.js                 Header, Warenkorb-Zustand, Toast, Karussell, Akkordeon,
-                            FAQ- und Bewertungs-Aufbau, Newsletter, Consent, Einblenden
+                            FAQ- und Bewertungs-Aufbau, Textbindung, Newsletter,
+                            Consent, Einblenden
   js/produkt.js             Galerie, Mengenwahl, In den Warenkorb
   js/warenkorb.js           Warenkorb, Checkout-Schritte, Validierung, Bestätigung
   js/quiz.js                Diddl-Quiz (Ergebnis mit Charakterbild)
   js/zugang.js              Passwortabfrage (siehe 5.13)
   img/                      Bilder (siehe Quellenverzeichnis)
   fonts/                    Chewy und Quicksand als woff2
+content/
+  startseite.json           Texte und Bilder der Startseite
+  produkt.json              Produktdaten, Preis, Galerie
+  einstellungen.json        Versand, Zahlungsarten, Kampagne/Social
+  faq.json                  Häufige Fragen
+  quiz.json                 Quizfragen und Figuren
+  bewertungen.json          Beispiel-Bewertungen
+admin/
+  index.html                Redaktionsoberfläche (Sveltia CMS)
+  config.yml                CMS-Konfiguration: Felder, Backend, Bildordner
 ```
 
 Abweichung vom Briefing: Karussell und Akkordeon liegen in `app.js` statt

@@ -1,0 +1,76 @@
+{
+  "id": "comeback-tuete",
+  "name": "Diddl Comeback-Tüte",
+  "kurz": "Eine Tüte voller Diddl – limitiert, überraschend und garantiert mit Block, Schreibwaren, Accessoire und Kuscheltier.",
+  "preisEuro": 19.99,
+  "mwstProzent": 19,
+  "warenwertMindestensEuro": 19.99,
+  "mengeMax": 5,
+  "bild": "assets/img/tuete-1.webp",
+  "beschreibung": [
+    {
+      "absatz": "Die Diddl Comeback-Tüte ist unsere Überraschungstüte zum Diddl-Comeback. Drinnen steckt eine Auswahl aus der aktuellen Kollektion, zusammengestellt wie damals am Kiosk: Du weißt vorher nicht, welche Motive dich erwarten."
+    },
+    {
+      "absatz": "Sicher ist: Ein Diddl-Block, ein Schreibwaren-Utensil, ein Accessoire und ein Kuscheltier sind immer dabei. Der geschätzte Warenwert liegt mindestens beim Kaufpreis. Die Tüte erscheint in limitierter Auflage und wird nicht nachproduziert."
+    }
+  ],
+  "details": [
+    {
+      "label": "Inhalt",
+      "wert": "Mindestens 4 Artikel: Block, Schreibwaren, Accessoire, Kuscheltier"
+    },
+    {
+      "label": "Auflage",
+      "wert": "Limitiert, keine Nachproduktion"
+    },
+    {
+      "label": "Verpackung",
+      "wert": "Bedruckte Papiertüte, verschlossen"
+    },
+    {
+      "label": "Versand",
+      "wert": "Deutschland, Österreich, Schweiz"
+    },
+    {
+      "label": "Artikelnummer",
+      "wert": "DEMO-2026-001"
+    }
+  ],
+  "garantiertEnthalten": [
+    {
+      "artikel": "1x Diddl-Block"
+    },
+    {
+      "artikel": "1x Schreibwaren-Utensil"
+    },
+    {
+      "artikel": "1x Diddl-Accessoire"
+    },
+    {
+      "artikel": "1x Diddl-Kuscheltier"
+    }
+  ],
+  "galerie": [
+    {
+      "src": "assets/img/tuete-1.webp",
+      "alt": "Zwei Hände halten rosafarbene Papiertüten mit dem Aufdruck „Diddl is back!“ in einem Einkaufszentrum.",
+      "notiz": ""
+    },
+    {
+      "src": "assets/img/tuete-2.webp",
+      "alt": "Diddl-Comeback-Motiv mit Schriftzug „Diddl is back!“.",
+      "notiz": "Mögliche Inhalte der Diddl Comeback-Tüte"
+    },
+    {
+      "src": "assets/img/tuete-3.webp",
+      "alt": "Diddl-Produkte auf einem Verkaufstisch.",
+      "notiz": "Mögliche Inhalte der Diddl Comeback-Tüte"
+    },
+    {
+      "src": "assets/img/tuete-5.jpg",
+      "alt": "Überblick über die Comeback-Kollektion: Rucksack, Kuscheltier, Notizbücher, Stifte, Tasse und Sticker mit Diddl-Motiven.",
+      "notiz": "Mögliche Inhalte der Diddl Comeback-Tüte"
+    }
+  ]
+}

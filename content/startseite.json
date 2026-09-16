@@ -1,0 +1,49 @@
+{
+  "hero": {
+    "headline": "Diddl ist zurück!",
+    "subline": "Entdecke die Diddl Comeback-Tüte – limitiert, überraschend und voller Erinnerungen an deine Kindheit.",
+    "button": "Mehr erfahren"
+  },
+  "ueber": {
+    "titel": "Über Diddl",
+    "subline": "Käsekuchenland ruft – bist du bereit zurückzukehren?",
+    "slides": [
+      {
+        "titel": "Diddl ist zurück – und er kommt nicht allein.",
+        "text": "Diddl, Diddlina, Pimboli und Wollywell warten schon im Käsekuchenland darauf, dass du dich wieder an sie erinnerst. Was früher Blöcke, Sticker und Duftpapier war, ist heute eine ganze Wundertüte voller Kindheitserinnerungen: von Schreibwaren bis zum Kuscheltier zum Festhalten.",
+        "buttonText": "Entdecke, was in deiner Comeback-Tüte steckt",
+        "buttonLink": "produkt.html",
+        "bild": "assets/img/ueber-1-wiese.jpg",
+        "bildAlt": "Diddl, Diddlina, Pimboli und Wollywell toben über eine bunte Wiese im Käsekuchenland."
+      },
+      {
+        "titel": "Wer ist Diddl?",
+        "text": "Diddl ist die Springmaus mit den großen Füßen, 1990 erfunden von Thomas Goletz. In den 90ern und frühen 2000ern hatte sie Kultstatus: Diddl-Blätter wurden gesammelt, getauscht und in Mappen gehütet wie Schätze. Zuhause ist Diddl im Käsekuchenland, zusammen mit Diddlina, Pimboli dem Knuffelteddy und Wollywell.\n\nIm Oktober 2025 kehrte Diddl zuerst in Frankreich und Belgien zurück, seit Sommer 2026 auch in Deutschland, Österreich und der Schweiz. Die Kollektionen erscheinen in limitierter Auflage und werden nicht nachproduziert.",
+        "buttonText": "",
+        "buttonLink": "",
+        "bild": "assets/img/ueber-1-charaktere.jpg",
+        "bildAlt": "Diddl breitet die Arme aus, darüber der Schriftzug „Diddl is back!“ auf rosa-gelbem Aquarellgrund."
+      },
+      {
+        "titel": "Zeig, was in deiner Tüte steckt",
+        "text": "Unboxing, Tauschen, Sammeln: Auf TikTok und Instagram zeigen Fans gerade, was sie aus ihrer Comeback-Tüte gezogen haben und welche Motive sie noch suchen. Folge Diddl, teile dein Unboxing unter #DiddlisBack und finde Tauschpartner für deine Doppelten.",
+        "buttonText": "Diddl auf TikTok folgen",
+        "buttonLink": "https://www.tiktok.com/@diddl_original",
+        "bild": "assets/img/ueber-3-laden.jpg",
+        "bildAlt": "Diddl-Kuscheltiere und Blöcke in einem Ladenregal, im Vordergrund filmt jemand die Auslage mit dem Smartphone."
+      }
+    ]
+  },
+  "teaser": {
+    "titel": "Entdecke die Comeback-Tüte",
+    "text": "Eine Tüte, ein Preis, und was drin ist, siehst du erst beim Öffnen – wie damals am Kiosk. Garantiert dabei sind ein Diddl-Block, ein Schreibwaren-Utensil, ein Accessoire und ein Kuscheltier, der Rest ist Überraschung. Die Comeback-Tüte erscheint in limitierter Auflage und wird nicht nachproduziert.",
+    "button": "Jetzt sichern",
+    "bild": "assets/img/tuete-1.webp",
+    "bildAlt": "Zwei Hände halten rosafarbene Papiertüten mit dem Aufdruck „Diddl is back!“ in einem Einkaufszentrum."
+  },
+  "newsletter": {
+    "titel": "Fanpost aus dem Käsekuchenland",
+    "text": "Trag dich ein und erhalte exklusive Post direkt aus Diddls Zuhause: neue Kollektionen, limitierte Drops, Angebote und alle wichtigen News rund ums Comeback – bevor sie irgendwo sonst auftauchen.",
+    "button": "Jetzt eintragen"
+  }
+}

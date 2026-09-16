@@ -66,9 +66,9 @@
   <section class="hero" aria-labelledby="hero-titel">
     <div class="container hero__innen">
       <div class="hero__text">
-        <h1 id="hero-titel">Diddl ist zurück!</h1>
-        <p>Entdecke die Diddl Comeback-Tüte – limitiert, überraschend und voller Erinnerungen an deine Kindheit.</p>
-        <a class="btn" href="produkt.html">Mehr erfahren</a>
+        <h1 id="hero-titel" data-inhalt="startseite.hero.headline">Diddl ist zurück!</h1>
+        <p data-inhalt="startseite.hero.subline">Entdecke die Diddl Comeback-Tüte – limitiert, überraschend und voller Erinnerungen an deine Kindheit.</p>
+        <a class="btn" href="produkt.html" data-inhalt="startseite.hero.button">Mehr erfahren</a>
       </div>
     </div>
     <div class="hero__hintergrund">
@@ -86,8 +86,8 @@
   <section class="section einblenden" id="ueber-diddl" aria-labelledby="ueber-titel">
     <div class="container">
       <div class="section__kopf zentriert">
-        <h2 id="ueber-titel">Über Diddl</h2>
-        <p>Käsekuchenland ruft – bist du bereit zurückzukehren?</p>
+        <h2 id="ueber-titel" data-inhalt="startseite.ueber.titel">Über Diddl</h2>
+        <p data-inhalt="startseite.ueber.subline">Käsekuchenland ruft – bist du bereit zurückzukehren?</p>
       </div>
 
       <div class="karussell" data-karussell aria-roledescription="Karussell" aria-label="Über Diddl in drei Slides">
@@ -95,32 +95,39 @@
         <ul class="karussell__spur">
           <li class="slide" data-slide role="group" aria-roledescription="Slide" aria-label="Diddl ist zurück">
             <div class="slide__text">
-              <h3>Diddl ist zurück – und er kommt nicht allein.</h3>
-              <p>Diddl, Diddlina, Pimboli und Wollywell warten schon im Käsekuchenland darauf, dass du dich wieder an sie erinnerst. Was früher Blöcke, Sticker und Duftpapier war, ist heute eine ganze Wundertüte voller Kindheitserinnerungen: von Schreibwaren bis zum Kuscheltier zum Festhalten.</p>
-              <a class="btn" href="produkt.html">Entdecke, was in deiner Comeback-Tüte steckt</a>
+              <h3 data-inhalt="startseite.ueber.slides.0.titel">Diddl ist zurück – und er kommt nicht allein.</h3>
+              <div data-inhalt="startseite.ueber.slides.0.text" data-inhalt-absaetze>
+                <p>Diddl, Diddlina, Pimboli und Wollywell warten schon im Käsekuchenland darauf, dass du dich wieder an sie erinnerst. Was früher Blöcke, Sticker und Duftpapier war, ist heute eine ganze Wundertüte voller Kindheitserinnerungen: von Schreibwaren bis zum Kuscheltier zum Festhalten.</p>
+              </div>
+              <a class="btn" href="produkt.html" data-inhalt-link="startseite.ueber.slides.0.buttonLink" data-inhalt-linktext="startseite.ueber.slides.0.buttonText">Entdecke, was in deiner Comeback-Tüte steckt</a>
             </div>
             <div class="slide__bild">
-              <img src="assets/img/ueber-1-wiese.jpg" alt="Diddl, Diddlina, Pimboli und Wollywell toben über eine bunte Wiese im Käsekuchenland." width="900" height="1119" loading="lazy">
+              <img src="assets/img/ueber-1-wiese.jpg" alt="Diddl, Diddlina, Pimboli und Wollywell toben über eine bunte Wiese im Käsekuchenland." width="900" height="1119" loading="lazy" data-inhalt-bild="startseite.ueber.slides.0.bild" data-inhalt-alt="startseite.ueber.slides.0.bildAlt">
             </div>
           </li>
           <li class="slide slide--bild-links" data-slide role="group" aria-roledescription="Slide" aria-label="Wer ist Diddl?">
             <div class="slide__text">
-              <h3>Wer ist Diddl?</h3>
-              <p>Diddl ist die Springmaus mit den großen Füßen, 1990 erfunden von Thomas Goletz. In den 90ern und frühen 2000ern hatte sie Kultstatus: Diddl-Blätter wurden gesammelt, getauscht und in Mappen gehütet wie Schätze. Zuhause ist Diddl im Käsekuchenland, zusammen mit Diddlina, Pimboli dem Knuffelteddy und Wollywell.</p>
-              <p>Im Oktober 2025 kehrte Diddl zuerst in Frankreich und Belgien zurück, seit Sommer 2026 auch in Deutschland, Österreich und der Schweiz. Die Kollektionen erscheinen in limitierter Auflage und werden nicht nachproduziert.</p>
+              <h3 data-inhalt="startseite.ueber.slides.1.titel">Wer ist Diddl?</h3>
+              <div data-inhalt="startseite.ueber.slides.1.text" data-inhalt-absaetze>
+                <p>Diddl ist die Springmaus mit den großen Füßen, 1990 erfunden von Thomas Goletz. In den 90ern und frühen 2000ern hatte sie Kultstatus: Diddl-Blätter wurden gesammelt, getauscht und in Mappen gehütet wie Schätze. Zuhause ist Diddl im Käsekuchenland, zusammen mit Diddlina, Pimboli dem Knuffelteddy und Wollywell.</p>
+                <p>Im Oktober 2025 kehrte Diddl zuerst in Frankreich und Belgien zurück, seit Sommer 2026 auch in Deutschland, Österreich und der Schweiz. Die Kollektionen erscheinen in limitierter Auflage und werden nicht nachproduziert.</p>
+              </div>
+              <a class="btn" href="produkt.html" hidden data-inhalt-link="startseite.ueber.slides.1.buttonLink" data-inhalt-linktext="startseite.ueber.slides.1.buttonText"></a>
             </div>
             <div class="slide__bild slide__bild--blob">
-              <img src="assets/img/ueber-1-charaktere.jpg" alt="Diddl breitet die Arme aus, darüber der Schriftzug „Diddl is back!“ auf rosa-gelbem Aquarellgrund." width="1600" height="900" loading="lazy">
+              <img src="assets/img/ueber-1-charaktere.jpg" alt="Diddl breitet die Arme aus, darüber der Schriftzug „Diddl is back!“ auf rosa-gelbem Aquarellgrund." width="1600" height="900" loading="lazy" data-inhalt-bild="startseite.ueber.slides.1.bild" data-inhalt-alt="startseite.ueber.slides.1.bildAlt">
             </div>
           </li>
           <li class="slide" data-slide role="group" aria-roledescription="Slide" aria-label="Diddl auf TikTok und Instagram">
             <div class="slide__text">
-              <h3>Zeig, was in deiner Tüte steckt</h3>
-              <p>Unboxing, Tauschen, Sammeln: Auf TikTok und Instagram zeigen Fans gerade, was sie aus ihrer Comeback-Tüte gezogen haben und welche Motive sie noch suchen. Folge Diddl, teile dein Unboxing unter #DiddlisBack und finde Tauschpartner für deine Doppelten.</p>
-              <a class="btn" href="https://www.tiktok.com/@diddl_original" target="_blank" rel="noopener">Diddl auf TikTok folgen</a>
+              <h3 data-inhalt="startseite.ueber.slides.2.titel">Zeig, was in deiner Tüte steckt</h3>
+              <div data-inhalt="startseite.ueber.slides.2.text" data-inhalt-absaetze>
+                <p>Unboxing, Tauschen, Sammeln: Auf TikTok und Instagram zeigen Fans gerade, was sie aus ihrer Comeback-Tüte gezogen haben und welche Motive sie noch suchen. Folge Diddl, teile dein Unboxing unter #DiddlisBack und finde Tauschpartner für deine Doppelten.</p>
+              </div>
+              <a class="btn" href="https://www.tiktok.com/@diddl_original" target="_blank" rel="noopener" data-inhalt-link="startseite.ueber.slides.2.buttonLink" data-inhalt-linktext="startseite.ueber.slides.2.buttonText">Diddl auf TikTok folgen</a>
             </div>
             <div class="slide__bild">
-              <img src="assets/img/ueber-3-laden.jpg" alt="Diddl-Kuscheltiere und Blöcke in einem Ladenregal, im Vordergrund filmt jemand die Auslage mit dem Smartphone." width="1200" height="1200" loading="lazy">
+              <img src="assets/img/ueber-3-laden.jpg" alt="Diddl-Kuscheltiere und Blöcke in einem Ladenregal, im Vordergrund filmt jemand die Auslage mit dem Smartphone." width="1200" height="1200" loading="lazy" data-inhalt-bild="startseite.ueber.slides.2.bild" data-inhalt-alt="startseite.ueber.slides.2.bildAlt">
             </div>
           </li>
         </ul>
@@ -145,13 +152,15 @@
     <div class="container teaser">
       <div class="teaser__text">
         <div class="section__kopf">
-          <h2 id="teaser-titel">Entdecke die Comeback-Tüte</h2>
+          <h2 id="teaser-titel" data-inhalt="startseite.teaser.titel">Entdecke die Comeback-Tüte</h2>
         </div>
-        <p>Eine Tüte, ein Preis, und was drin ist, siehst du erst beim Öffnen – wie damals am Kiosk. Garantiert dabei sind ein Diddl-Block, ein Schreibwaren-Utensil, ein Accessoire und ein Kuscheltier, der Rest ist Überraschung. Die Comeback-Tüte erscheint in limitierter Auflage und wird nicht nachproduziert.</p>
-        <a class="btn" href="produkt.html">Jetzt sichern</a>
+        <div data-inhalt="startseite.teaser.text" data-inhalt-absaetze>
+          <p>Eine Tüte, ein Preis, und was drin ist, siehst du erst beim Öffnen – wie damals am Kiosk. Garantiert dabei sind ein Diddl-Block, ein Schreibwaren-Utensil, ein Accessoire und ein Kuscheltier, der Rest ist Überraschung. Die Comeback-Tüte erscheint in limitierter Auflage und wird nicht nachproduziert.</p>
+        </div>
+        <a class="btn" href="produkt.html" data-inhalt="startseite.teaser.button">Jetzt sichern</a>
       </div>
       <div class="teaser__bild">
-        <img src="assets/img/tuete-1.webp" alt="Zwei Hände halten rosafarbene Papiertüten mit dem Aufdruck „Diddl is back!“ in einem Einkaufszentrum." width="1024" height="576" loading="lazy">
+        <img src="assets/img/tuete-1.webp" alt="Zwei Hände halten rosafarbene Papiertüten mit dem Aufdruck „Diddl is back!“ in einem Einkaufszentrum." width="1024" height="576" loading="lazy" data-inhalt-bild="startseite.teaser.bild" data-inhalt-alt="startseite.teaser.bildAlt">
       </div>
     </div>
     <div class="welle welle--hell" aria-hidden="true">
@@ -163,8 +172,8 @@
   <section class="section einblenden" id="bewertungen" aria-labelledby="bewertungen-titel">
     <div class="container">
       <div class="section__kopf zentriert">
-        <h2 id="bewertungen-titel">Das sagen Diddl-Fans</h2>
-        <p>Beispielansicht: So könnte die Bewertungssektion aussehen. Die drei Stimmen sind erfunden, echte Bewertungen gibt es in diesem Prototyp nicht.</p>
+        <h2 id="bewertungen-titel" data-bewertungen-titel>Das sagen Diddl-Fans</h2>
+        <p data-bewertungen-hinweis>Beispielansicht: So könnte die Bewertungssektion aussehen. Die drei Stimmen sind erfunden, echte Bewertungen gibt es in diesem Prototyp nicht.</p>
       </div>
       <ul class="bewertungen" data-bewertungen>
         <li class="bewertung sticker-karte">
@@ -196,12 +205,12 @@
   <section class="section section--rosa einblenden" id="mein-diddl-typ" aria-labelledby="quiz-titel">
     <div class="container">
       <div class="section__kopf zentriert">
-        <p class="vorzeile">Diddl Charakter Quiz</p>
-        <h2 id="quiz-titel">Welcher Diddl-Charakter steckt in dir?</h2>
-        <p>5 Fragen, 4 Freunde aus dem Käsekuchenland. Finde heraus, ob du Diddl, Diddlina, Pimboli oder Wollywell bist!</p>
+        <p class="vorzeile" data-inhalt="quiz.titelZeile">Diddl Charakter Quiz</p>
+        <h2 id="quiz-titel" data-inhalt="quiz.frageTitel">Welcher Diddl-Charakter steckt in dir?</h2>
+        <p data-inhalt="quiz.einleitung">5 Fragen, 4 Freunde aus dem Käsekuchenland. Finde heraus, ob du Diddl, Diddlina, Pimboli oder Wollywell bist!</p>
       </div>
       <div class="quiz__kopfbild">
-        <img src="assets/img/quiz-kopf.jpg" alt="Wollywell, Diddl, Diddlina und Pimboli springen fröhlich vor rosafarbenem Hintergrund." width="1200" height="700" loading="lazy">
+        <img src="assets/img/quiz-kopf.jpg" alt="Wollywell, Diddl, Diddlina und Pimboli springen fröhlich vor rosafarbenem Hintergrund." width="1200" height="700" loading="lazy" data-inhalt-bild="quiz.kopfbild.src" data-inhalt-alt="quiz.kopfbild.alt">
       </div>
       <div class="quiz sticker-karte" data-quiz>
         <div class="quiz__ohne-js zentriert">
@@ -219,9 +228,9 @@
     <div class="container fanpost">
       <div class="newsletter">
         <div class="section__kopf">
-          <h2 id="newsletter-titel">Fanpost aus dem Käsekuchenland</h2>
+          <h2 id="newsletter-titel" data-inhalt="startseite.newsletter.titel">Fanpost aus dem Käsekuchenland</h2>
         </div>
-        <p>Trag dich ein und erhalte exklusive Post direkt aus Diddls Zuhause: neue Kollektionen, limitierte Drops, Angebote und alle wichtigen News rund ums Comeback – bevor sie irgendwo sonst auftauchen.</p>
+        <p data-inhalt="startseite.newsletter.text">Trag dich ein und erhalte exklusive Post direkt aus Diddls Zuhause: neue Kollektionen, limitierte Drops, Angebote und alle wichtigen News rund ums Comeback – bevor sie irgendwo sonst auftauchen.</p>
         <form data-newsletter novalidate>
           <div class="newsletter__feld">
             <label for="fanpost-email">Deine E-Mail-Adresse</label>
@@ -231,7 +240,7 @@
             <input type="checkbox" id="fanpost-einwilligung" name="einwilligung" required>
             <label for="fanpost-einwilligung">Ich möchte den Newsletter erhalten und habe die <a href="datenschutz.html#newsletter">Datenschutzerklärung</a> gelesen. Die Einwilligung kann ich jederzeit widerrufen.</label>
           </div>
-          <button class="btn" type="submit">Jetzt eintragen</button>
+          <button class="btn" type="submit" data-inhalt="startseite.newsletter.button">Jetzt eintragen</button>
           <div class="newsletter__erfolg" data-newsletter-erfolg tabindex="-1" hidden>
             <p><strong>Fast geschafft.</strong> In einem echten Betrieb bekämst du jetzt eine E-Mail mit einem Bestätigungslink (Double-Opt-In). Dieser Prototyp versendet nichts und speichert deine Adresse nicht.</p>
           </div>
@@ -328,7 +337,7 @@
     <button class="btn btn--klein" type="button" data-consent-wahl="alle">Alle akzeptieren</button>
   </div>
 </div>
-<script src="assets/js/data.js"></script>
+<script src="assets/js/daten.js"></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/quiz.js"></script>
 </body>

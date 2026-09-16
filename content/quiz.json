@@ -1,0 +1,144 @@
+{
+  "titelZeile": "Diddl Charakter Quiz",
+  "titel": "Welcher Diddl-Charakter steckt in dir?",
+  "einleitung": "5 Fragen, 4 Freunde aus dem Käsekuchenland. Finde heraus, ob du Diddl, Diddlina, Pimboli oder Wollywell bist!",
+  "kopfbild": "assets/img/quiz-kopf.jpg",
+  "kopfbildAlt": "Wollywell, Diddl, Diddlina und Pimboli springen fröhlich vor rosafarbenem Hintergrund.",
+  "figuren": [
+    {
+      "id": "diddl",
+      "name": "Diddl",
+      "untertitel": "Die Springmaus mit den großen Füßen",
+      "bild": "assets/img/figur-diddl.jpg",
+      "beschreibung": "Neugierig, mutig und immer bereit für das nächste Abenteuer – so wie die Maus mit den großen Füßen selbst. Du probierst lieber aus, statt lange zu überlegen, und genau das macht dich unwiderstehlich liebenswert."
+    },
+    {
+      "id": "diddlina",
+      "name": "Diddlina",
+      "untertitel": "Diddls Freundin, kreativ und herzlich",
+      "bild": "assets/img/figur-diddlina.jpg",
+      "beschreibung": "Du liebst schöne Dinge, kleine Details und alles, was Herz hat. Mit deinem Gespür für Ästhetik und deiner herzlichen Art bringst du automatisch Farbe in den Alltag."
+    },
+    {
+      "id": "pimboli",
+      "name": "Pimboli",
+      "untertitel": "Der Knuffelteddy aus dem Wohnkoffer",
+      "bild": "assets/img/figur-pimboli.jpg",
+      "beschreibung": "Kuschelig, treu und immer für andere da – der Knuffelteddy unter deinen Freund:innen. Bei dir fühlt sich jeder sofort geborgen, denn Nähe und Verlässlichkeit sind für dich das Wichtigste."
+    },
+    {
+      "id": "wollywell",
+      "name": "Wollywell",
+      "untertitel": "Das verträumte Schaf aus dem Käsekuchenland",
+      "bild": "assets/img/figur-wollywell.jpg",
+      "beschreibung": "Verträumt, fantasievoll und ein bisschen wolkig unterwegs – du lebst am liebsten in deiner eigenen kleinen Welt. Deine Kreativität und Ruhe machen dich zu jemandem, bei dem andere gerne mal abschalten."
+    }
+  ],
+  "fragen": [
+    {
+      "frage": "Wie sieht dein perfekter Nachmittag aus?",
+      "antworten": [
+        {
+          "text": "Draußen unterwegs, irgendwas Neues entdecken.",
+          "figur": "diddl"
+        },
+        {
+          "text": "Zimmer neu dekorieren oder mein Lieblingsoutfit zusammenstellen.",
+          "figur": "diddlina"
+        },
+        {
+          "text": "Auf dem Sofa kuscheln, mit meinem Lieblingsmenschen oder Kuscheltier.",
+          "figur": "pimboli"
+        },
+        {
+          "text": "Kopfhörer auf, in Gedanken verloren, vor mich hin träumen oder malen.",
+          "figur": "wollywell"
+        }
+      ]
+    },
+    {
+      "frage": "Du bekommst eine Diddl Comeback-Tüte – was machst du zuerst?",
+      "antworten": [
+        {
+          "text": "Mir Zeit lassen und die Vorfreude genießen, bevor ich reinschaue.",
+          "figur": "wollywell"
+        },
+        {
+          "text": "Sofort aufreißen, ich kann’s nicht erwarten!",
+          "figur": "diddl"
+        },
+        {
+          "text": "Hoffen, dass das Kuscheltier drin ist – mein neuer Bettnachbar.",
+          "figur": "pimboli"
+        },
+        {
+          "text": "Vorsichtig öffnen und mich über jedes hübsche Detail freuen.",
+          "figur": "diddlina"
+        }
+      ]
+    },
+    {
+      "frage": "Was hättest du in der Schule am liebsten gemacht?",
+      "antworten": [
+        {
+          "text": "Zeit mit Freunden, Gruppenarbeiten.",
+          "figur": "pimboli"
+        },
+        {
+          "text": "Aus dem Fenster träumen oder Geschichten schreiben.",
+          "figur": "wollywell"
+        },
+        {
+          "text": "Sport oder irgendwas Aktives draußen.",
+          "figur": "diddl"
+        },
+        {
+          "text": "Kreatives Gestalten, Kunst, mein Mäppchen dekorieren.",
+          "figur": "diddlina"
+        }
+      ]
+    },
+    {
+      "frage": "Wie tröstest du eine gute Freundin oder einen guten Freund?",
+      "antworten": [
+        {
+          "text": "Eine kleine, süße Überraschung basteln oder schenken.",
+          "figur": "diddlina"
+        },
+        {
+          "text": "Zuhören, ganz ruhig, ohne viele Worte.",
+          "figur": "wollywell"
+        },
+        {
+          "text": "Ablenken – wir machen sofort etwas Cooles zusammen.",
+          "figur": "diddl"
+        },
+        {
+          "text": "Ganz fest umarmen und einfach da sein.",
+          "figur": "pimboli"
+        }
+      ]
+    },
+    {
+      "frage": "Dein Lebensmotto?",
+      "antworten": [
+        {
+          "text": "„Kopf in den Wolken, Herz am richtigen Fleck.“",
+          "figur": "wollywell"
+        },
+        {
+          "text": "„Zuhause ist, wo die Liebsten sind.“",
+          "figur": "pimboli"
+        },
+        {
+          "text": "„Kleine Dinge, große Wirkung.“",
+          "figur": "diddlina"
+        },
+        {
+          "text": "„Lieber ausprobieren als abwarten.“",
+          "figur": "diddl"
+        }
+      ]
+    }
+  ]
+}

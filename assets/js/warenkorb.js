@@ -11,7 +11,7 @@
   if (!app) { return; }
 
   var euro = app.euro;
-  var versandCent = (D.versand && D.versand.kostenCent) || 0;
+  var versandCent = 0;
 
   /* =====================================================================
      Teil A: Bestätigungsseite (bestellbestaetigung.html)
@@ -362,7 +362,9 @@
     if (el) { el.textContent = text; }
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
+  function start() {
+    versandCent = (D.versand && D.versand.kostenCent) || 0;
     if (!bestaetigungInit()) { checkoutInit(); }
-  });
+  }
+  if (D.wennBereit) { D.wennBereit(start); }
 })();

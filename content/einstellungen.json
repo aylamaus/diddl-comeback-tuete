@@ -1,0 +1,38 @@
+{
+  "versand": {
+    "kostenEuro": 4.95,
+    "lieferzeitText": "3 bis 5 Werktage nach Zahlungseingang",
+    "laender": [
+      {
+        "land": "Deutschland"
+      },
+      {
+        "land": "Österreich"
+      },
+      {
+        "land": "Schweiz"
+      }
+    ],
+    "zahlungsarten": [
+      {
+        "id": "rechnung",
+        "label": "Rechnung"
+      },
+      {
+        "id": "paypal",
+        "label": "PayPal"
+      },
+      {
+        "id": "kreditkarte",
+        "label": "Kreditkarte"
+      }
+    ]
+  },
+  "kampagne": {
+    "hashtag": "#DiddlisBack",
+    "instagram": "https://www.instagram.com/diddl_original",
+    "tiktok": "https://www.tiktok.com/@diddl_original",
+    "facebook": "https://www.facebook.com/DieDiddlmaus",
+    "youtube": "https://www.youtube.com/channel/UCt2q9qyNrg0_lAfLlLSKwDA"
+  }
+}

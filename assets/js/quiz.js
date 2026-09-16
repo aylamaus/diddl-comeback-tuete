@@ -8,10 +8,10 @@
 
   var D = window.DIDDL || {};
   var wurzel = document.querySelector("[data-quiz]");
-  if (!wurzel || !D.quiz || !D.quiz.fragen || !D.quiz.fragen.length) { return; }
+  if (!wurzel) { return; }
 
-  var fragen = D.quiz.fragen;
-  var figuren = D.quiz.figuren;
+  var fragen = [];
+  var figuren = {};
   var punkte = {};
   var reihenfolgeErreicht = []; // für Gleichstand: wer zuerst die Höchstpunktzahl hatte
   var index = 0;
@@ -141,5 +141,11 @@
     }
   }
 
-  starten();
+  function start() {
+    if (!D.quiz || !D.quiz.fragen || !D.quiz.fragen.length) { return; }
+    fragen = D.quiz.fragen;
+    figuren = D.quiz.figuren;
+    starten();
+  }
+  if (D.wennBereit) { D.wennBereit(start); }
 })();

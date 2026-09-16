@@ -1,0 +1,261 @@
+# =====================================================================
+# Sveltia CMS – Konfiguration der Redaktionsoberfläche
+# Aufruf: https://aylamaus.github.io/diddl-comeback-tuete/admin/
+# Jede Änderung im CMS wird als Commit auf den Branch main geschrieben;
+# GitHub Pages liefert die Seite danach automatisch neu aus.
+# Redakteure brauchen einen GitHub-Account mit Schreibrecht im Repository.
+# =====================================================================
+
+backend:
+  name: github
+  repo: aylamaus/diddl-comeback-tuete
+  branch: main
+  # Für „Mit GitHub anmelden“ wird ein Auth-Proxy gebraucht (Cloudflare
+  # Worker „sveltia-cms-auth“, kostenlos). Nach dem Deploy hier eintragen:
+  # base_url: https://sveltia-cms-auth.<dein-konto>.workers.dev
+  # Ohne base_url: im Anmeldedialog „Personal Access Token“ wählen und ein
+  # Fine-grained Token mit Contents: Read and write für dieses Repo nutzen.
+  commit_messages:
+    create: "CMS: {{collection}} „{{slug}}“ angelegt"
+    update: "CMS: {{collection}} „{{slug}}“ aktualisiert"
+    delete: "CMS: {{collection}} „{{slug}}“ gelöscht"
+    uploadMedia: "CMS: Bild {{path}} hochgeladen"
+    deleteMedia: "CMS: Bild {{path}} gelöscht"
+
+site_url: https://aylamaus.github.io/diddl-comeback-tuete/
+display_url: https://aylamaus.github.io/diddl-comeback-tuete/
+logo_url: https://aylamaus.github.io/diddl-comeback-tuete/assets/img/logo-diddl-is-back.png
+locale: de
+
+# Bilder landen direkt im Bildordner der Seite; im JSON steht der relative Pfad.
+media_folder: assets/img
+public_folder: assets/img
+
+collections:
+  - name: startseite
+    label: Startseite
+    description: Texte und Bilder der Startseite. Die Struktur der Seite (Reihenfolge der Abschnitte) ist fest.
+    editor:
+      preview: false
+    files:
+      - name: startseite
+        label: Startseite
+        file: content/startseite.json
+        format: json
+        fields:
+          - label: Hero (Kopfbereich)
+            name: hero
+            widget: object
+            fields:
+              - { label: Headline, name: headline, widget: string, hint: "Kurz halten, wird sehr groß dargestellt." }
+              - { label: Subline, name: subline, widget: text }
+              - { label: Button-Beschriftung, name: button, widget: string }
+          - label: Über Diddl (Karussell)
+            name: ueber
+            widget: object
+            fields:
+              - { label: Überschrift, name: titel, widget: string }
+              - { label: Subline, name: subline, widget: string }
+              - label: Slides
+                name: slides
+                widget: list
+                min: 3
+                max: 3
+                hint: "Genau drei Slides. Leerzeile im Text = neuer Absatz. Button-Felder leer lassen, wenn kein Button gewünscht ist."
+                summary: "{{fields.titel}}"
+                fields:
+                  - { label: Überschrift, name: titel, widget: string }
+                  - { label: Text, name: text, widget: text }
+                  - { label: Button-Beschriftung, name: buttonText, widget: string, required: false }
+                  - { label: Button-Link, name: buttonLink, widget: string, required: false, hint: "z. B. produkt.html oder https://…" }
+                  - { label: Bild, name: bild, widget: image, hint: "Wird in Blüten- bzw. Blob-Form beschnitten, quadratischer Ausschnitt." }
+                  - { label: Bildbeschreibung (Alt-Text), name: bildAlt, widget: string }
+          - label: Teaser Comeback-Tüte
+            name: teaser
+            widget: object
+            fields:
+              - { label: Überschrift, name: titel, widget: string }
+              - { label: Text, name: text, widget: text }
+              - { label: Button-Beschriftung, name: button, widget: string }
+              - { label: Bild, name: bild, widget: image }
+              - { label: Bildbeschreibung (Alt-Text), name: bildAlt, widget: string }
+          - label: Newsletter-Abschnitt
+            name: newsletter
+            widget: object
+            fields:
+              - { label: Überschrift, name: titel, widget: string }
+              - { label: Text, name: text, widget: text }
+              - { label: Button-Beschriftung, name: button, widget: string }
+
+  - name: produkt
+    label: Produkt
+    description: Die Comeback-Tüte – Texte, Preis, Details und Galerie.
+    editor:
+      preview: false
+    files:
+      - name: produkt
+        label: Diddl Comeback-Tüte
+        file: content/produkt.json
+        format: json
+        fields:
+          - { label: Interne ID, name: id, widget: hidden, default: comeback-tuete }
+          - { label: Produktname, name: name, widget: string }
+          - { label: Kurzbeschreibung, name: kurz, widget: text, hint: "Ein Satz unter der Überschrift." }
+          - { label: Preis in Euro, name: preisEuro, widget: number, value_type: float, step: 0.01, min: 0, hint: "inkl. MwSt., z. B. 19.99" }
+          - { label: MwSt. in Prozent, name: mwstProzent, widget: number, value_type: int, default: 19 }
+          - { label: Mindest-Warenwert in Euro, name: warenwertMindestensEuro, widget: number, value_type: float, step: 0.01, hint: "Erscheint im Transparenz-Kasten." }
+          - { label: Maximale Menge pro Bestellung, name: mengeMax, widget: number, value_type: int, min: 1, max: 20 }
+          - { label: Bild im Warenkorb, name: bild, widget: image }
+          - label: Beschreibung (Absätze)
+            name: beschreibung
+            widget: list
+            fields:
+              - { label: Absatz, name: absatz, widget: text }
+          - label: Produktdetails
+            name: details
+            widget: list
+            summary: "{{fields.label}}: {{fields.wert}}"
+            fields:
+              - { label: Bezeichnung, name: label, widget: string }
+              - { label: Wert, name: wert, widget: string }
+          - label: Garantiert enthalten
+            name: garantiertEnthalten
+            widget: list
+            hint: "Erscheint im Transparenz-Kasten und in der FAQ-Antwort sinngemäß – FAQ bitte mit anpassen."
+            fields:
+              - { label: Artikel, name: artikel, widget: string }
+          - label: Bildergalerie
+            name: galerie
+            widget: list
+            min: 1
+            max: 6
+            summary: "{{fields.alt}}"
+            fields:
+              - { label: Bild, name: src, widget: image }
+              - { label: Bildbeschreibung (Alt-Text), name: alt, widget: string }
+              - { label: Notiz auf dem Bild, name: notiz, widget: string, required: false, hint: "z. B. „Mögliche Inhalte der Diddl Comeback-Tüte“, leer lassen für keine Notiz" }
+
+  - name: einstellungen
+    label: Versand & Kanäle
+    editor:
+      preview: false
+    files:
+      - name: einstellungen
+        label: Versand & Kanäle
+        file: content/einstellungen.json
+        format: json
+        fields:
+          - label: Versand
+            name: versand
+            widget: object
+            fields:
+              - { label: Versandkosten in Euro, name: kostenEuro, widget: number, value_type: float, step: 0.01 }
+              - { label: Lieferzeit (Text), name: lieferzeitText, widget: string, hint: "Bitte auch in FAQ und AGB gleich halten." }
+              - label: Lieferländer
+                name: laender
+                widget: list
+                fields:
+                  - { label: Land, name: land, widget: string }
+              - label: Zahlungsarten
+                name: zahlungsarten
+                widget: list
+                summary: "{{fields.label}}"
+                fields:
+                  - { label: ID, name: id, widget: string, hint: "klein, ohne Leerzeichen" }
+                  - { label: Bezeichnung, name: label, widget: string }
+          - label: Kampagne und Social Media
+            name: kampagne
+            widget: object
+            fields:
+              - { label: Hashtag, name: hashtag, widget: string }
+              - { label: Instagram-URL, name: instagram, widget: string }
+              - { label: TikTok-URL, name: tiktok, widget: string }
+              - { label: Facebook-URL, name: facebook, widget: string }
+              - { label: YouTube-URL, name: youtube, widget: string }
+
+  - name: faq
+    label: FAQ
+    editor:
+      preview: false
+    files:
+      - name: faq
+        label: Häufige Fragen
+        file: content/faq.json
+        format: json
+        fields:
+          - label: Einträge
+            name: eintraege
+            widget: list
+            summary: "{{fields.frage}}"
+            fields:
+              - { label: Frage, name: frage, widget: string }
+              - { label: Antwort, name: antwort, widget: text, hint: "Leerzeile = neuer Absatz." }
+
+  - name: quiz
+    label: Quiz
+    description: „Welcher Diddl-Charakter steckt in dir?“ – Fragen, Antworten und Ergebnisfiguren.
+    editor:
+      preview: false
+    files:
+      - name: quiz
+        label: Diddl-Quiz
+        file: content/quiz.json
+        format: json
+        fields:
+          - { label: Kleine Zeile über der Überschrift, name: titelZeile, widget: string }
+          - { label: Überschrift, name: titel, widget: string }
+          - { label: Einleitung, name: einleitung, widget: text }
+          - { label: Kopfbild, name: kopfbild, widget: image }
+          - { label: Kopfbild-Beschreibung (Alt-Text), name: kopfbildAlt, widget: string }
+          - label: Ergebnisfiguren
+            name: figuren
+            widget: list
+            min: 4
+            max: 4
+            summary: "{{fields.name}}"
+            hint: "Genau vier Figuren. Die ID bestimmt die Farbe der Ergebniskarte (diddl, diddlina, pimboli, wollywell)."
+            fields:
+              - { label: ID, name: id, widget: select, options: [diddl, diddlina, pimboli, wollywell] }
+              - { label: Name, name: name, widget: string }
+              - { label: Beiname, name: untertitel, widget: string }
+              - { label: Bild, name: bild, widget: image, hint: "quadratisch, wird rund beschnitten" }
+              - { label: Beschreibung, name: beschreibung, widget: text }
+          - label: Fragen
+            name: fragen
+            widget: list
+            min: 1
+            summary: "{{fields.frage}}"
+            hint: "Jede Frage hat vier Antworten, jede Antwort zählt für genau eine Figur. Der Fortschritt „Frage x von y“ passt sich automatisch an."
+            fields:
+              - { label: Frage, name: frage, widget: string }
+              - label: Antworten
+                name: antworten
+                widget: list
+                min: 4
+                max: 4
+                summary: "{{fields.text}}"
+                fields:
+                  - { label: Antworttext, name: text, widget: string }
+                  - { label: Zählt für, name: figur, widget: select, options: [diddl, diddlina, pimboli, wollywell] }
+
+  - name: bewertungen
+    label: Bewertungen (Beispiel)
+    description: Achtung – Beispielansicht. Vor einem echten Betrieb durch echte, nachprüfbare Bewertungen ersetzen oder entfernen.
+    editor:
+      preview: false
+    files:
+      - name: bewertungen
+        label: Bewertungen
+        file: content/bewertungen.json
+        format: json
+        fields:
+          - { label: Überschrift, name: titel, widget: string }
+          - { label: Hinweistext, name: hinweis, widget: text, hint: "Muss klarstellen, dass es Beispiele sind." }
+          - label: Einträge
+            name: eintraege
+            widget: list
+            summary: "{{fields.vorname}} ({{fields.sterne}} Sterne)"
+            fields:
+              - { label: Vorname, name: vorname, widget: string }
+              - { label: Sterne, name: sterne, widget: number, value_type: int, min: 1, max: 5 }
+              - { label: Text, name: text, widget: text }
