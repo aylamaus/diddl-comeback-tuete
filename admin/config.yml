@@ -124,6 +124,14 @@ collections:
             hint: "Erscheint im Transparenz-Kasten und in der FAQ-Antwort sinngemäß – FAQ bitte mit anpassen."
             fields:
               - { label: Artikel, name: artikel, widget: string }
+          - label: Kanaltexte (Single Source Publishing)
+            name: kanaltexte
+            widget: object
+            hint: "Dieselbe Produktinformation, je Kanal angepasst. Wird nicht auf der Website angezeigt, sondern dient als zentrale Quelle für Social Media und Newsletter."
+            fields:
+              - { label: Instagram-Caption, name: instagram, widget: text }
+              - { label: TikTok-Hook, name: tiktok, widget: text }
+              - { label: Newsletter-Teaser, name: newsletter, widget: text }
           - label: Bildergalerie
             name: galerie
             widget: list

@@ -56,6 +56,13 @@
       });
     }
 
+    // Lieferzeit am Preis und im Ablauf
+    if (D.versand && D.versand.lieferzeitText) {
+      document.querySelectorAll("[data-lieferzeit]").forEach(function (el) { el.textContent = D.versand.lieferzeitText; });
+      var kurz = document.querySelector("[data-lieferzeit-kurz]");
+      if (kurz) { kurz.textContent = D.versand.lieferzeitText.replace(/ nach Zahlungseingang$/, ""); }
+    }
+
     // Garantierter Inhalt im Transparenz-Kasten
     var garantiert = document.querySelector("[data-garantiert]");
     if (garantiert && produkt.garantiertEnthalten && produkt.garantiertEnthalten.length) {

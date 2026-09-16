@@ -148,4 +148,9 @@
     starten();
   }
   if (D.wennBereit) { D.wennBereit(start); }
+  // Ehrliche Statusmeldung, falls die Inhalte nicht geladen werden konnten
+  document.addEventListener("diddl:fehler", function () {
+    var status = wurzel.querySelector("[data-quiz-status] p");
+    if (status) { status.textContent = "Das Quiz konnte gerade nicht geladen werden. Bitte lade die Seite neu – oder schau dir solange die Comeback-Tüte an."; }
+  }, { once: true });
 })();

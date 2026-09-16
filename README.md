@@ -13,6 +13,18 @@ DHBW Mannheim). Der Prototyp läuft ohne Build-Schritt auf GitHub Pages.
 
 ---
 
+## Die fünf Portfolio-Fragen in Kurzform
+
+| Frage (Vorlesung 24.08.) | Kurzantwort | Ausführlich |
+|---|---|---|
+| **Nutzerziel** – für wen wird welche Handlung unterstützt? | Erwachsene mit Diddl-Nostalgie (primär) und Gen Z/Alpha über Social-Trends (sekundär) sollen die limitierte Comeback-Tüte kaufen. | [Abschnitt 1](#1-projekt-und-praxisfall) |
+| **Journey & Seitenlogik** – wie führt die Struktur zur Handlung? | Einstieg (Hero) → Orientierung (Über Diddl, Teaser) → Entscheidung (Produktseite mit Transparenz-Kasten) → Handlung (Checkout) → Bestätigung (Rückführung in Kanäle). | [Journey](#user-journey-in-fünf-ebenen) |
+| **Systementscheidung** – warum passt der Umsetzungsweg? | Statische Eigenentwicklung plus Git-basiertes Headless-CMS: kleiner Funktionsumfang, volle Funnel-Kontrolle, kein Budget, kein Betrieb – Grenzen bewusst akzeptiert. | [Abschnitt 2](#2-systementscheidung) |
+| **Qualität** – welche rechtlichen, technischen und barrierebezogenen Kriterien gelten? | Button-Lösung, Transparenz bei der Überraschungstüte, Consent ohne Nudging, lokale Schriften, WCAG-Kontraste, Tastatur, ohne JS lesbar. | [Abschnitt 5](#5-entscheidungslog), [6](#6-barrierefreiheit) |
+| **Test & Reflexion** – welche Annahme wurde wie geprüft, was würden wir ändern? | Zwei Review-Iterationen, technischer Qualitätsdurchgang, Usability-Testprotokoll; Reflexion zu Reihenfolge, Content-Modell und Prototyp-Grenzen. | [Abschnitt 10](#10-test-und-reflexion) |
+
+---
+
 ## Inhalt
 
 1. [Projekt und Praxisfall](#1-projekt-und-praxisfall)
@@ -24,6 +36,9 @@ DHBW Mannheim). Der Prototyp läuft ohne Build-Schritt auf GitHub Pages.
 7. [Deployment auf GitHub Pages](#7-deployment-auf-github-pages)
 8. [Offene Punkte und Risiken](#8-offene-punkte-und-risiken)
 9. [Quellenverzeichnis Bilder](#9-quellenverzeichnis-bilder)
+10. [Test und Reflexion](#10-test-und-reflexion)
+11. [Erfolgsmessung, Remarketing und Retargeting](#11-erfolgsmessung-remarketing-und-retargeting)
+12. [Übergabe](#12-übergabe)
 - [Anhang A: Designkonzept](#anhang-a-designkonzept)
 - [Anhang B: Dateistruktur](#anhang-b-dateistruktur)
 
@@ -59,6 +74,47 @@ Der primäre Call to Action auf allen Seiten ist der Kauf der Comeback-Tüte.
 Die Zielgruppe kommt überwiegend über TikTok und Instagram, also vom
 Smartphone. Deshalb ist die Seite mobile first gebaut.
 
+### Proto-Personas
+
+Proto-Personas fokussieren, sie erfinden nicht (Vorlesung 24.08.). Beide
+beruhen auf den Annahmen des Briefings; offene Annahmen sind markiert.
+
+| | Persona A „Nostalgie“ | Persona B „Trend“ |
+|---|---|---|
+| **Wer** | Anfang 20 bis Ende 40, mit Diddl aufgewachsen, sammelte Diddl-Blätter auf dem Schulhof | Kind/Jugendliche:r, kennt Diddl nicht aus eigener Erinnerung, sieht Unboxings auf TikTok |
+| **Ziel** | Ein Stück Kindheit zurückholen, ohne lange zu suchen | Beim Sammel- und Tauschtrend dabei sein |
+| **Situation** | Sieht das Comeback in Instagram-Feed oder Presse, öffnet den Link auf dem Smartphone, meist abends | Sieht ein Unboxing-Video, tippt auf den Link in der Bio, kurze Aufmerksamkeitsspanne |
+| **Hürde** | „Ist das offiziell? Was ist drin? Lohnt sich das für 19,99 €?“ – Angst vor Fake-Shop und Katze im Sack | „Was genau ist Diddl? Wo bekomme ich das? Kann ich das mit anderen tauschen?“ |
+| **Kriterium für eine gute Lösung** | Klarer Inhalt, transparenter Preis, Widerruf, Bestellung in unter drei Minuten | Schnelle Antwort in einem Satz, Bilder statt Text, direkter Weg zurück zu TikTok/Instagram |
+| **Offene Annahme** | Kaufbereitschaft bei Überraschungsinhalt ohne Motivwahl (Annahme, nicht getestet) | Kinder kaufen nicht selbst; die Seite muss Eltern überzeugen (Annahme) |
+
+### User Journey in fünf Ebenen
+
+| Schritt | Frage der Person | Gefühl / was gibt Sicherheit | Hürde | Antwort auf der Seite |
+|---|---|---|---|---|
+| **Einstieg** (Hero) | „Ist Diddl wirklich zurück?“ | Wiedererkennen der Original-Illustrationen | Verwechslung mit Fan-Seiten | Kampagnenmotiv, Headline „Diddl ist zurück!“, klarer CTA |
+| **Orientierung** (Über Diddl, Teaser) | „Was gibt es, und warum jetzt?“ | Kurze, ehrliche Erklärung des Comebacks | Zu viel Text auf dem Smartphone | Drei Slides mit je einer Aussage, Teaser mit den vier garantierten Inhalten |
+| **Entscheidung** (Produktseite) | „Was ist drin, was kostet es, kann ich zurückgeben?“ | Transparenz-Kasten direkt unter dem Preis, Lieferzeit am Preis, „So funktioniert’s“ | Überraschungscharakter erzeugt Misstrauen | Warenwert, garantierter Inhalt, Widerrufsrecht, FAQ-Link – alles ohne Klick sichtbar |
+| **Handlung** (Warenkorb, Checkout) | „Wie viel Aufwand ist das?“ | Fortschrittsanzeige, Fehler direkt am Feld, keine Kontopflicht | Abbruch bei Formularen auf dem Handy | Drei Schritte auf einer Seite, „Zahlungspflichtig bestellen“ als eindeutige Handlung |
+| **Bestätigung** (Bestätigungsseite) | „Hat es geklappt, und was jetzt?“ | Bestellnummer, ehrlicher Demo-Hinweis | Journey endet im Nichts | Rückführung zu Instagram/TikTok (#DiddlisBack) und zum Quiz |
+
+### Drei kritische Reibungspunkte und ihre UX-Antwort
+
+| Beobachtung | Risiko | Hypothese | Lösung | Nachweis |
+|---|---|---|---|---|
+| Der Inhalt der Tüte ist vor dem Kauf unbekannt | Kaufabbruch, Vorwurf irreführender Preisangabe | Transparenz vor dem Klick erhöht Vertrauen | Hervorgehobener Kasten unter dem Preis mit Mindest-Warenwert, garantiertem Inhalt und Widerrufsrecht (5.3) | Testaufgabe „Nenne, was garantiert in der Tüte ist“ – Erfolg ohne Klick auf ein Akkordeon |
+| Die Seite könnte für einen Fake-Shop oder die echte Diddl-Seite gehalten werden | Vertrauensverlust bzw. Verwechslung | Ehrliche Kennzeichnung schadet dem Erlebnis nicht | Prototyp-Hinweis im Footer, Checkout und auf der Bestätigungsseite; Passwortabfrage mit Hinweis „nicht die offizielle Diddl-Website“ | Testaufgabe „Ist das ein echter Shop?“ – Antwort muss aus der Seite ableitbar sein |
+| Lieferzeit und Versandkosten sind beim Kaufentscheid nicht sichtbar | Unsicherheit vor der Bestellung | Lieferzeit am Preis und im Checkout reduziert Rückfragen | Zeile „Lieferung in 3–5 Werktagen“ unter dem Preis, im Ablauf und in der Warenkorb-Summe (16.09.) | Testaufgabe „Nenne Lieferzeit und Versandkosten, bevor du bestellst“ |
+
+### Vier Fragen, die die Landingpage beantworten muss
+
+| Frage (Vorlesung 20.08./24.08.) | Antwort auf der Seite |
+|---|---|
+| Was bekomme ich? | Überraschungstüte mit garantiert Block, Schreibwaren, Accessoire, Kuscheltier – Hero-Subline, Teaser, Transparenz-Kasten |
+| Wie funktioniert es? | „So funktioniert’s“ in drei Schritten auf der Produktseite: bestellen, Tüte kommt, auspacken und teilen |
+| Kann ich vertrauen? | Mindest-Warenwert, Widerruf, Lieferzeit, Preis inkl. MwSt., Rechtsseiten, ehrlicher Prototyp-Hinweis |
+| Was soll ich tun? | Ein primärer CTA pro Seite, am Ende „Zahlungspflichtig bestellen“ |
+
 ---
 
 ## 2. Systementscheidung
@@ -69,6 +125,65 @@ Smartphone. Deshalb ist die Seite mobile first gebaut.
 Inhalte liegen als JSON-Dateien im Repository, das CMS ist eine reine
 Redaktionsoberfläche ohne eigene Datenbank und ohne Server – jede Änderung
 ist ein Git-Commit, den GitHub Pages automatisch ausliefert.
+
+### Kerneigenschaften eines Online-Systems (Vorlesung 11.08.)
+
+| Eigenschaft | So löst es der Prototyp |
+|---|---|
+| **verfügbar** | Statisch auf GitHub Pages, mobil und stationär, mobile first bei 360 px geprüft |
+| **interaktiv** | Warenkorb mit Zustand, Quiz mit Teilen-Funktion, Newsletter-Formular, Akkordeons und Karussells |
+| **verwaltbar** | Inhalte als JSON, Redaktionsoberfläche (Sveltia CMS), Rechte über GitHub-Collaborators, Historie über Git |
+| **integrierbar** | Offizielle Social-Kanäle, Kampagnen-Hashtag, Web-Share-API, Newsletter als Brücke zu E-Mail; Kanaltexte als zentrale Quelle für Instagram, TikTok, Newsletter |
+
+### CMS-Anforderungsprofil (Steckbrief)
+
+Erst Anforderungen klären, dann Systeme vergleichen (Vorlesung 17.08.).
+
+| Leitfrage | Antwort für die Diddl Comeback-Tüte |
+|---|---|
+| **Content** – was wird erstellt, gepflegt, wiederverwendet? | Ein Produkt (Texte, Preis, Galerie), Startseiten-Texte und Bilder, FAQ, Quiz (Fragen, Figuren), Beispiel-Bewertungen, Versand- und Kanaldaten. Wiederverwendet: Produktinformation als Quelle für Website, Instagram, TikTok, Newsletter. Rechtstexte ändern sich selten und bleiben außerhalb der Redaktion. |
+| **Redaktion** – wer arbeitet mit dem System, und wie? | Zwei Studierende als Redaktion, perspektivisch ein Marketing-Team ohne Programmierkenntnisse; Pflege vom Laptop, gelegentlich, in kleinen Änderungen (Preis, Text, Bild). |
+| **Prozesse** – welche Freigaben, Rollen, Abläufe? | Direktes Veröffentlichen genügt; Vier-Augen-Prinzip wäre wünschenswert, ist aber bei zwei Redakteuren nicht zwingend. Nachvollziehbarkeit jeder Änderung ist Pflicht. |
+| **Zukunft** – welche Kanäle, Erweiterungen, Pflegeaufwände? | Weitere Drops/Produkte, Newsletter-Versand, Social-Posts aus derselben Quelle, später Analytics. Kein zweites Frontend absehbar. |
+| **Notwendig** | Texte und Bilder ohne Code ändern, Preis/Lieferzeit zentral, Bild-Upload, Änderungshistorie, kostenlos, kein Serverbetrieb, DSGVO-verträglich |
+| **Nice-to-have** | Entwurf/Freigabe-Workflow, Vorschau vor dem Veröffentlichen, Mehrsprachigkeit, Rollen unterhalb „Schreibrecht“ |
+
+### Priorisierung der Anforderungen
+
+| MUSS | SOLL | BEWUSST NICHT |
+|---|---|---|
+| Kaufprozess bis zur Bestätigung, barrierearm, mobil | Inhalte ohne Entwickler pflegbar (CMS) | Echte Zahlung und Bestellverwaltung |
+| Rechtssichere Kennzeichnung (Button-Lösung, Transparenz, Rechtstexte, Consent) | Kanalverknüpfung mit wiederverwendbaren Texten | Tracking und Personalisierung im Prototyp |
+| Keine externen Requests, keine Kosten, kein Betrieb | Erfolgsmessung vorbereitet (Consent-Flag) | Mehrere Redaktionsrollen und Freigabestufen |
+| Nachvollziehbare Dokumentation und Übergabe | Beispiel-Bewertungen als gekennzeichnete Demo | Mehrsprachigkeit, Suche, Kundenkonten |
+
+### Vier Umsetzungswege im Vergleich
+
+| Umsetzungsweg | Stärke für die Comeback-Tüte | Herausforderung |
+|---|---|---|
+| **Website-Builder / SaaS** (Wix, Squarespace, Webflow) | Schneller Start, Hosting inklusive, visuelle Bearbeitung | Laufende Kosten, Funnel und Transparenz-Kasten nur im Rahmen der Vorlagen, Datenmodell für Quiz/Galerie eingeschränkt, Abhängigkeit vom Anbieter |
+| **Klassisches CMS** (WordPress mit WooCommerce) | Redaktion, SEO und Shop-Plugins vorhanden | Betrieb, Updates und Plugin-Sicherheit müssen organisiert werden; Datenbank-Hosting kostet; für ein Produkt überdimensioniert |
+| **Headless CMS** (Contentful, Storyblok, Strapi) | Strukturierte Inhalte für mehrere Frontends | Zusätzliches System ohne aktuellen Bedarf an mehreren Frontends; Frontend muss ohnehin gebaut werden; Kosten ab Teamgröße |
+| **Eigenentwicklung, statisch, + Git-basiertes CMS** (gewählt) | Volle Kontrolle über Funnel, Transparenz und Barrierefreiheit; keine Kosten, kein Betrieb, keine externen Requests; Redaktion über Sveltia ohne Server | Eigene Verantwortung für Qualität, Wartung und Dokumentation; kein Freigabe-Workflow; statische Fallback-Texte laufen dem CMS hinterher |
+
+**Systemhypothese in fünf Punkten:** *passt* – Eigenentwicklung + Git-CMS;
+*erfüllt* – alle MUSS-Anforderungen und die SOLL-Punkte Redaktion und
+Kanalverknüpfung; *Grenzen* – kein Payment, kein Workflow, Fallback-Drift;
+*Ressourcen* – HTML/CSS/JS-Kenntnisse für Strukturänderungen, GitHub-Account
+für Redakteure; *Risiken* – Wartung liegt beim Team, KI-generierter Code
+muss geprüft bleiben (Abschnitt 3).
+
+### Plugins und Widgets (Vorlesung 10.09.)
+
+In einem WordPress-Setup wären Consent-Banner, Newsletter-Anbindung und Shop
+Plugins (Funktionserweiterungen), während Karussell, Quiz und
+Bewertungskarten Widgets (Darstellungsbausteine) wären. Die
+Eigenentwicklung bildet alle sechs Bausteine mit eigenem Code ab. Damit
+entfallen die Risiken der Vorlesung – Sicherheitslücken in Fremdcode,
+Kompatibilitätsbrüche nach Updates, Ladezeit durch Plugin-Stapel,
+DSGVO-Probleme durch Drittanbieter-Requests – zum Preis, dass Wartung und
+Weiterentwicklung beim eigenen Team liegen. Einziger Fremdcode ist das
+CMS-Skript auf der Admin-Seite, bewusst außerhalb der öffentlichen Seite.
 
 ### Warum nicht WordPress, Website-Builder oder Shopsystem?
 
@@ -131,6 +246,18 @@ Qualitätsdurchgang durch Menschen. Das vollständige Briefing liegt als
 [`BRIEFING.md`](BRIEFING.md) im Repository; die Git-Historie dokumentiert
 die Arbeitsschritte.
 
+**Risiken von Vibe Coding und wie sie hier abgefangen wurden** (Vorlesung
+20.08.: „Vibe Coding beseitigt Risiken nicht – es verschiebt sie“):
+
+| Risiko | Gegenmaßnahme in diesem Projekt |
+|---|---|
+| Plausibler, aber falscher Code | Jede Änderung im Browser geprüft (Kaufflow, Quiz, Formulare), Live-Prüfung nach jedem Push, keine Annahme „läuft bei mir“ |
+| Sicherheits- und Datenschutzfehler | Keine externen Requests auf der öffentlichen Seite, Eingaben clientseitig validiert, keine Secrets im Repo (Passwort nur als Hash, CMS-Token beim Nutzer) |
+| Unbeabsichtigte Nebenwirkungen | Kleine Commits mit deutschen Nachrichten, ein Anliegen pro Commit, nach jeder Runde der komplette Nutzerweg neu getestet |
+| Schlechte Wartbarkeit | Feste Konventionen (BEM-Klassen auf Deutsch, Tokens in `:root`, eine CSS-Datei), kommentierter Code, dieses README |
+| Übersehene Qualitätsanforderungen | Eigener Qualitätsdurchgang: Tastatur, Kontraste (berechnet), 360/768/1280 px, ohne JavaScript, Überschriften- und Link-Check per Skript |
+| Verantwortung wird „abgegeben“ | Alle Entscheidungen (Abschnitt 5) wurden vom Team getroffen oder bestätigt; die KI hat Vorschläge geliefert, Rückfragen gestellt und Abweichungen begründet |
+
 ---
 
 ## 4. Contentpflege über das CMS
@@ -179,6 +306,37 @@ Elemente mit `data-inhalt="startseite.hero.headline"` bekommen ihren Text
 aus dem JSON, `data-inhalt-bild` und `data-inhalt-link` entsprechend Bild
 und Link.
 
+**Content-Logik: statisch, dynamisch, kuratiert** (Vorlesung 17.08.)
+
+| Art | Inhalte | Pflege |
+|---|---|---|
+| **Statisch** | Seitenstruktur, Rechtstexte, Prototyp-Hinweis, Checkout-Formular | Im HTML, bewusst nicht im CMS |
+| **Dynamisch aus JSON** | Preis, Lieferzeit, FAQ, Quizfragen, Galerie, Slide-Texte, Hero-Texte | CMS → JSON → `daten.js` beim Seitenaufruf |
+| **Kuratiert** | Drei Slides, Beispiel-Bewertungen, Reihenfolge der FAQ | Redaktionelle Auswahl im CMS, feste Anzahl bei Slides |
+
+**Single Source Publishing: eine Quelle, mehrere Kanäle** (Vorlesung 11.08.)
+
+`content/produkt.json` ist die zentrale Produktquelle. Sie liefert die
+Fakten (Name, Preis, garantierter Inhalt, Lieferzeit) für die Website und
+enthält im Feld „Kanaltexte“ kanalgerechte Varianten, die nicht identisch
+ausgespielt werden:
+
+| Kanal | Ausprägung | Quelle im CMS |
+|---|---|---|
+| Website | vollständig, suchmaschinenfreundlich, mit Transparenz-Kasten | Produkt → Beschreibung, Details, Garantiert enthalten |
+| Instagram | visuell und emotional, Unboxing-Aufforderung | Produkt → Kanaltexte → Instagram-Caption |
+| TikTok | kurzer, schneller Einstieg, Trend-Bezug | Produkt → Kanaltexte → TikTok-Hook |
+| Newsletter | persönlich und aktivierend („Fanpost“) | Produkt → Kanaltexte → Newsletter-Teaser |
+
+Ändert sich ein Fakt (z. B. die vierte Kategorie „Accessoire“), wird er an
+einer Stelle geändert; die Kanaltexte werden daneben angepasst, statt in
+vier Tools gesucht zu werden.
+
+**Freigabe-Workflow als Ausweg:** Ein Vier-Augen-Prinzip ließe sich ohne
+Systemwechsel nachrüsten, indem das CMS auf einen Branch `entwurf`
+konfiguriert wird und GitHub Branch Protection Pull Requests nach `main`
+verlangt. Für zwei Redakteure bewusst nicht im MVP.
+
 **Grenzen und Fallback:** Die HTML-Seiten enthalten die Texte zusätzlich
 statisch – als Fallback ohne JavaScript und für Suchmaschinen. Diese
 Fallback-Texte werden vom CMS **nicht** aktualisiert und können deshalb
@@ -191,7 +349,30 @@ versehentlich verändert werden.
 
 ## 5. Entscheidungslog
 
-Format: Beobachtung → Risiko → Entscheidung → Begründung.
+**Kurzübersicht** (Format der Vorlesung 17.08.: Anforderung → Entscheidung → Begründung)
+
+| Nr. | Anforderung | Entscheidung | Begründung |
+|---|---|---|---|
+| 5.1 | Schriften ohne Datenabfluss | Chewy/Quicksand lokal als woff2 | LG München 2022: Google-Fonts-CDN ohne Einwilligung unzulässig |
+| 5.2 | WCAG-Kontrast trotz Marken-Pink | Buttons ≥ 18 px/700 | Large-Text-Schwelle 3:1 wird erreicht |
+| 5.3 | Verbraucherschutz bei Überraschungsprodukt | Warenwert-Kasten ohne Klick unter dem Preis | Wesentliche Information vor der Kaufhandlung |
+| 5.4 | § 312j Abs. 3 BGB | „Zahlungspflichtig bestellen“ wörtlich | Gesetzliche Button-Lösung |
+| 5.5 | Einwilligung ohne Nudging | Consent mit zwei gleichwertigen Optionen | Vorbereitung für Tracking, kein Zwang heute |
+| 5.6 | Teilbare URLs, ohne JS lesbar | Neun statische Seiten statt SPA | GitHub Pages ohne Rewrites, SEO, Progressive Enhancement |
+| 5.7 | Hero als Vollbild | Banner ohne Logo beschnitten, Text auf Fläche | Keine Kollision von Text und Artwork |
+| 5.8 | Ladezeit mobil | Bilder ≤ 1600 px, JPEG statt webp/png | Kein webp-Encoder verfügbar, Fotos |
+| 5.9 | Blaues Hover (Kundenwunsch) | Token nur für Hover/Fokus | Kontrastregeln bleiben eingehalten |
+| 5.10 | Bewertungs-Section (Kundenwunsch) | Als „Beispiel“ gekennzeichnet | § 5b UWG, kein Täuschen |
+| 5.11 | Mehr Wellen, Einblenden | Drei Wellenformen, nur Deckkraft | Kundenwunsch ohne Slide-up-Muster |
+| 5.12 | Bild mit Personen | Nicht verwendet | Persönlichkeitsrechte |
+| 5.13 | Zugangshürde für Prüfende | Passwortabfrage im Browser, noindex | Reicht für Verwechslungsschutz, kein Sicherheitsanspruch |
+| 5.14 | Pflege ohne Entwickler | Sveltia CMS, Git-basiert | Kein Server, keine Kosten, Rechte über GitHub |
+| 5.15 | CMS-fähige Inhalte ohne Build | JSON per fetch, statischer Fallback | Kein Build-Schritt, dokumentierte Drift |
+
+Format der ausführlichen Einträge: Beobachtung → Risiko → Entscheidung →
+Begründung, bei den zentralen Einträgen zusätzlich **Nachweis**
+(Vorlesung 24.08.: „Dokumentiert nicht nur die Lösung – dokumentiert die
+Begründung und den Nachweis“).
 
 ### 5.1 Selbst gehostete Schriften
 
@@ -216,6 +397,8 @@ Format: Beobachtung → Risiko → Entscheidung → Begründung.
   Schriftschnitt 700 gesetzt. Damit greift die Large-Text-Schwelle von 3:1.
   Der Fokusring nutzt dasselbe Pink (3,42:1 gegen Hell und gegen Dunkel) und
   erfüllt damit die 3:1-Anforderung für Nicht-Text-Kontrast.
+- **Nachweis:** Kontrastwerte nach WCAG-Formel berechnet (Abschnitt 6);
+  Hover-Pink 3,42:1 gegen Hell, Buttons 18 px/700 → Large-Text-Schwelle 3:1.
 - **Begründung:** Die Markenfarbe bleibt erhalten, die Anforderung wird über
   Typografie statt über eine Farbänderung erfüllt. Zusätzlich sind
   Link-Farben auf der Flieder-Fläche auf `--bg-dark` umgestellt, weil das
@@ -235,6 +418,10 @@ Format: Beobachtung → Risiko → Entscheidung → Begründung.
 - **Begründung:** Wesentliche Vertragsinformationen müssen vor der
   Kaufhandlung wahrnehmbar sein; der Kasten schützt Käufer und den Anbieter
   vor dem Vorwurf einer irreführenden Preisangabe.
+- **Nachweis:** Testaufgabe „Nenne, was garantiert in der Tüte ist und ob du
+  zurückgeben kannst“ – Erfolgskriterium: Antwort ohne Klick auf ein
+  Akkordeon; technisch geprüft: Kasten liegt im DOM vor den Akkordeons und ist
+  bei 360 px ohne Scrollen nach dem Preis sichtbar.
 
 ### 5.4 Beschriftung des Bestellbuttons
 
@@ -247,6 +434,9 @@ Format: Beobachtung → Risiko → Entscheidung → Begründung.
   und Datenschutz sowie ein Satz, der die Bedeutung des Buttons erklärt.
 - **Begründung:** Die Button-Lösung ist gesetzlich vorgeschrieben; die
   wörtliche Übernahme ist die rechtssicherste Variante.
+- **Nachweis:** Live-Test des Kaufflows am 13.09. und 16.09.: Button trägt
+  exakt den Text, ist erst nach der Checkbox wirksam, danach Weiterleitung auf
+  die Bestätigung mit geleertem Warenkorb.
 
 ### 5.5 Consent-Banner
 
@@ -391,6 +581,10 @@ Format: Beobachtung → Risiko → Entscheidung → Begründung.
   hebt sich dann mit einer Wellenkante nach oben. Zusätzlich tragen alle
   Seiten `noindex, nofollow`, damit der Prototyp nicht in Suchmaschinen
   auftaucht.
+- **Nachweis:** Ohne Freigabe bleibt `main` unsichtbar (`visibility:
+  hidden`), falsches Passwort erzeugt Fehlermeldung mit `role="alert"`,
+  richtiges Passwort (auch in Großschreibung) öffnet die Seite und setzt den
+  Fokus auf den Hauptinhalt – im Browser am 16.09. geprüft.
 - **Begründung:** Für den Zweck „Zugangshürde und Verwechslungsschutz“
   reicht das, ohne Hosting-Wechsel, Account oder Build-Schritt. Das
   Passwort wird den Prüfenden separat mitgeteilt. Für einen echten
@@ -415,6 +609,9 @@ Format: Beobachtung → Risiko → Entscheidung → Begründung.
   Freigabe-Workflow gebraucht wird. Das CMS-Skript wird nur auf der
   Admin-Seite von einem CDN geladen – die öffentliche Seite bleibt ohne
   externe Requests.
+- **Nachweis:** Erste redaktionelle Änderung über das CMS am 16.09.2026
+  (Commit `03c43eb`, Bewertung geändert), nach etwa einer Minute live; die
+  Konfiguration wurde im Browser ohne Fehlermeldung geladen.
 - **Begründung:** Erfüllt die Anforderung „schnelle Änderungen durch
   Mitarbeitende“ ohne die Systemkategorie zu wechseln: Die Seite bleibt eine
   statische Eigenentwicklung, das CMS ist ein Werkzeug darüber.
@@ -461,6 +658,20 @@ Format: Beobachtung → Risiko → Entscheidung → Begründung.
 | Social-Icons ohne Textlabel | Jeder Link trägt ein `aria-label` („Diddl auf Instagram, öffnet in neuem Tab“) | Umgesetzt |
 | Ohne JavaScript | Firefox mit deaktiviertem JS, 375 px | Alle Inhalte lesbar, Navigation im Fluss, Slides untereinander, Akkordeons offen; Warenkorb, Quiz und Karussell-Steuerung entfallen erwartungsgemäß |
 | Responsiv | 360, 375, 768, 1280 px | Kein horizontales Scrollen, Navigation ab 768 px einzeilig |
+
+**Lighthouse (Vorlesung 24.08.):** Die automatische Prüfung ist im Team
+durchzuführen: Chrome, Inkognito-Fenster, Passwort eingeben, DevTools →
+Lighthouse → Kategorien Performance, Accessibility, Best Practices, SEO,
+Gerät „Mobile“, für `index.html` und `produkt.html`. Ergebnisse hier
+eintragen:
+
+| Seite | Performance | Accessibility | Best Practices | SEO | Datum |
+|---|---|---|---|---|---|
+| Startseite | [ausstehend] | [ausstehend] | [ausstehend] | [ausstehend] | |
+| Produktseite | [ausstehend] | [ausstehend] | [ausstehend] | [ausstehend] | |
+
+Erwartung: SEO wird wegen des bewussten `noindex` (5.13) abgewertet; das ist
+gewollt, solange der Prototyp hinter dem Passwort liegt.
 
 **Bekannte Einschränkungen:** Es wurde kein Screenreader-Test mit VoiceOver
 oder NVDA durchgeführt. Die Wischgeste am Karussell hat keine Alternative
@@ -532,6 +743,9 @@ müssen diese neun Zeilen angepasst werden (Suchen und Ersetzen).
 | **CMS-Login per OAuth** | `base_url` in `admin/config.yml` noch nicht gesetzt | Anmeldung per Zugriffstoken funktioniert sofort; OAuth-Worker optional (Abschnitt 7) |
 | **Annahmen im Prototyp** | Versandkosten 4,95 €, Lieferzeit 3–5 Werktage (wie AGB), Länder DE/AT/CH, Artikelnummer `DEMO-2026-001`, Beiname „Das verträumte Schaf aus dem Käsekuchenland“ für Wollywell | Frei gesetzte Demo-Werte, keine Angaben der Marke; über das CMS änderbar |
 | **Zahlungslogos** | Als Text-Badges umgesetzt, keine Markenlogos | Bei Bedarf offizielle Logodateien der Anbieter einbinden |
+| **Cross-Device** | Warenkorb liegt im `localStorage` und ist damit gerätegebunden; wer auf dem Handy entdeckt und am Rechner bestellt, beginnt neu | Geräteübergreifender Warenkorb bräuchte Login oder Server (Vorlesung 10.09.) – bewusst nicht im Prototyp |
+| **Lighthouse-Werte** | Noch nicht erhoben | Im Team ausführen und in Abschnitt 6 eintragen |
+| **Usability-Test** | Protokoll und Aufgaben liegen vor (Abschnitt 10), Beobachtungen mit Testpersonen sind einzutragen | Mindestens drei Personen aus Persona A, eine aus Persona B |
 | **Screenreader-Test** | Nicht durchgeführt | Vor Livegang mit VoiceOver/NVDA prüfen |
 | **Passwortabfrage** | Nur im Browser (siehe 5.13), kein echter Zugangsschutz; alle Seiten `noindex` | Für echten Schutz serverseitig lösen; vor einem Launch Abfrage entfernen und `noindex` zurücknehmen |
 
@@ -580,6 +794,163 @@ License) und [Quicksand](https://fonts.google.com/specimen/Quicksand)
 Social-Media-Links: offizielle Kanäle laut Verlinkung auf diddl.de
 (Instagram und TikTok `@diddl_original`, Facebook `DieDiddlmaus`, YouTube-Kanal),
 Stand September 2026.
+
+---
+
+## 10. Test und Reflexion
+
+### Was wurde wie geprüft
+
+| Prüfung | Methode | Ergebnis |
+|---|---|---|
+| Technischer Qualitätsdurchgang (13.09.) | Skript über alle Seiten (Überschriften, IDs, Alt-Texte, Labels, Links), Kontrastberechnung, Tastaturtest im Browser, 360/375/768/1280 px, Firefox ohne JavaScript | Alle Punkte der Checkliste aus der Vorlesung 17.08. bestanden; ein Kontrastproblem (Links auf Flieder 4,27:1) gefunden und behoben |
+| Kaufflow live (13.09., 14.09., 16.09.) | Auf der veröffentlichten Seite: Tüte hinzufügen, Reload, Menge ändern, Formular mit Fehlern, Bestellung, Bestätigung | Warenkorb überlebt Seitenwechsel und Reload, Fehlermeldungen stehen am Feld, Bestellnummer erscheint, Warenkorb wird geleert |
+| Quiz | Alle vier Antwortmuster plus zwei Gleichstandsfälle | Vier verschiedene Ergebnisse, Gleichstand-Regel „zuerst erreicht“ korrekt |
+| Review-Iteration 1 (14.09.) | Fachliches Feedback des Teams als annotiertes PDF (9 Seiten) | 27 Änderungen umgesetzt, u. a. Hero, Karussell-Inhalte, Bewertungen, Newsletter, Footer, Rechtstexte |
+| Review-Iteration 2 (16.09.) | Feedback-PDF (5 Seiten) plus Anforderungen Passwortschutz und CMS | 14 Design-Änderungen, Passwortabfrage, CMS-Anbindung, Umstellung der Inhalte auf JSON |
+| CMS-Praxistest (16.09.) | Redakteurin ändert eine Bewertung über die Oberfläche | Commit `03c43eb` durch das CMS, nach ca. einer Minute live |
+
+### Usability-Test mit Testpersonen (Protokoll)
+
+Nach der Methode der Vorlesung 24.08.: eine repräsentative Aufgabe, beobachten,
+nachfragen – nicht „Gefällt dir die Seite?“, sondern „Kannst du dein Ziel
+erreichen?“. Die Beobachtungen sind vom Team einzutragen.
+
+**Aufgabe (Persona A):** „Stell dir vor, du hast auf Instagram gesehen, dass
+Diddl zurück ist, und öffnest diesen Link auf deinem Handy. Finde heraus,
+was garantiert in der Tüte ist, was sie kostet und wann sie ankommt – und
+lege dann zwei Tüten in den Warenkorb und schließe die Bestellung ab.“
+
+**Erfolgskriterien:** (1) nennt die vier garantierten Inhalte ohne
+Hilfestellung, (2) nennt Preis und Lieferzeit, bevor sie den Warenkorb
+öffnet, (3) erreicht die Bestätigungsseite in unter drei Minuten ohne
+Rückfrage, (4) kann sagen, ob das ein echter Shop ist.
+
+**Zusatzaufgabe (Persona B):** „Finde heraus, welcher Diddl-Charakter in dir
+steckt, und teile das Ergebnis.“ Erfolg: Quiz gefunden über Navigation
+„Mein Diddl Typ“, Ergebnis geteilt oder kopiert.
+
+| Testperson | Persona | Kriterien erfüllt (1–4) | Zögern / Reibung beobachtet | Zitat / Nachfrage |
+|---|---|---|---|---|
+| 1 | A | [eintragen] | [eintragen] | [eintragen] |
+| 2 | A | [eintragen] | [eintragen] | [eintragen] |
+| 3 | A | [eintragen] | [eintragen] | [eintragen] |
+| 4 | B | [eintragen] | [eintragen] | [eintragen] |
+
+**Drei priorisierte Erkenntnisse:** [nach dem Test eintragen: Erkenntnis →
+geänderte Stelle → Commit]
+
+### Reflexion: Was würden wir heute anders machen?
+
+1. **Persona und Journey vor dem ersten Code festhalten.** Beide Personas
+   standen implizit im Briefing, wurden aber erst nach den Review-Runden
+   ausformuliert. Mit der Fünf-Ebenen-Journey von Anfang an wären die
+   Lieferzeit am Preis und der Ablauf „So funktioniert’s“ nicht erst in
+   Iteration 2 entstanden.
+2. **Inhalte von Beginn an als JSON modellieren.** Die erste Fassung hielt
+   die Inhalte in `data.js`, was für Redakteure ohne CMS gedacht war. Die
+   Umstellung auf JSON plus CMS kostete eine Iteration; mit dem
+   CMS-Steckbrief als erstem Arbeitsschritt (Vorlesung 11.08.) wäre die
+   Entscheidung früher gefallen.
+3. **Kleiner schneiden.** Die Review-Iterationen bündelten je 15–30
+   Änderungen in wenigen Commits. Kleinere, thematische Commits hätten die
+   Git-Historie als Dokumentation noch lesbarer gemacht (Vorlesung 20.08.:
+   „Kleiner schneiden“).
+4. **Testpersonen früher einbeziehen.** Alle Prüfungen bis zum 16.09. waren
+   Experten- und Teamreviews. Ein Fünf-Minuten-Test mit einer Person aus der
+   Zielgruppe nach der ersten Fassung hätte die Reibung „Was ist drin?“
+   vermutlich noch stärker in den Hero gezogen.
+5. **Beispiel-Bewertungen bleiben ein Kompromiss.** Sie sind gekennzeichnet,
+   aber für einen echten Launch müssten sie durch echte, nachprüfbare
+   Stimmen ersetzt werden; die Kennzeichnung ist eine Prototyp-Lösung, kein
+   Vorbild.
+
+---
+
+## 11. Erfolgsmessung, Remarketing und Retargeting
+
+### Erfolgsmessung als Konzept
+
+Der Prototyp misst bewusst nichts (keine externen Requests, kein Tracking).
+Für den echten Betrieb ist die Messung vorbereitet: Das Consent-Banner
+setzt `DIDDL.trackingErlaubt`, nur dahinter dürfte ein Messwerkzeug laden.
+
+| KPI | Frage | Messpunkt |
+|---|---|---|
+| Klickrate Hero-CTA | Zieht der Einstieg? | Klick „Mehr erfahren“ / Aufrufe Startseite |
+| Produktseiten-Aufrufe aus Social | Kommt die Zielgruppe über TikTok/Instagram? | UTM-Parameter in den Bio-Links |
+| Add-to-Cart-Rate | Überzeugt die Transparenz? | Klick „In den Warenkorb“ / Produktseiten-Aufrufe |
+| Checkout-Abschluss | Wo bricht der Funnel? | Schritt 1 → 2 → 3 → Bestätigung |
+| Quiz-Abschlüsse und Teilen | Funktioniert die Kanalrückführung? | Ergebnis angezeigt, „Ergebnis teilen“ geklickt |
+| Newsletter-Anmeldungen | Entsteht ein Remarketing-Kanal? | Absendungen mit Einwilligung |
+
+**Werkzeugentscheidung für später:** ein selbst gehostetes oder EU-basiertes
+Werkzeug ohne Cookies (z. B. Matomo oder Plausible), erst nach Einwilligung
+geladen, mit UTM-Parametern statt Fingerprinting. Damit bleibt die
+Datenschutzerklärung wahr und die Messung DSGVO-verträglich.
+
+### Remarketing und Retargeting (Vorlesung 10.09.)
+
+| | Remarketing (bekannte Kontakte) | Retargeting (anonyme Besucher) |
+|---|---|---|
+| **Szenario** | Eine Person hat sich für „Fanpost aus dem Käsekuchenland“ eingetragen oder eine Tüte im Warenkorb liegen lassen | Eine Person kam über TikTok, hat die Produktseite gesehen und ist ohne Kauf gegangen |
+| **Kampagnenidee** | E-Mail „Deine Tüte wartet im Käsekuchenland“ mit Hinweis auf die limitierte Auflage; nach dem Kauf: „Zeig dein Unboxing unter #DiddlisBack“ | Anzeige mit dem Unboxing-Motiv in Instagram/TikTok für Besucher der Produktseite, Botschaft „Limitiert – nicht nachproduziert“ |
+| **Technik** | Newsletter-Dienst mit Double-Opt-In (Datenschutz 6), Warenkorb-Erinnerung; im Prototyp nur der lokale Warenkorb | Pixel der Plattform, ausschließlich nach Einwilligung über das vorhandene Consent-Banner |
+| **Voraussetzung im Prototyp** | Newsletter-Formulare und Einwilligungstext vorhanden, Versand fehlt | Consent-Mechanik vorhanden, Pixel bewusst nicht eingebaut |
+| **Cross-Device** | Über die E-Mail-Adresse geräteübergreifend möglich | Nur innerhalb der Plattform-ID; Warenkorb bleibt gerätegebunden |
+
+---
+
+## 12. Übergabe
+
+Leitfrage der Vorlesung 11.08.: „Wenn ihr in sechs Wochen jemand anderem
+eure Landingpage übergeben müsstet – welche Informationen und Strukturen
+müsste diese Person vorfinden?“
+
+### Zugänge und Verantwortliche
+
+| Was | Wo | Wer |
+|---|---|---|
+| Quellcode und Inhalte | GitHub-Repository `aylamaus/diddl-comeback-tuete`, Branch `main` | Inhaberin: Ayla Karaoglan; Collaborators nach Bedarf |
+| Live-Seite | GitHub Pages, `https://aylamaus.github.io/diddl-comeback-tuete/` | Deployt automatisch bei jedem Push |
+| Redaktion | `/admin/` (Sveltia CMS), Anmeldung per GitHub-Zugriffstoken (Abschnitt 7) | Jede Person mit Schreibrecht im Repo |
+| Seitenpasswort | Hash in `assets/js/zugang.js`; Klartext wird mündlich/per Mail weitergegeben | Team |
+| Bildrechte | Quellenverzeichnis (Abschnitt 9) | Rechteinhaber siehe Impressum |
+
+### Runbook: die drei häufigsten Aufgaben
+
+1. **Text ändern** (z. B. Hero-Subline): `/admin/` → Startseite → Feld ändern
+   → Speichern. Nach ein bis zwei Minuten live; im Browser hart neu laden.
+2. **Bild tauschen** (z. B. Slide-Bild): `/admin/` → Startseite → Slide →
+   Bild → hochladen (JPEG/WebP, max. 1600 px breit, Dateiname klein ohne
+   Umlaute) → Alt-Text anpassen → Speichern.
+3. **Preis oder Lieferzeit ändern:** `/admin/` → Produkt → „Preis in Euro“
+   bzw. Versand & Kanäle → „Lieferzeit“. Beides erscheint automatisch auf
+   Produktseite, Warenkorb und Bestätigung. FAQ und AGB nennen die Werte
+   zusätzlich im Text – dort mit anpassen.
+
+### Was nicht über das CMS geht
+
+Neue Seiten oder Abschnitte, Änderungen an Header/Footer (in allen neun
+HTML-Dateien identisch), Rechtstexte, Design (`assets/css/style.css`),
+Passwort (`assets/js/zugang.js`, neuen SHA-256-Hash eintragen). Dafür sind
+HTML-/CSS-Kenntnisse oder ein neuer KI-gestützter Arbeitsauftrag nötig; das
+Briefing in `BRIEFING.md` und dieses README sind der Kontext dafür.
+
+### Wenn etwas nicht funktioniert
+
+| Symptom | Ursache | Maßnahme |
+|---|---|---|
+| Seite zeigt alte Inhalte | GitHub-Pages-Cache (10 Minuten) | Hart neu laden, ggf. zehn Minuten warten |
+| Warenkorb, Quiz oder Galerie leer | Eine JSON-Datei ist ungültig (nach manuellem Edit) | Datei im CMS erneut speichern oder letzten Commit auf GitHub zurücksetzen („Revert“) |
+| CMS lädt nicht | unpkg.com nicht erreichbar oder Token abgelaufen | Neues Fine-grained Token erzeugen; alternativ „Mit lokalem Repository arbeiten“ |
+| Seite ohne Styles auf verschachtelter 404-URL | Relative Pfade (Abschnitt 8) | Bekannt, akzeptiert |
+
+### Abhängigkeiten
+
+GitHub (Hosting, Repository, Auth), unpkg.com/Cloudflare (nur Admin-Seite),
+keine weiteren Dienste. Es gibt keine Datenbank, keine Secrets und keinen
+Server, der gewartet werden müsste.
 
 ---
 
@@ -678,7 +1049,7 @@ assets/
   fonts/                    Chewy und Quicksand als woff2
 content/
   startseite.json           Texte und Bilder der Startseite
-  produkt.json              Produktdaten, Preis, Galerie
+  produkt.json              Produktdaten, Preis, Galerie, Kanaltexte
   einstellungen.json        Versand, Zahlungsarten, Kampagne/Social
   faq.json                  Häufige Fragen
   quiz.json                 Quizfragen und Figuren

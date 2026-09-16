@@ -1298,6 +1298,54 @@ html:not(.js) .nav__liste {
 .galerie__thumb[aria-current="true"] { border-color: var(--btn); }
 .galerie__thumb:hover { border-color: var(--btn-hover); }
 
+.preis__lieferzeit { margin-top: 0.15rem; font-weight: 600; }
+
+/* „So funktioniert’s“ – drei Schritte in einer Zeile */
+.ablauf__titel {
+  font-family: var(--font-text);
+  font-weight: 700;
+  font-size: var(--fs-h4);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.ablauf {
+  list-style: none;
+  counter-reset: schritt;
+  margin: 0 0 2rem;
+  padding: 0;
+  max-width: none;
+  display: grid;
+  gap: 0.75rem;
+}
+.ablauf li {
+  counter-increment: schritt;
+  position: relative;
+  margin: 0;
+  padding: 0.85rem 1rem 0.85rem 3.25rem;
+  border-radius: var(--radius-flach);
+  background: var(--pastel-rosa);
+}
+.ablauf li::before {
+  content: counter(schritt);
+  position: absolute;
+  left: 0.9rem;
+  top: 0.8rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: var(--btn);
+  color: var(--btn-text);
+  font-weight: 700;
+  font-family: var(--font-display);
+  display: grid;
+  place-items: center;
+}
+.ablauf strong { display: block; }
+.ablauf span { font-size: var(--fs-klein); }
+@media (min-width: 48em) {
+  .ablauf { grid-template-columns: repeat(3, 1fr); }
+}
+
 /* Akkordeon */
 .akkordeon {
   border-top: 2px solid var(--pastel-flieder);

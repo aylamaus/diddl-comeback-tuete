@@ -364,6 +364,9 @@
 
   function start() {
     versandCent = (D.versand && D.versand.kostenCent) || 0;
+    if (D.versand && D.versand.lieferzeitText) {
+      document.querySelectorAll("[data-lieferzeit]").forEach(function (el) { el.textContent = D.versand.lieferzeitText; });
+    }
     if (!bestaetigungInit()) { checkoutInit(); }
   }
   if (D.wennBereit) { D.wennBereit(start); }
