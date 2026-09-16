@@ -17,7 +17,12 @@
   <link rel="icon" href="assets/img/favicon.png" type="image/png" sizes="128x128">
   <link rel="apple-touch-icon" href="assets/img/favicon.png">
   <link rel="stylesheet" href="assets/css/style.css">
-  <script>document.documentElement.className += " js";</script>
+  <script>
+    document.documentElement.className += " js";
+    // Passwortabfrage: Seite bleibt verborgen, bis zugang.js die Freigabe kennt
+    try { if (window.localStorage.getItem("diddl_zugang_v1") !== "ok") { document.documentElement.className += " gesperrt"; } } catch (e) {}
+  </script>
+  <script src="assets/js/zugang.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#hauptinhalt">Zum Inhalt springen</a>

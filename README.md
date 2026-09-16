@@ -351,6 +351,30 @@ Format: Beobachtung → Risiko → Entscheidung → Begründung.
 - **Begründung:** Für einen öffentlich erreichbaren Prototyp ist das Risiko
   vermeidbar, der Nutzen des Bildes gering.
 
+### 5.13 Passwortabfrage im Browser statt echtem Zugangsschutz
+
+- **Beobachtung:** Der Prototyp soll für die Prüfenden online erreichbar
+  sein, aber nicht von jedem geöffnet und nicht mit der offiziellen
+  Diddl-Website verwechselt werden. Geprüft wurden StatiCrypt
+  (Verschlüsselung jeder Seite mit Build-Schritt), Cloudflare Pages mit
+  Basic-Auth-Middleware und Cloudflare Access.
+- **Risiko:** Ein clientseitiger Passwortdialog ist kein Sicherheitsmechanismus:
+  Die HTML-Dateien bleiben auf GitHub Pages öffentlich abrufbar, wer
+  JavaScript deaktiviert oder den Quelltext liest, kommt an den Inhalt.
+- **Entscheidung (Kundenwunsch 16.09.2026):** Eine einfache Passwortabfrage
+  in der Seite (`assets/js/zugang.js`). Ein Inline-Skript im `<head>`
+  versteckt die Seite, bis im `localStorage` eine Freigabe liegt; das
+  Overlay prüft die Eingabe über einen SHA-256-Vergleich (das Passwort
+  steht nicht im Klartext im Code), merkt sich die Freigabe pro Browser und
+  hebt sich dann mit einer Wellenkante nach oben. Zusätzlich tragen alle
+  Seiten `noindex, nofollow`, damit der Prototyp nicht in Suchmaschinen
+  auftaucht.
+- **Begründung:** Für den Zweck „Zugangshürde und Verwechslungsschutz“
+  reicht das, ohne Hosting-Wechsel, Account oder Build-Schritt. Das
+  Passwort wird den Prüfenden separat mitgeteilt. Für einen echten
+  geschützten Bereich wäre serverseitiger Schutz nötig (z. B. Cloudflare
+  Pages mit Basic Auth), siehe Abschnitt 8.
+
 ---
 
 ## 6. Barrierefreiheit
@@ -367,6 +391,7 @@ Format: Beobachtung → Risiko → Entscheidung → Begründung.
 | Textkontrast | Berechnung nach WCAG-Formel | Text 12,4:1 bis 16,6:1; Links ≥ 4,99:1; Button-Text auf Violett 5,71:1; Hover-Pink 3,42:1 nur mit ≥ 18 px/700 (siehe 5.2); Akzentblau nur als Hover-Hintergrund mit dunklem Text (7,1:1) bzw. als Linkfarbe auf dunklem Footer (4,75:1) |
 | Sichtbarer Fokus | Manuell im Browser, Tab-Reihenfolge Skip-Link → Logo → Navigation → Warenkorb → Burger | Pinker Doppelring (Pink außen, Hell innen) auf allen Flächen sichtbar; kein `outline: none` |
 | Skip-Link | Erster Tab-Stopp auf jeder Seite | Springt zu `#hauptinhalt` |
+| Passwortabfrage | `role="dialog"`, Label am Feld, Fehlermeldung als `role="alert"`, Fokus geht danach auf den Hauptinhalt; Animation entfällt bei `prefers-reduced-motion` | Umgesetzt |
 | Tastaturbedienung Burger-Menü | `aria-expanded`, `aria-controls`, Escape schließt und setzt Fokus zurück | Funktioniert |
 | Tastaturbedienung Karussell | Pfeiltasten links/rechts bei Fokus im Karussell, Punkt-Buttons mit `aria-label`, Statusmeldung `aria-live` | Funktioniert, Fokus wandert mit |
 | Akkordeons | `<button aria-expanded>` steuert `hidden`; ohne JS alle offen | Funktioniert |
@@ -398,8 +423,8 @@ für Switch-Nutzer außer den Pfeil-Buttons (die vorhanden sind).
 4. Nach ein bis zwei Minuten ist die Seite unter
    `https://<benutzername>.github.io/diddl-comeback-tuete/` erreichbar
    (dieses Projekt: `https://aylamaus.github.io/diddl-comeback-tuete/`).
-5. Prüfen: Startseite laden, Browserkonsole öffnen (keine 404), eine Tüte in
-   den Warenkorb legen, Seite neu laden (Warenkorb bleibt), Checkout bis zur
+5. Prüfen: Startseite laden, Passwort eingeben, Browserkonsole öffnen
+   (keine 404), eine Tüte in den Warenkorb legen, Seite neu laden (Warenkorb bleibt), Checkout bis zur
    Bestätigung durchspielen.
 
 **Warum kein Build-Schritt nötig ist:** Alle Pfade sind relativ
@@ -431,6 +456,7 @@ müssen diese neun Zeilen angepasst werden (Suchen und Ersetzen).
 | **Annahmen im Prototyp** | Versandkosten 4,95 €, Lieferzeit 3–5 Werktage (wie AGB), Länder DE/AT/CH, Artikelnummer `DEMO-2026-001`, Beiname „Das verträumte Schaf aus dem Käsekuchenland“ für Wollywell | Frei gesetzte Demo-Werte, keine Angaben der Marke; über `data.js` änderbar |
 | **Zahlungslogos** | Als Text-Badges umgesetzt, keine Markenlogos | Bei Bedarf offizielle Logodateien der Anbieter einbinden |
 | **Screenreader-Test** | Nicht durchgeführt | Vor Livegang mit VoiceOver/NVDA prüfen |
+| **Passwortabfrage** | Nur im Browser (siehe 5.13), kein echter Zugangsschutz; alle Seiten `noindex` | Für echten Schutz serverseitig lösen; vor einem Launch Abfrage entfernen und `noindex` zurücknehmen |
 
 ---
 
@@ -569,6 +595,7 @@ assets/
   js/produkt.js             Galerie, Mengenwahl, In den Warenkorb
   js/warenkorb.js           Warenkorb, Checkout-Schritte, Validierung, Bestätigung
   js/quiz.js                Diddl-Quiz (Ergebnis mit Charakterbild)
+  js/zugang.js              Passwortabfrage (siehe 5.13)
   img/                      Bilder (siehe Quellenverzeichnis)
   fonts/                    Chewy und Quicksand als woff2
 ```

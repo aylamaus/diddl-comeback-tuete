@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Diddl Comeback-Tüte kaufen – 19,99 €</title>
   <meta name="description" content="Die limitierte Diddl Comeback-Tüte: Überraschungsinhalt mit garantiert einem Diddl-Block, einem Schreibwaren-Utensil, einem Accessoire und einem Kuscheltier. Warenwert mindestens 19,99 Euro.">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="noindex, nofollow">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_DE">
   <meta property="og:site_name" content="Diddl Comeback-Tüte">
@@ -17,7 +17,12 @@
   <link rel="icon" href="assets/img/favicon.png" type="image/png" sizes="128x128">
   <link rel="apple-touch-icon" href="assets/img/favicon.png">
   <link rel="stylesheet" href="assets/css/style.css">
-  <script>document.documentElement.className += " js";</script>
+  <script>
+    document.documentElement.className += " js";
+    // Passwortabfrage: Seite bleibt verborgen, bis zugang.js die Freigabe kennt
+    try { if (window.localStorage.getItem("diddl_zugang_v1") !== "ok") { document.documentElement.className += " gesperrt"; } } catch (e) {}
+  </script>
+  <script src="assets/js/zugang.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#hauptinhalt">Zum Inhalt springen</a>
